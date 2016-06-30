@@ -14,12 +14,13 @@ sweetify is an API designed on top of Spotify to return information on the top h
 
 + Response 200 (application/json)
 
-            {
-                "top_song": "One Dance",
-                "top_song_genre": "Rap",
-                "top_artist": "Drake",
-                "top_album": "Views"
-            }
+        {
+            "year": 2016,
+            "top_song": "One Dance",
+            "top_song_genre": "Rap",
+            "top_artist": "Drake",
+            "top_album": "Views"
+        }
 
 ## Artists [/artists/{artist_name}]
 
@@ -30,12 +31,13 @@ sweetify is an API designed on top of Spotify to return information on the top h
 
 + Response 200 (application/json)
 
-            {
-                "genre": "Rap",
-                "popularity": "50",
-                "top_tracks": ["One Dance", "Too Good", "Controlla"]
-                "img_url": "https://www.google.com/search?q=drake"
-            }
+        {
+            "artist": "Drake"
+            "genre": "Rap",
+            "popularity": "50",
+            "top_tracks": ["One Dance", "Too Good", "Controlla"]
+            "img_url": "https://www.google.com/search?q=drake"
+        }
 
 ## Songs [/songs/{song_name}]
 
@@ -46,14 +48,14 @@ sweetify is an API designed on top of Spotify to return information on the top h
 
 + Response 200 (application/json)
 
-            {
-                "album": "Views",
-                "artist": "Drake",
-                "explicit": true,
-                "popularity": "75"
-            }
-       
-       
+        {
+            "song_name":"One Dance"
+            "album": "Views",
+            "artist": "Drake",
+            "explicit": true,
+            "popularity": "75"
+        }
+    
 ## Songs [/songs/{artist_name}]
 
 ### Get all songs by artist [GET]
@@ -63,37 +65,40 @@ sweetify is an API designed on top of Spotify to return information on the top h
 
 + Response 200 (application/json)
 
-        [
-            {
-                "song_name": "One Dance" 
-                "album": "Views",
-                "artist": "Drake",
-                "explicit": true,
-                "popularity": "75"
-            },
-            {
-                "song_name": "Hello"
-                "album": "Views",
-                "artist": "Drake",
-                "explicit": true,
-                "popularity": "50"
-            }
-        ]
+        {   
+            "artist": "Drake"
+            "songs":
+            [
+                {
+                    "song_name": "One Dance" 
+                    "album": "Views",
+                    "artist": "Drake",
+                    "explicit": true,
+                    "popularity": "75"
+                },
+                {
+                    "song_name": "Hello"
+                    "album": "Views",
+                    "artist": "Drake",
+                    "explicit": true,
+                    "popularity": "50"
+                }
+            ]
+        }
 
 ## Genres [/genres/{name}]
 
-### Get all information on a year [GET]
+### Get all information on a genre [GET]
 
 + Parameters
     + name (string) - The genre you want information on
 
 + Response 200 (application/json)
 
-        [
-            {
-                "years_top_song": [2012, 2000],
-                "artists": ["Benny Benassi", "Skrillex"],
-                "description": "Electro house is a form of hous music characterized by a prominent bassline and/or kick drum.",
-                "related_genres": ["House", "Electro"]
-            }
-        ]
+        {
+            "genre": "Electro house",
+            "years_top_song": [2012, 2000],
+            "artists": ["Benny Benassi", "Skrillex"],
+            "description": "Electro house is a form of hous music characterized by a prominent bassline and/or kick drum.",
+            "related_genres": ["House", "Electro"]
+        }
