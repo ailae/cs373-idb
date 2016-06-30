@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-from unittest import Main, TestCase
+from unittest import main, TestCase
 import models
 
 
@@ -18,8 +18,10 @@ class ModelUnitTests(TestCase):
 		popularity = 50
 		top_tracks = ["Blood On The Leaves", "Saint Pablo"]
 		test_artist = Artist(name, image, genres, popularity, top_tracks, spotify_url)
-        expect = ""
-		assertEquals(expect, test_artist.__repr__())
+		db.session.add(test_artist)
+		db.session.commit()
+		db_artists = Artist.query.all()
+		print(db_artists)
 
 #http://flask-sqlalchemy.pocoo.org/2.1/quickstart/
 

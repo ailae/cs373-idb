@@ -22,14 +22,14 @@ class Artist(db.Model) :
 	__tablename__ = 'Artist'
 
 	name = db.Column(db.String(50), primary_key=True)
-    image = db.Column(JSON)
+	image = db.Column(JSON)
 	genre = db.Column(db.Arry[String], nullable=False)
 	popularity = db.Column(db.Integer, nullable=False)
 	top_tracks = db.Column(db.dict)
 	spotify_url = db.Column(db.String(150), nullable=False)
 
-	def __init__(self, name, image, genre, popularity = 0, \
-		topTracks, spotifyUrl) :
+	def __init__(self, name, image, genre,  \
+		top_tracks, spotify_url, popularity=0,) :
 	    self.name = name
 	    self.image = image
 	    self.genre = genre
