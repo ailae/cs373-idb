@@ -5,7 +5,7 @@ HOST: http://sweetify.apiblueprint.org/
 
 sweetify is an API designed on top of Spotify to return information on the top hits for each year
 
-## Songs by name [/songs/?song_name={string, optional}&artist_name={string, optional}]
+## Songs by name [/songs?song_name={string, optional}&artist_name={string, optional}]
 
 ### Get all songs, information on a song by name, or all the songs by an artist [GET]
 
@@ -64,7 +64,7 @@ sweetify is an API designed on top of Spotify to return information on the top h
             "success": true
         }
 
-## Artists [/artists/?artist_name={string, optional}]
+## Artists [/artists?artist_name={string, optional}]
     
 ### Get all artists or information on an artist by name [GET]
 
@@ -100,7 +100,7 @@ sweetify is an API designed on top of Spotify to return information on the top h
             "success": true
         }
 
-## Years  [/years/?year={int, optional}]
+## Years  [/years?year={int, optional}]
 
 ### Get all years or information on a specific year [GET]
 
@@ -133,7 +133,7 @@ sweetify is an API designed on top of Spotify to return information on the top h
             "success": true
         }
 
-## Genres [/genres/?genre_name={string, optional}]
+## Genres [/genres?genre_name={string, optional}]
 
 ### Get all genres or information on a genre [GET]
 
