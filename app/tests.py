@@ -13,11 +13,12 @@ class ModelUnitTests(TestCase):
 	def artist_model_test_1(self):
 		name = "Kanye West"
 		image_url = "http://cdn.uinterview.com/wp-content/uploads/2016/02/news-kanye-west.jpg"
-		image = Image(500, image_url, 500)
+		image_height = 34
+		image_width = 54
 		genres = ["Rap", "Hip Hop"]
 		popularity = 50
 		top_tracks = ["Blood On The Leaves", "Saint Pablo"]
-		test_artist = Artist(name, image, genres, popularity, top_tracks, spotify_url)
+		test_artist = Artist(name, image_height, image_url, image_width, genres, popularity, top_tracks, spotify_url)
 		db.session.add(test_artist)
 		db.session.commit()
 		db_artists = Artist.query.all()
