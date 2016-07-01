@@ -39,12 +39,11 @@ class Artist(db.Model) :
 	    self.spotify_url = spotify_url
 
 	def __repr__(self) :
-		return 'Artist(name={}, image_url={}, genre={}, '.format(
+		return 'Artist(name={}, image_url={}, genre='.format(
 					self.name, 
 					self.image_url, 
-					self.genre
-					) + \
-				'popularity={}, spotifyUrl={}, topTracks='.format(
+					) + self.genre + \
+				', popularity={}, spotifyUrl={}, topTracks='.format(
 					self.popularity,
 					self.spotifyUrl
 				) + self.songs + ')'
