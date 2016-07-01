@@ -5,30 +5,66 @@ HOST: http://sweetify.apiblueprint.org/
 
 sweetify is an API designed on top of Spotify to return information on the top hits for each year
 
-## Years  [/years/{year}]
+## Songs by name [/songs/?song_name={string, optional}&artist_name={string, optional}]
 
-### Get all years or information on a specific year [GET]
+### Get all songs, information on a song by name, or all the songs by an artist [GET]
 
 + Parameters
-    + year (number, optional) - The year to get information on; if none provided, returns a list of years
+    + song_name (string, optional) - The song name you want information on; if none provided, returns a list of all songs
+    + artist_name (string, optional) - The artist whose songs you want to view
 
 + Response 200 (application/json)
 
         {
-            "years": [2000, 2001, 2002]
+            "result": {
+                "songs": [
+                    "Once Dance",
+                    "Single Ladies",
+                    "Survivor"
+                ],
+            }
+            "success": true
         }
-        
+
 + Response 200 (application/json)
 
         {
-            "year": 2016,
-            "top_song": "One Dance",
-            "top_song_genre": "Rap",
-            "top_artist": "Drake",
-            "top_album": "Views"
+            "result": {
+                "song_name":"One Dance"
+                "album": "Views",
+                "artist": "Drake",
+                "explicit": true,
+                "popularity": "75"
+            }
+            "success": true
         }
 
-## Artists [/artists/{artist_name}]
++ Response 200 (application/json)
+
+        {
+            "result": {
+                "artist": "Drake"
+                "songs": [
+                    {
+                        "song_name": "One Dance" 
+                        "album": "Views",
+                        "artist": "Drake",
+                        "explicit": true,
+                        "popularity": "75"
+                    },
+                    {
+                        "song_name": "Hello"
+                        "album": "Views",
+                        "artist": "Drake",
+                        "explicit": true,
+                        "popularity": "50"
+                    }
+                ],
+            }
+            "success": true
+        }
+
+## Artists [/artists/?artist_name={string, optional}]
     
 ### Get all artists or information on an artist by name [GET]
 
@@ -38,73 +74,66 @@ sweetify is an API designed on top of Spotify to return information on the top h
 + Response 200 (application/json)
 
         {
-            "artist": "Drake"
-            "genre": "Rap",
-            "popularity": "50",
-            "top_tracks": ["One Dance", "Too Good", "Controlla"]
-            "img_url": "https://www.google.com/search?q=drake"
+            "result": {
+                "artists": [
+                    "Drake",
+                    "Beyonce"
+                ],
+            }
+            "success": true
+        }
+
++ Response 200 (application/json)
+
+        {
+            "result": {
+                "artist": "Drake"
+                "genre": "Rap",
+                "popularity": "50",
+                "top_tracks": [
+                    "One Dance",
+                    "Too Good",
+                    "Controlla"
+                ],
+                "img_url": "https://www.google.com/search?q=drake"
+            }
+            "success": true
+        }
+
+## Years  [/years/?year={int, optional}]
+
+### Get all years or information on a specific year [GET]
+
++ Parameters
+    + year (int, optional) - The year to get information on; if none provided, returns a list of years
+
++ Response 200 (application/json)
+
+        {
+            "result": {
+                "years": [
+                    2000,
+                    2001,
+                    2002
+                ],
+            }
+            "success": true
         }
         
 + Response 200 (application/json)
 
         {
-            "artists": ["Drake", "Beyonce"]
+            "result": {
+                "year": 2016,
+                "top_song": "One Dance",
+                "top_song_genre": "Rap",
+                "top_artist": "Drake",
+                "top_album": "Views"
+            }
+            "success": true
         }
 
-## Songs by name [/songs/{song_name}]
-
-### Get all songs or information on a song by name [GET]
-
-+ Parameters
-    + song_name (string, optional) - The song name you want information on; if none provided, returns a list of all songs
-
-+ Response 200 (application/json)
-
-        {
-            "song_name":"One Dance"
-            "album": "Views",
-            "artist": "Drake",
-            "explicit": true,
-            "popularity": "75"
-        }
-
-+ Response 200 (application/json)
-
-        {
-            "songs": ["One Dance", "Single Ladies", "Survivor"]
-        }
-    
-## Songs by artist [/songs/{artist_name}]
-
-### Get all songs by artist [GET]
-
-+ Parameters
-    + artist_name (string) - The artist whose songs you want to view
-
-+ Response 200 (application/json)
-
-        {   
-            "artist": "Drake"
-            "songs":
-            [
-                {
-                    "song_name": "One Dance" 
-                    "album": "Views",
-                    "artist": "Drake",
-                    "explicit": true,
-                    "popularity": "75"
-                },
-                {
-                    "song_name": "Hello"
-                    "album": "Views",
-                    "artist": "Drake",
-                    "explicit": true,
-                    "popularity": "50"
-                }
-            ]
-        }
-
-## Genres [/genres/{name}]
+## Genres [/genres/?genre_name={string, optional}]
 
 ### Get all genres or information on a genre [GET]
 
@@ -114,15 +143,25 @@ sweetify is an API designed on top of Spotify to return information on the top h
 + Response 200 (application/json)
 
         {
-            "genre": "Electro house",
-            "years_top_song": [2012, 2000],
-            "artists": ["Benny Benassi", "Skrillex"],
-            "description": "Electro house is a form of hous music characterized by a prominent bassline and/or kick drum.",
-            "related_genres": ["House", "Electro"]
+            "result": {
+                "genres": [
+                    "Alternative",
+                    "Rock",
+                    "Hip Hop"
+                ],
+            }
+            "success": true
         }
-        
+
 + Response 200 (application/json)
 
         {
-            "genres": ["Electro house", "House"]
+            "result": {
+                "genre": "Electro house",
+                "years_top_song": [2012, 2000],
+                "artists": ["Benny Benassi", "Skrillex"],
+                "description": "Electro house is a form of hous music characterized by a prominent bassline and/or kick drum.",
+                "related_genres": ["House", "Electro"]
+            }
+            "success": true
         }
