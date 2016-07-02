@@ -14,26 +14,25 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-
 class Artist(db.Model) :
 	__tablename__ = 'Artist'
 
 	name = db.Column(db.String(50), primary_key=True)
 	image_height = db.Column(db.Integer)
-	image_url = db.Column(db.String(150))
+	image_url = db.Column(db.String(300))
 	image_width = db.Column(db.Integer)
-	genre = db.Column(db.ARRAY[String], ForeignKey('Genre.name'), nullable=False)
+	genres = db.Column(db.ARRAY[String], ForeignKey('Genre.name'), nullable=False)
 	popularity = db.Column(db.Integer, nullable=False)
 	top_songs = db.Column(db.ARRAY[String], nullable=True)
-	spotify_url = db.Column(db.String(150), nullable=False)
+	spotify_url = db.Column(db.String(300), nullable=False)
 
-	def __init__(self, name, image_url, genre, spotify_url, top_songs, \
+	def __init__(self, name, image_height, image_width, image_url, genres, spotify_url, top_songs, \
 		popularity=0) :
 	    self.name = name
 	    self.image_height = image_height
 	    self.image_url = image_url
 	    self.image_width = image_width
-	    self.genre = genre
+	    self.genres = genres
 	    self.popularity = popularity
 	    self.top_songs = top_songs
 	    self.spotify_url = spotify_url
@@ -42,11 +41,11 @@ class Artist(db.Model) :
 		return 'Artist(name={}, image_url={}, genre='.format(
 					self.name, 
 					self.image_url, 
-					) + self.genre + \
+					) + self.genres + \
 				', popularity={}, spotifyUrl={}, topTracks='.format(
 					self.popularity,
 					self.spotifyUrl
-				) + self.songs + ')'
+				) + self.top_songs + ')'
 
 
 class Year(db.Model) :
@@ -59,9 +58,9 @@ class Year(db.Model) :
 							nullable=False)
 	top_album = db.Column(db.String(50), nullable=False)
 
-	def __init__(self, year, top_song, top_genre, top_artist, top_album) :
+	def __init__(self, year, top_songs, top_genre, top_artist, top_album) :
 		self.year = year
-		self.top_song = top_song
+		self.top_songs = top_songs
 		self.top_genre = top_genre
 		self.top_artist = top_artist
 		self.top_album = top_album
@@ -69,7 +68,7 @@ class Year(db.Model) :
 	def __repr__(self) :
 		return 'Year(year={}, top_song={}, top_genre={}, '.format(
 					self.year,
-					self.top_song,
+					self.top_songs,
 					self.top_genre
 					) + \
 				'top_artist={}, top_album={})'.format(
@@ -86,7 +85,7 @@ class Song(db.Model) :
 	album = db.Column(db.String(50))
 	explicit = db.Column(db.Boolean)
 	popularity = db.Column(db.Integer)
-	spotify_url = db.Column(db.String(150))
+	spotify_url = db.Column(db.String(300))
 
 	def __init__(self, name, artist, album, explicit, popularity, \
 					spotify_url) :
@@ -115,20 +114,20 @@ class Genre(db.Model) :
 
 	name = db.Column(db.String(50), primary_key=True, nullable=False)
 	description = db.Column(db.String(300), nullable=False)
-	years = db.Column(db.ARRAY[Integer], )	
+	years_on_top = db.Column(db.ARRAY[Integer])	
 	artists = db.Column(db.ARRAY[String])
 	related_genres = db.Column(db.ARRAY[Sting])
 
-	def __init__(self, name, description, years, artists, related_genres) : 
+	def __init__(self, name, description, years_on_top, artists, related_genres) : 
 		self.name = name
 		self.description = description
-		self.years = years
+		self.years_on_top = years_on_top
 		self.artists = artists
 		self.related_genres = related_genres
 
 	def __repr__(self) :
 		return 'Genre=(name={}, description={}, years='.format(
-			self.name, self.description) + self.years + ', artists=' + \
+			self.name, self.description) + self.years_on_top + ', artists=' + \
 			self.artists + ', related_genres=' + self.related_genres + ')'
 
 
