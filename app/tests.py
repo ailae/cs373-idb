@@ -35,7 +35,7 @@ class ModelUnitTests(TestCase):
 		image_width = 54
 		genres = ["Rap", "Hip Hop"]
 		popularity = 50
-		top_songs = ["Blood On The Leaves", "Saint Pablo"]
+		top_songs = ["Blood On The Leaves:3032a29s", "Saint Pablo:30924p"]
 		spotify_url = "http://www.spotify.com/kanye"
 		test_artist = Artist(name, image_height, image_width, image_url, 
 							genres, spotify_url, top_songs, popularity)
@@ -55,7 +55,7 @@ class ModelUnitTests(TestCase):
 		image_width = 593
 		genres = ["R&B", "Pop"]
 		popularity = 80
-		top_songs = ["Drunk In Love"]
+		top_songs = ["Drunk In Love:02193a0"]
 		spotify_url = "http://www.spotify.com/beyonce"
 		test_artist = Artist(name, image_height, image_width, image_url, genres, spotify_url, top_songs, popularity)
 		name_2 = "DJ Khaled"
@@ -64,7 +64,7 @@ class ModelUnitTests(TestCase):
 		image_width_2 = 200
 		genres_2 = ["R&B", "Hip Hop", "Rap"]
 		popularity_2 = 21
-		top_songs_2 = ["Hold You Down"]
+		top_songs_2 = ["Hold You Down:3029802"]
 		spotify_url_2 = "http://www.spotify.com/djkhaled"
 		test_artist_2 = Artist(name_2, image_height_2, image_width_2, image_url_2, genres_2, spotify_url_2, top_songs_2, popularity_2)
 		
@@ -87,7 +87,7 @@ class ModelUnitTests(TestCase):
 		image_width = 5000
 		genres = ["Potato", "Tomato"]
 		popularity = 100
-		top_songs = ["First Song", "Another Song"]
+		top_songs = ["First Song:1234", "Another Song:5678"]
 		spotify_url = "http://www.spotify.com/artist"
 		test_artist = Artist(name, image_height, image_width, image_url, genres, spotify_url, top_songs, popularity)
 		db.session.add(test_artist)
@@ -99,7 +99,7 @@ class ModelUnitTests(TestCase):
 		image_width = 5000
 		genres = ["Potato", "Tomato"]
 		popularity = 100
-		top_songs = ["First Song", "Another Song"]
+		top_songs = ["The Song:2341", "Second Song:8567"]
 		spotify_url = "http://www.spotify.com/artist"
 		test_artist_2 = Artist(name, image_height, image_width, image_url, genres, spotify_url, top_songs, popularity)
 		db.session.add(test_artist_2)
@@ -111,7 +111,7 @@ class ModelUnitTests(TestCase):
 		image_width = 5000
 		genres = ["Potato", "Tomato"]
 		popularity = 2
-		top_songs = ["First Song", "Another Song"]
+		top_songs = ["Random Song:3920sid", "Random 2 Song:5678idSp"]
 		spotify_url = "http://www.spotify.com/artist"
 		test_artist_3 = Artist(name, image_height, image_width, image_url, genres, spotify_url, top_songs, popularity)
 		db.session.add(test_artist_3)
@@ -127,7 +127,7 @@ class ModelUnitTests(TestCase):
 	# what is expected.
 	def test_year_1(self):
 		year = 2001
-		top_songs = ["Some Really Popular Song", "Some Other Song"]
+		top_songs = ["Some Really Popular Song:5423", "Some Other Song:04921"]
 		top_genre = "Dubstep"
 		top_artist = "NSYNC"
 		top_album = "The Best Album"
@@ -142,13 +142,13 @@ class ModelUnitTests(TestCase):
 
 	def test_year_2(self):
 		year = 2015
-		top_songs = ["New Song", "Old Song"]
+		top_songs = ["New Song:19651469", "Old Song:65165162"]
 		top_genre = "Pop"
 		top_artist = "Some Important Artist"
 		top_album = "The Biggest Album of 2015"
 		test_year = Year(year, top_songs, top_genre, top_artist, top_album)
 		year_2 = 2014
-		top_songs_2 = ["Another New Song", "Older Song"]
+		top_songs_2 = ["Another New Song:5165065", "Older Song:45980515"]
 		top_genre_2 = "Rap"
 		top_artist_2 = "Rapper"
 		top_album_2 = "The Biggest Album of 2014"
@@ -163,25 +163,24 @@ class ModelUnitTests(TestCase):
 		assertTrue(fourteen is not None)
 		fifteen_top_album = fifteen.top_album
 		fourteen_top_album = fourteen.top_album
-		correct_albums = fifteen_top_album == top_album and 
-					   fourteen_top_album == top_album_2
+		correct_albums = fifteen_top_album == top_album and fourteen_top_album == top_album_2
 		assertTrue(correct_albums) 
 
 	def test_year_3(self):
 		year = 2015
-		top_songs = ["New Song", "Old Song"]
+		top_songs = ["New Song:9862162", "Old Song:98498216565162"]
 		top_genre = "Rap"
 		top_artist = "Some Important Artist"
 		top_album = "The Biggest Album of 2015"
 		test_year = Year(year, top_songs, top_genre, top_artist, top_album)
 		year_2 = 2014
-		top_songs_2 = ["Another New Song", "Older Song"]
+		top_songs_2 = ["Another New Song:989826515", "Older Song:648915484"]
 		top_genre_2 = "Rap"
 		top_artist_2 = "Rapper"
 		top_album_2 = "The Biggest Album of 2014"
 		test_year_2 = Year(year, top_songs, top_genre, top_artist, top_album)
 		year_3 = 2013
-		top_songs_3 = ["thirteen", "another thirteen"]
+		top_songs_3 = ["thirteen:9216519819", "another thirteen:2151248"]
 		top_genre_3 = "Pop"
 		top_artist_3 = "Some dude"
 		top_album_3 = "The Biggest Album of 2013"
@@ -199,7 +198,7 @@ class ModelUnitTests(TestCase):
 	# The following tests will check the Song model
 
 	def test_song_1(self):
-		name = "A Song"
+		name = "A Song:99999"
 		artist = "Some Artist"
 		album = "Some Album"
 		explicit = True
@@ -211,12 +210,12 @@ class ModelUnitTests(TestCase):
 		db.session.commit()
 
 		assertTrue(test_song in db.session)
-		this_song = Song.query.filter(name="A Song")
+		this_song = Song.query.filter(id_name_pair="A Song:99999")
 		this_song_explicit = this_song.explicit
 		assertTrue(this_song_explicit)
 
 	def test_song_2(self):
-		name = "Some Song"
+		name = "Some Song:123"
 		artist = "Some Artist"
 		album = "Some Album"
 		explicit = True
@@ -227,7 +226,7 @@ class ModelUnitTests(TestCase):
 		db.session.add(test_song)
 		db.session.commit()
 
-		name = "Second Song"
+		name = "Second Song:234"
 		artist = "Second Artist"
 		album = "Second Album"
 		explicit = False
@@ -238,16 +237,15 @@ class ModelUnitTests(TestCase):
 		db.session.add(test_song_2)
 		db.session.commit()
 
-		first_song = Song.query.filter_by(name="Some Song").first()
-		second_song = Song.query.filter_by(name="Second Song").first()
+		first_song = Song.query.filter_by(id_name_pair="Some Song:123").first()
+		second_song = Song.query.filter_by(id_name_pair="Second Song:234").first()
 		assertTrue(first_song is not None)
 		assertTrue(second_song is not None)
-		correct_explicits = (first_song.explicit == True) and
-							(second_song.explicit == False)
+		correct_explicits = (first_song.explicit == True) and (second_song.explicit == False)
 		assertTrue(correct_explicits)
 
 	def test_song_3(self):
-		name = "Some Song"
+		name = "Some Song:123"
 		artist = "The Same Artist"
 		album = "The Same Album"
 		explicit = True
@@ -258,7 +256,7 @@ class ModelUnitTests(TestCase):
 		db.session.add(test_song)
 		db.session.commit()
 
-		name = "Different Song Same Album"
+		name = "Different Song Same Album:321"
 		artist = "The Same Artist"
 		album = "The Same Album"
 		explicit = True
@@ -269,7 +267,7 @@ class ModelUnitTests(TestCase):
 		db.session.add(test_song_2)
 		db.session.commit()
 
-		name = "Different Song Diff Album"
+		name = "Different Song Diff Album:444"
 		artist = "Diff Artist"
 		album = "Diff Album"
 		explicit = False
@@ -328,9 +326,7 @@ class ModelUnitTests(TestCase):
 		assertTrue(first_genre is not None)
 		assertTrue(second_genre is not None)
 		correct_descriptions = (first_genre.description == 
-								"Some description of second genre.") and
-								(second_genre.description == 
-								"Second description of second genre.")
+								"Some description of second genre.") and (second_genre.description == "Second description of second genre.")
 		assertTrue(correct_descriptions)
 
 	def test_genre_3(self):
