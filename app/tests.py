@@ -163,8 +163,7 @@ class ModelUnitTests(TestCase):
 		assertTrue(fourteen is not None)
 		fifteen_top_album = fifteen.top_album
 		fourteen_top_album = fourteen.top_album
-		correct_albums = fifteen_top_album == top_album and 
-					   fourteen_top_album == top_album_2
+		correct_albums = fifteen_top_album == top_album and fourteen_top_album == top_album_2
 		assertTrue(correct_albums) 
 
 	def test_year_3(self):
@@ -242,8 +241,7 @@ class ModelUnitTests(TestCase):
 		second_song = Song.query.filter_by(id_name_pair="Second Song:234").first()
 		assertTrue(first_song is not None)
 		assertTrue(second_song is not None)
-		correct_explicits = (first_song.explicit == True) and
-							(second_song.explicit == False)
+		correct_explicits = (first_song.explicit == True) and (second_song.explicit == False)
 		assertTrue(correct_explicits)
 
 	def test_song_3(self):
@@ -328,9 +326,7 @@ class ModelUnitTests(TestCase):
 		assertTrue(first_genre is not None)
 		assertTrue(second_genre is not None)
 		correct_descriptions = (first_genre.description == 
-								"Some description of second genre.") and
-								(second_genre.description == 
-								"Second description of second genre.")
+								"Some description of second genre.") and (second_genre.description == "Second description of second genre.")
 		assertTrue(correct_descriptions)
 
 	def test_genre_3(self):
