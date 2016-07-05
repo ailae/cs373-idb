@@ -1,0 +1,7 @@
+collatz-tests
+.DS_Store
+RunCollatz.tmp
+TestCollatz.tmp
+.coverage
+*.pyc
+__pycache__
