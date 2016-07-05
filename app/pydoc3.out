@@ -1,0 +1,264 @@
+Help on module models:
+
+NAME
+    models
+
+DESCRIPTION
+    This module demonstrates a model of our dataBASE used by
+    sweetify.me
+
+CLASSES
+    sqlalchemy.ext.declarative.api.Base(builtins.object)
+        Artist
+        Genre
+        Song
+        Year
+    
+    class Artist(sqlalchemy.ext.declarative.api.Base)
+     |  DataBASE model of table 'Artist'
+     |  
+     |  Method resolution order:
+     |      Artist
+     |      sqlalchemy.ext.declarative.api.Base
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, **kwargs)
+     |      A simple constructor that allows initialization from kwargs.
+     |      
+     |      Sets attributes on the constructed instance using the names and
+     |      values in ``kwargs``.
+     |      
+     |      Only keys that are present as
+     |      attributes of the instance's class are allowed. These could be,
+     |      for example, any mapped columns or relationships.
+     |  
+     |  __repr__(self)
+     |      Return repr(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  genres
+     |  
+     |  image_height
+     |  
+     |  image_url
+     |  
+     |  image_width
+     |  
+     |  name
+     |  
+     |  popularity
+     |  
+     |  spotify_url
+     |  
+     |  top_songs_id_name_pair
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  __mapper__ = <Mapper at 0x103635e80; Artist>
+     |  
+     |  __table__ = Table('Artist', MetaData(bind=None), Column('nam...0), tab...
+     |  
+     |  __tablename__ = 'Artist'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from sqlalchemy.ext.declarative.api.Base:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from sqlalchemy.ext.declarative.api.Base:
+     |  
+     |  metadata = MetaData(bind=None)
+    
+    class Genre(sqlalchemy.ext.declarative.api.Base)
+     |  DataBASE model of table 'Genre'
+     |  
+     |  Method resolution order:
+     |      Genre
+     |      sqlalchemy.ext.declarative.api.Base
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, **kwargs)
+     |      A simple constructor that allows initialization from kwargs.
+     |      
+     |      Sets attributes on the constructed instance using the names and
+     |      values in ``kwargs``.
+     |      
+     |      Only keys that are present as
+     |      attributes of the instance's class are allowed. These could be,
+     |      for example, any mapped columns or relationships.
+     |  
+     |  __repr__(self)
+     |      Return repr(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  artists
+     |  
+     |  description
+     |  
+     |  name
+     |  
+     |  related_genres
+     |  
+     |  years_on_top
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  __mapper__ = <Mapper at 0x10367d240; Genre>
+     |  
+     |  __table__ = Table('Genre', MetaData(bind=None), Column('name...s', ARR...
+     |  
+     |  __tablename__ = 'Genre'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from sqlalchemy.ext.declarative.api.Base:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from sqlalchemy.ext.declarative.api.Base:
+     |  
+     |  metadata = MetaData(bind=None)
+    
+    class Song(sqlalchemy.ext.declarative.api.Base)
+     |  DataBASE model of table 'Song'
+     |  
+     |  Method resolution order:
+     |      Song
+     |      sqlalchemy.ext.declarative.api.Base
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, **kwargs)
+     |      A simple constructor that allows initialization from kwargs.
+     |      
+     |      Sets attributes on the constructed instance using the names and
+     |      values in ``kwargs``.
+     |      
+     |      Only keys that are present as
+     |      attributes of the instance's class are allowed. These could be,
+     |      for example, any mapped columns or relationships.
+     |  
+     |  __repr__(self)
+     |      Return repr(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  album
+     |  
+     |  artist
+     |  
+     |  explicit
+     |  
+     |  id_name_pair
+     |  
+     |  popularity
+     |  
+     |  spotify_url
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  __mapper__ = <Mapper at 0x10365cb00; Song>
+     |  
+     |  __table__ = Table('Song', MetaData(bind=None), Column('id_na..., Strin...
+     |  
+     |  __tablename__ = 'Song'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from sqlalchemy.ext.declarative.api.Base:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from sqlalchemy.ext.declarative.api.Base:
+     |  
+     |  metadata = MetaData(bind=None)
+    
+    class Year(sqlalchemy.ext.declarative.api.Base)
+     |  DataBASE model of table 'Year'
+     |  
+     |  Method resolution order:
+     |      Year
+     |      sqlalchemy.ext.declarative.api.Base
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, **kwargs)
+     |      A simple constructor that allows initialization from kwargs.
+     |      
+     |      Sets attributes on the constructed instance using the names and
+     |      values in ``kwargs``.
+     |      
+     |      Only keys that are present as
+     |      attributes of the instance's class are allowed. These could be,
+     |      for example, any mapped columns or relationships.
+     |  
+     |  __repr__(self)
+     |      Return repr(self).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  top_album
+     |  
+     |  top_artist
+     |  
+     |  top_genre
+     |  
+     |  top_songs_id__name_pair
+     |  
+     |  year
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  __mapper__ = <Mapper at 0x10365c4e0; Year>
+     |  
+     |  __table__ = Table('Year', MetaData(bind=None), Column('year'...=50), t...
+     |  
+     |  __tablename__ = 'Year'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from sqlalchemy.ext.declarative.api.Base:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from sqlalchemy.ext.declarative.api.Base:
+     |  
+     |  metadata = MetaData(bind=None)
+
+FILE
+    /Users/niuyajie/Desktop/cs373-idb/app/models.py
+
+

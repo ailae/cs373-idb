@@ -1,13 +1,13 @@
 ************* Module models
 R: 25, 0: Too few public methods (0/2) (too-few-public-methods)
 R: 63, 0: Too few public methods (0/2) (too-few-public-methods)
-R: 94, 0: Too few public methods (0/2) (too-few-public-methods)
-R:128, 0: Too few public methods (0/2) (too-few-public-methods)
+R: 96, 0: Too few public methods (0/2) (too-few-public-methods)
+R:132, 0: Too few public methods (0/2) (too-few-public-methods)
 
 
 Report
 ======
-43 statements analysed.
+42 statements analysed.
 
 Statistics by type
 ------------------
@@ -31,6 +31,8 @@ External dependencies
 ::
 
     sqlalchemy (models)
+      \-dialects 
+      | \-postgresql (models)
       \-ext 
         \-declarative (models)
 
@@ -42,13 +44,13 @@ Raw metrics
 +----------+-------+------+---------+-----------+
 |type      |number |%     |previous |difference |
 +==========+=======+======+=========+===========+
-|code      |69     |30.53 |70       |-1.00      |
+|code      |68     |29.31 |70       |-2.00      |
 +----------+-------+------+---------+-----------+
-|docstring |9      |3.98  |9        |=          |
+|docstring |17     |7.33  |17       |=          |
 +----------+-------+------+---------+-----------+
-|comment   |107    |47.35 |107      |=          |
+|comment   |106    |45.69 |106      |=          |
 +----------+-------+------+---------+-----------+
-|empty     |41     |18.14 |41       |=          |
+|empty     |41     |17.67 |41       |=          |
 +----------+-------+------+---------+-----------+
 
 
@@ -76,7 +78,7 @@ Messages by category
 +-----------+-------+---------+-----------+
 |refactor   |4      |4        |=          |
 +-----------+-------+---------+-----------+
-|warning    |0      |3        |-3.00      |
+|warning    |0      |0        |=          |
 +-----------+-------+---------+-----------+
 |error      |0      |0        |=          |
 +-----------+-------+---------+-----------+
@@ -96,5 +98,5 @@ Messages
 
 Global evaluation
 -----------------
-Your code has been rated at 9.07/10 (previous run: 8.37/10, +0.70)
+Your code has been rated at 9.05/10 (previous run: 9.09/10, -0.04)
 

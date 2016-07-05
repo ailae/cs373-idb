@@ -1,5 +1,6 @@
-"""This module demonstrates a model of our dataBASE used by
-sweetify.me """
+"""
+This module demonstrates a model of our datebase used by sweetify.me
+"""
 
 # from sqlalchemy.orm import relationship, backref, joinedload_all
 #from postgreSQL import ARRAY
@@ -11,30 +12,30 @@ sweetify.me """
 # # import os
 
 # app = Flask(__name__)
-# # app.config.from_object(os.environ['APP_SETTINGS'])
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# # app.config.from_object(os.environ('APP_SETTINGS'))
+# app.config('SQLALCHEMY_TRACK_MODIFICATIONS') = False
 # db = sqlalchemy(app)
 
-# from sqlalchemy.dialects import postgresql
-# from postgresql import ARRAY
 from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.dialects.postgresql import ARRAY
+# from postgresql import ARRAY
 
 BASE = declarative_base()
 
 class Artist(BASE):
-    """dataBASE model of table 'Artist' """
+    """
+    DataBASE model of table 'Artist'
+    """
 
     __tablename__ = 'Artist'
 
     name = Column(String(50), primary_key=True)
-    image_height = Column(Integer)
     image_url = Column(String(300))
-    image_width = Column(Integer)
-    genres = Column(String(1000000000), ForeignKey('Genre.name'), nullable=False)
+    genres = Column(ARRAY(String), ForeignKey('Genre.name'), nullable=False)
     popularity = Column(Integer, nullable=False)
-    top_songs_id_name_pair = Column(String(1000000000), nullable=True)
-    # Array of id: song, like ['12345: song', '67890: song2', ...]
+    top_songs_id_name_pair = Column(ARRAY(String), nullable=True)
+    # Array of id: song, like ('12345: song', '67890: song2', ...)
     spotify_url = Column(String(300), nullable=False)
 
     # def __init__(self, name, image_height, image_width, image_url, \
@@ -60,14 +61,15 @@ class Artist(BASE):
             ) + self.top_songs_id_name_pair + ')'
 
 
-
 class Year(BASE):
-    """DataBASE model of table 'Year' """
+    """
+    DataBASE model of table 'Year'
+    """
 
     __tablename__ = 'Year'
 
     year = Column(Integer, primary_key=True)
-    top_songs_id__name_pair = Column(String(1000000000), nullable=False)
+    top_songs_id__name_pair = Column(ARRAY(String), nullable=False)
     top_genre = Column(String(50), ForeignKey('Genre.name'), nullable=False)
     top_artist = Column(String(50), ForeignKey('Artist.name'), \
                             nullable=False)
@@ -93,7 +95,9 @@ class Year(BASE):
 
 
 class Song(BASE):
-    """ DataBASE model of table 'Song' """
+    """
+    DataBASE model of table 'Song'
+    """
 
     __tablename__ = 'Song'
 
@@ -127,15 +131,17 @@ class Song(BASE):
 
 
 class Genre(BASE):
-    """ DataBASE model of table 'Genre' """
+    """
+    DataBASE model of table 'Genre'
+    """
 
     __tablename__ = 'Genre'
 
     name = Column(String(50), primary_key=True, nullable=False)
     description = Column(String(300), nullable=False)
-    years_on_top = Column(String(1000000000))
-    artists = Column(String(1000000000))
-    related_genres = Column(String(1000000000))
+    years_on_top = Column(ARRAY(Integer))
+    artists = Column(ARRAY(String))
+    related_genres = Column(ARRAY(String))
 
     # def __init__(self, name, description, years_on_top, artists, related_genres):
     #     self.name = name
@@ -194,7 +200,7 @@ class Genre(BASE):
     # related_genre_3 = Column(String(50), ForeignKey('Genre.name'))
     # related_genre_4 = Column(String(50), ForeignKey('Genre.name'))
     # related_genre_5 = Column(String(50), ForeignKey('Genre.name'))
-    # related_genres = Column(String(1000000000))
+    # related_genres = Column(ARRAY(String))
 
     # def __init__(self, name, description, \
     #     year_1 = None, artist_1 = None, related_genre_1 = None, \
