@@ -1,0 +1,208 @@
+commit 8686c2677efad19eb354e4400bda5d5d92a0f749
+Author: Samarth Dhruva <samarthdhruva@live.com>
+Date:   Tue Jul 5 20:19:19 2016 -0500
+
+    Removed unnecessary files
+
+commit 99a76a2ec1faabc08a9eba24aee6b4ca332cf7d3
+Author: Samarth Dhruva <samarthdhruva@live.com>
+Date:   Tue Jul 5 20:13:34 2016 -0500
+
+    Updated API Unit tests again (Fixes #15)
+
+commit d2757afd21998c33e34cebd5c6c6bd74288bd383
+Merge: 37a06ae 7007ca9
+Author: Samarth Dhruva <samarthdhruva@live.com>
+Date:   Tue Jul 5 20:05:04 2016 -0500
+
+    Merge branch 'dev'
+    
+    Merging dev branch with master after models and tests were changed.
+
+commit 7007ca9d103e13e4d35a515d9fe456280c328411
+Author: Samarth Dhruva <samarthdhruva@live.com>
+Date:   Tue Jul 5 20:04:13 2016 -0500
+
+    Updated all models to use only SQLAlchemy, not Flask-SQLAlchemy, and all tests now match that format. Both are rated above 9 by pylint. (Fixes #2 and Fixes #16)
+
+commit 37a06ae014212cca1b2bf26a60d99dc4ca445423
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Tue Jul 5 19:44:21 2016 -0500
+
+    Adding website code
+
+commit f006256b3c4bab580b5b0c3942d9f3b96fe59845
+Author: Yajieniu <fineyear3714@gmail.com>
+Date:   Tue Jul 5 16:44:44 2016 -0500
+
+    models.py is ready
+
+commit f78988ed4f75e315b81cdb3136c45d999a1ffc7e
+Author: Yajieniu <fineyear3714@gmail.com>
+Date:   Tue Jul 5 16:18:54 2016 -0500
+
+    changed arrays to large string
+
+commit cc86a7ad7328e644fadddd4e7dcd2e9020664541
+Merge: e9dfbad f154151
+Author: Yajieniu <fineyear3714@gmail.com>
+Date:   Tue Jul 5 14:32:30 2016 -0500
+
+    some changes
+
+commit f154151546619e4f31a6e3460e6588d8c0586ea8
+Author: Alex Cheng <akc2267@users.noreply.github.com>
+Date:   Tue Jul 5 14:04:24 2016 -0500
+
+    created gitignore
+
+commit e9dfbad55f14fbe573b5b301267f14b4d471aedc
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Tue Jul 5 09:43:27 2016 -0500
+
+    Added the methods to the UML. Closes #7.
+
+commit d41f25e707f397a1778cfef2a67e90192b8b4006
+Merge: 823bdec a3bc827
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sun Jul 3 21:16:34 2016 -0500
+
+    Merge branch 'dev'
+    
+    Updated unit tests and fixed syntax errors
+
+commit a3bc827cdd3d7a5e628201cb670e38cb01822283
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sun Jul 3 21:10:18 2016 -0500
+
+    Fixed syntax errors in unit tests
+
+commit 6fd5328f9f09ab14a50ce9ece2ccd9995b30c46b
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sun Jul 3 20:33:02 2016 -0500
+
+    Updated unit tests to reflect the new song_name:song_id attribute (Fixes #11)
+
+commit fb8103e3679be52e6bbfb3907bb5fa39157435e3
+Author: Yajieniu <fineyear3714@gmail.com>
+Date:   Sun Jul 3 14:55:20 2016 -0500
+
+    changed all song names to song id:name pairs
+
+commit 823bdec8fc3c153b445270282632504de8fb0223
+Merge: 01602fc 345423a
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sun Jul 3 02:19:09 2016 -0500
+
+    Merge branch 'dev'
+    
+    Unit tests are essentially done and most work has been done in master thus far, so merging makes sense.
+
+commit 345423a06e7dda8033e884449f484952fdf8d97f
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sun Jul 3 02:18:46 2016 -0500
+
+    Implemented unit tests for the models, currently three for each model. (Fixes #6)
+
+commit d0504fda191623174889b0425c0bf6586dcd27d6
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Fri Jul 1 20:54:37 2016 -0500
+
+    Implemented temporary unit tests for Artist model, using syntax found online. Unsure if these tests are valid, however.
+
+commit 5ee146a739b82e17230d404c2ed72a080fec2c71
+Author: Yajieniu <fineyear3714@gmail.com>
+Date:   Fri Jul 1 18:24:44 2016 -0500
+
+    How about these models
+
+commit 4b05a6da368a62419d1d3beafe8c6ad7ef33c093
+Author: Yajieniu <fineyear3714@gmail.com>
+Date:   Fri Jul 1 18:21:28 2016 -0500
+
+    How about these models
+
+commit 01602fc003598c5945558ee903fdfef309f430f5
+Merge: 02bb7f0 104b99c
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Fri Jul 1 09:46:37 2016 -0500
+
+    Modifying the url for the apis. Touches #1
+
+commit 02bb7f0127adae4e395339ce4c6721598923f597
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Fri Jul 1 09:45:32 2016 -0500
+
+    Modifying the url for the apis. Touches #1
+
+commit 6e8c94077dacf0f4a883433bc77f29635ebc0947
+Author: Yajieniu <fineyear3714@gmail.com>
+Date:   Fri Jul 1 00:32:24 2016 -0500
+
+    Updated models.py, but it's not the last version
+
+commit 104b99c37120837ef7d5db0318c6ebae4e620304
+Author: Brady Miller <bratxdy@utexas.edu>
+Date:   Thu Jun 30 23:17:34 2016 -0500
+
+    Minor change. Touches #1.
+
+commit 413b93ca3fe995cad8c5e18f1811ac4306226d4a
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Thu Jun 30 23:16:32 2016 -0500
+
+    Updated the apiary.apib to match the wiki on API design. Touches #1.
+
+commit 4f5bc4736142b13bea80063b99caa8d9f3c377c6
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Thu Jun 30 18:12:25 2016 -0500
+
+    Made some changes to models and tests, need to run on personal computer because CS machines don't have sqlalchemy
+
+commit 7c236b82308ae6746e66a974b592e7d11fc9bf50
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Thu Jun 30 18:00:55 2016 -0500
+
+    Added tests, put models inside app folder
+
+commit ff66f78a50480988f45dbcd6f9c96e0bfcb108bb
+Author: Yajieniu <fineyear3714@gmail.com>
+Date:   Thu Jun 30 17:56:59 2016 -0500
+
+    added models, not complete
+
+commit 61100665741207f4370a97c00c21133eb20dd849
+Author: ailae <ailaenos@gmail.com>
+Date:   Thu Jun 30 17:47:13 2016 -0500
+
+    Adding optional params to return all songs/arists/years/genres
+
+commit f56bf5018aa647eff10220475df5a9ea46922946
+Author: Samarth Dhruva <samarthdhruva@live.com>
+Date:   Thu Jun 30 15:32:55 2016 -0500
+
+    Added API Unit tests, which aren't relevant at the moment, but will be later.
+
+commit 590bf7173f6e8995da5ff15d53d6fc90e469ec3d
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Wed Jun 29 23:20:57 2016 -0500
+
+    Initial UML diagram. Touches #7.
+
+commit 50312c927fd0cb0d51332bd35b05fcb77074966b
+Author: ailae <ailaenos@gmail.com>
+Date:   Wed Jun 29 19:54:57 2016 -0500
+
+    Transferring API Description file from Apiary.io
+
+commit d942dd3a41ad0b28f655403c2b0eefd5775cc6bf
+Author: ailae <ailaenos@gmail.com>
+Date:   Wed Jun 29 19:24:43 2016 -0500
+
+    Transferring API Description file from Apiary.io
+
+commit 900c30559704d246b1fb8844e2fbd52525feae39
+Author: ailae <ailaenos@utexas.edu>
+Date:   Wed Jun 29 19:24:21 2016 -0500
+
+    Create README.md

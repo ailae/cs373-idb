@@ -9,8 +9,7 @@
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>models</strong></big></big></font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/niuyajie/Desktop/cs373-idb/app/models.py">/Users/niuyajie/Desktop/cs373-idb/app/models.py</a></font></td></tr></table>
-    <p><tt>This&nbsp;module&nbsp;demonstrates&nbsp;a&nbsp;model&nbsp;of&nbsp;our&nbsp;datebase&nbsp;used&nbsp;by<br>
-sweetify.me</tt></p>
+    <p><tt>This&nbsp;module&nbsp;demonstrates&nbsp;a&nbsp;model&nbsp;of&nbsp;our&nbsp;datebase&nbsp;used&nbsp;by&nbsp;sweetify.me</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
@@ -36,7 +35,13 @@ sweetify.me</tt></p>
 <font color="#000000" face="helvetica, arial"><a name="Artist">class <strong>Artist</strong></a>(sqlalchemy.ext.declarative.api.Base)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>DataBASE&nbsp;model&nbsp;of&nbsp;table&nbsp;'<a href="#Artist">Artist</a>'<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Database&nbsp;model&nbsp;of&nbsp;table&nbsp;'<a href="#Artist">Artist</a>',&nbsp;which&nbsp;stores:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;artist<br>
+&nbsp;&nbsp;&nbsp;&nbsp;image_url:&nbsp;a&nbsp;link&nbsp;to&nbsp;the&nbsp;artist's&nbsp;picture&nbsp;on&nbsp;Spotify<br>
+&nbsp;&nbsp;&nbsp;&nbsp;genres:&nbsp;an&nbsp;array&nbsp;of&nbsp;genres&nbsp;the&nbsp;artist&nbsp;is&nbsp;associated&nbsp;with<br>
+&nbsp;&nbsp;&nbsp;&nbsp;popularity:&nbsp;the&nbsp;popularity&nbsp;of&nbsp;the&nbsp;artist&nbsp;(as&nbsp;measured&nbsp;by&nbsp;Spotify)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;top_songs_id__name_pair:&nbsp;an&nbsp;array&nbsp;of&nbsp;the&nbsp;name/id&nbsp;pairs&nbsp;of&nbsp;all&nbsp;of&nbsp;the&nbsp;artist's&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;songs&nbsp;we&nbsp;have&nbsp;in&nbsp;our&nbsp;database<br>
+&nbsp;&nbsp;&nbsp;&nbsp;spotify_url:&nbsp;the&nbsp;url&nbsp;to&nbsp;the&nbsp;artist's&nbsp;Spotify&nbsp;page<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="models.html#Artist">Artist</a></dd>
@@ -72,9 +77,9 @@ Data descriptors defined here:<br>
 </dl>
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x103676e48; Artist&gt;</dl>
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x103571048; Artist&gt;</dl>
 
-<dl><dt><strong>__table__</strong> = Table('Artist', MetaData(bind=None), Column('nam...0), table=&lt;Artist&gt;, nullable=False), schema=None)</dl>
+<dl><dt><strong>__table__</strong> = Table('Artist', MetaData(bind=None), Column('nam...String(length=300), table=&lt;Artist&gt;), schema=None)</dl>
 
 <dl><dt><strong>__tablename__</strong> = 'Artist'</dl>
 
@@ -97,7 +102,12 @@ Data and other attributes inherited from sqlalchemy.ext.declarative.api.Base:<br
 <font color="#000000" face="helvetica, arial"><a name="Genre">class <strong>Genre</strong></a>(sqlalchemy.ext.declarative.api.Base)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>DataBASE&nbsp;model&nbsp;of&nbsp;table&nbsp;'<a href="#Genre">Genre</a>'<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Database&nbsp;model&nbsp;of&nbsp;table&nbsp;'<a href="#Genre">Genre</a>'&nbsp;which&nbsp;has:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;genre's&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;description:&nbsp;genre's&nbsp;description<br>
+&nbsp;&nbsp;&nbsp;&nbsp;years_on_top:&nbsp;all&nbsp;of&nbsp;the&nbsp;years&nbsp;in&nbsp;which&nbsp;this&nbsp;genre&nbsp;had&nbsp;the&nbsp;#1&nbsp;song<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artists:&nbsp;all&nbsp;of&nbsp;the&nbsp;artists&nbsp;who&nbsp;have&nbsp;been&nbsp;associated&nbsp;with&nbsp;this&nbsp;genre<br>
+&nbsp;&nbsp;&nbsp;&nbsp;related_genres:&nbsp;all&nbsp;of&nbsp;the&nbsp;genres&nbsp;that&nbsp;have&nbsp;been&nbsp;associated&nbsp;with&nbsp;this&nbsp;genre<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="models.html#Genre">Genre</a></dd>
@@ -131,7 +141,7 @@ Data descriptors defined here:<br>
 </dl>
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x1036b0208; Genre&gt;</dl>
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x1035993c8; Genre&gt;</dl>
 
 <dl><dt><strong>__table__</strong> = Table('Genre', MetaData(bind=None), Column('name...s', ARRAY(String()), table=&lt;Genre&gt;), schema=None)</dl>
 
@@ -156,7 +166,13 @@ Data and other attributes inherited from sqlalchemy.ext.declarative.api.Base:<br
 <font color="#000000" face="helvetica, arial"><a name="Song">class <strong>Song</strong></a>(sqlalchemy.ext.declarative.api.Base)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>DataBASE&nbsp;model&nbsp;of&nbsp;table&nbsp;'<a href="#Song">Song</a>'<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Database&nbsp;model&nbsp;of&nbsp;table&nbsp;'<a href="#Song">Song</a>'&nbsp;which&nbsp;stores&nbsp;each&nbsp;song's:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;id_name_pair:&nbsp;a&nbsp;string&nbsp;containing&nbsp;the&nbsp;song's&nbsp;name&nbsp;and&nbsp;Spotify&nbsp;ID<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist:&nbsp;artist&nbsp;who&nbsp;made&nbsp;the&nbsp;song<br>
+&nbsp;&nbsp;&nbsp;&nbsp;album:&nbsp;album&nbsp;the&nbsp;song&nbsp;comes&nbsp;from,&nbsp;as&nbsp;its&nbsp;name/id&nbsp;pair&nbsp;(id&nbsp;of&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;album&nbsp;from&nbsp;Spotify)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;explict:&nbsp;true&nbsp;if&nbsp;the&nbsp;song&nbsp;is&nbsp;explicit,&nbsp;false&nbsp;if&nbsp;it&nbsp;is&nbsp;not<br>
+&nbsp;&nbsp;&nbsp;&nbsp;popularity:&nbsp;the&nbsp;popularity&nbsp;of&nbsp;the&nbsp;song&nbsp;(from&nbsp;Spotify)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;spotify_url:&nbsp;a&nbsp;URL&nbsp;to&nbsp;the&nbsp;song&nbsp;on&nbsp;Spotify<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="models.html#Song">Song</a></dd>
@@ -192,7 +208,7 @@ Data descriptors defined here:<br>
 </dl>
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x103692ac8; Song&gt;</dl>
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x103571c88; Song&gt;</dl>
 
 <dl><dt><strong>__table__</strong> = Table('Song', MetaData(bind=None), Column('id_na..., String(length=300), table=&lt;Song&gt;), schema=None)</dl>
 
@@ -217,7 +233,12 @@ Data and other attributes inherited from sqlalchemy.ext.declarative.api.Base:<br
 <font color="#000000" face="helvetica, arial"><a name="Year">class <strong>Year</strong></a>(sqlalchemy.ext.declarative.api.Base)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>DataBASE&nbsp;model&nbsp;of&nbsp;table&nbsp;'<a href="#Year">Year</a>'<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Database&nbsp;model&nbsp;of&nbsp;table&nbsp;'<a href="#Year">Year</a>',&nbsp;which&nbsp;stores:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;year:&nbsp;the&nbsp;year's&nbsp;number&nbsp;(ex:&nbsp;2000)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;top_songs_id_name_pair:&nbsp;an&nbsp;array&nbsp;of&nbsp;the&nbsp;names/ids&nbsp;of&nbsp;the&nbsp;top&nbsp;100&nbsp;songs&nbsp;of&nbsp;that&nbsp;year<br>
+&nbsp;&nbsp;&nbsp;&nbsp;top_genre:&nbsp;the&nbsp;genre&nbsp;of&nbsp;the&nbsp;top&nbsp;song&nbsp;of&nbsp;the&nbsp;year<br>
+&nbsp;&nbsp;&nbsp;&nbsp;top_artist:&nbsp;the&nbsp;artist&nbsp;of&nbsp;the&nbsp;top&nbsp;song&nbsp;of&nbsp;the&nbsp;year<br>
+&nbsp;&nbsp;&nbsp;&nbsp;top_album:&nbsp;the&nbsp;top&nbsp;selling&nbsp;album&nbsp;of&nbsp;the&nbsp;year&nbsp;(not&nbsp;necessarily&nbsp;related&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;the&nbsp;top&nbsp;song&nbsp;of&nbsp;the&nbsp;year)&nbsp;as&nbsp;its&nbsp;name/id&nbsp;pair&nbsp;(id&nbsp;comes&nbsp;from&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spotify)<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="models.html#Year">Year</a></dd>
@@ -251,9 +272,9 @@ Data descriptors defined here:<br>
 </dl>
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x1036924a8; Year&gt;</dl>
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x103571668; Year&gt;</dl>
 
-<dl><dt><strong>__table__</strong> = Table('Year', MetaData(bind=None), Column('year'...=50), table=&lt;Year&gt;, nullable=False), schema=None)</dl>
+<dl><dt><strong>__table__</strong> = Table('Year', MetaData(bind=None), Column('year'..., String(length=150), table=&lt;Year&gt;), schema=None)</dl>
 
 <dl><dt><strong>__tablename__</strong> = 'Year'</dl>
 
