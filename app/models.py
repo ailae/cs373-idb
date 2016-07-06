@@ -38,8 +38,8 @@ class Artist(BASE):
         ) + self.genres + \
             ', popularity={}, spotifyUrl={}, topTracks='.format(
                 self.popularity,
-                self.spotifyUrl
-        ) + self.top_songs_id_name_pair + ')'
+                self.spotifyUrl) \
+            + self.top_songs_id_name_pair + ')'
 
 
 class Year(BASE):
@@ -70,8 +70,7 @@ class Year(BASE):
         ) + \
             'top_artist={}, top_album={})'.format(
                 self.top_artist,
-                self.top_album
-        )
+                self.top_album)
 
 
 class Song(BASE):
@@ -105,8 +104,7 @@ class Song(BASE):
             ' explicit={}, popularity={}, spotify_url={})'.format(
                 self.explicit,
                 self.popularity,
-                self.spotify_url
-        )
+                self.spotify_url)
 
 
 class Genre(BASE):
