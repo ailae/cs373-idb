@@ -1,207 +1,134 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, create_engine
-from sqlalchemy.orm import relationship, backref, joinedload_all
-from postgreSQL import ARRAY
-from sqlalchemy.orm.collections import attribute_mapped_collection
-# from sqlalchemy.types import JSON
+"""
+This module demonstrates a model of our datebase used by sweetify.me
+"""
 
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-import os
+from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.dialects.postgresql import ARRAY
 
-app = Flask(__name__)
-# app.config.from_object(os.environ['APP_SETTINGS'])
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+BASE = declarative_base()
 
 
-class Artist(db.Model) :
-	__tablename__ = 'Artist'
+class Artist(BASE):
 
-	name = db.Column(db.String(50), primary_key=True)
-	image_height = db.Column(db.Integer)
-	image_url = db.Column(db.String(300))
-	image_width = db.Column(db.Integer)
-	genres = db.Column(db.ARRAY[String], ForeignKey('Genre.name'), nullable=False)
-	popularity = db.Column(db.Integer, nullable=False)
-	top_songs_id_name_pair = db.Column(db.ARRAY[String], nullable=True)
-	# Array of id: song, like ['12345: song', '67890: song2', ...]
-	spotify_url = db.Column(db.String(300), nullable=False)
+    """
+    Database model of table 'Artist', which stores:
+        name: the name of the artist
+        image_url: a link to the artist's picture on Spotify
+        genres: an array of genres the artist is associated with
+        popularity: the popularity of the artist (as measured by Spotify)
+        top_songs_id__name_pair: an array of the name/id pairs of all of the artist's\
+                                 songs we have in our database
+        spotify_url: the url to the artist's Spotify page
+    """
 
-	def __init__(self, name, image_height, image_width, image_url, genres, spotify_url, top_songs_id_name_pair, \
-		popularity=0) :
-	    self.name = name
-	    self.image_height = image_height
-	    self.image_url = image_url
-	    self.image_width = image_width
-	    self.genres = genres
-	    self.popularity = popularity
-	    self.top_songs_id_name_pair = top_songs_id_name_pair
-	    self.spotify_url = spotify_url
+    __tablename__ = 'Artist'
 
-	def __repr__(self) :
-		return 'Artist(name={}, image_url={}, genre='.format(
-					self.name, 
-					self.image_url, 
-					) + self.genres + \
-				', popularity={}, spotifyUrl={}, topTracks='.format(
-					self.popularity,
-					self.spotifyUrl
-				) + self.top_songs_id_name_pair + ')'
+    name = Column(String(50), primary_key=True)
+    image_url = Column(String(300))
+    genres = Column(ARRAY(String), ForeignKey('Genre.name'))
+    popularity = Column(Integer)
+    top_songs_id_name_pair = Column(ARRAY(String))
+    spotify_url = Column(String(300))
+
+    def __repr__(self):
+        return 'Artist(name={}, image_url={}, genre='.format(
+            self.name,
+            self.image_url,
+        ) + self.genres + \
+            ', popularity={}, spotifyUrl={}, topTracks='.format(
+                self.popularity,
+                self.spotifyUrl
+            ) + self.top_songs_id_name_pair + ')'
 
 
-class Year(db.Model) :
-	__tablename__ = 'Year'
+class Year(BASE):
 
-	year = db.Column(db.Integer, primary_key=True)
-	top_songs_id__name_pair = db.Column(db.ARRAY[String], nullable=False)
-	top_genre = db.Column(db.String(50), ForeignKey('Genre.name'), nullable=False)
-	top_artist = db.Column(db.String(50), ForeignKey('Artist.name'), \
-							nullable=False)
-	top_album = db.Column(db.String(50), nullable=False)
+    """
+    Database model of table 'Year', which stores:
+        year: the year's number (ex: 2000)
+        top_songs_id_name_pair: an array of the names/ids of the top 100 songs of that year
+        top_genre: the genre of the top song of the year
+        top_artist: the artist of the top song of the year
+        top_album: the top selling album of the year (not necessarily related\
+                   to the top song of the year) as its name/id pair (id comes from\
+                   Spotify)
+    """
+    __tablename__ = 'Year'
 
-	def __init__(self, year, top_songs_id_name_pair, top_genre, top_artist, top_album) :
-		self.year = year
-		self.top_songs_id_name_pair = top_songs_id_name_pair
-		self.top_genre = top_genre
-		self.top_artist = top_artist
-		self.top_album = top_album
+    year = Column(Integer, primary_key=True)
+    top_songs_id__name_pair = Column(ARRAY(String))
+    top_genre = Column(String(50), ForeignKey('Genre.name'))
+    top_artist = Column(String(50), ForeignKey('Artist.name'))
+    top_album = Column(String(150))
 
-	def __repr__(self) :
-		return 'Year(year={}, top_songs_id_name_pair={}, top_genre={}, '.format(
-					self.year,
-					self.top_songs_id_name_pair,
-					self.top_genre
-					) + \
-				'top_artist={}, top_album={})'.format(
-					self.top_artist,
-					self.top_album
-				)
-
-
-class Song(db.Model) :
-	__tablename__ = 'Song'
-
-	id_name_pair = db.Column(db.String(150), primary_key=True)
-	artist = db.Column(db.String(50))
-	album = db.Column(db.String(50))
-	explicit = db.Column(db.Boolean)
-	popularity = db.Column(db.Integer)
-	spotify_url = db.Column(db.String(300))
-
-	def __init__(self, id_name_pair, artist, album, explicit, popularity, \
-					spotify_url) :
-		self.id_name_pair = id_name_pair
-		self.artist = artist
-		self.album = album
-		self.explicit = explicit
-		self.popularity = popularity
-		self.spotify_url = spotify_url
-
-	def __repr__(self) :
-		return 'Song(id_name_pair={}, artist={}, album={},'.format(
-					self.id_name_pair,
-					self.artist,
-					self.album
-					) + \
-				' explicit={}, popularity={}, spotify_url={})'.format(
-					self.explicit,
-					self.popularity,
-					self.spotify_url
-					)
+    def __repr__(self):
+        return 'Year(year={}, top_songs_id_name_pair={}, top_genre={}, '.format(
+            self.year,
+            self.top_songs_id_name_pair,
+            self.top_genre
+        ) + \
+            'top_artist={}, top_album={})'.format(
+                self.top_artist,
+                self.top_album
+            )
 
 
-class Genre(db.Model) :
-	__tablename__ = 'Genre'
+class Song(BASE):
 
-	name = db.Column(db.String(50), primary_key=True, nullable=False)
-	description = db.Column(db.String(300), nullable=False)
-	years_on_top = db.Column(db.ARRAY[Integer])	
-	artists = db.Column(db.ARRAY[String])
-	related_genres = db.Column(db.ARRAY[Sting])
+    """
+    Database model of table 'Song' which stores each song's:
+        id_name_pair: a string containing the song's name and Spotify ID
+        artist: artist who made the song
+        album: album the song comes from, as its name/id pair (id of\
+               the album from Spotify)
+        explict: true if the song is explicit, false if it is not
+        popularity: the popularity of the song (from Spotify)
+        spotify_url: a URL to the song on Spotify
+    """
 
-	def __init__(self, name, description, years_on_top, artists, related_genres) : 
-		self.name = name
-		self.description = description
-		self.years_on_top = years_on_top
-		self.artists = artists
-		self.related_genres = related_genres
+    __tablename__ = 'Song'
 
-	def __repr__(self) :
-		return 'Genre=(name={}, description={}, years='.format(
-			self.name, self.description) + self.years_on_top + ', artists=' + \
-			self.artists + ', related_genres=' + self.related_genres + ')'
+    id_name_pair = Column(String(150), primary_key=True)
+    artist = Column(String(50))
+    album = Column(String(150))
+    explicit = Column(Boolean)
+    popularity = Column(Integer)
+    spotify_url = Column(String(300))
 
-
-# class Image()
-# 	image_height = db.Column(db.Integer)
-# 	image_url = db.Column(db.String(150))
-# 	image_width = db.Column(db.Integer)
-
-# 	def __init__(self, image_height, image_url, image_width) :
-# 		self.image_height = image_height
-# 		self.image_width = image_width
-# 		self.image_url = image_url
-
-# 	def __repr__(self) :
-# 		return 'Image=(height={}, width={}, URL={})'.format(
-# 					self.image_height,
-# 					self.image_width,
-# 					self.image_url
-# 				)
+    def __repr__(self):
+        return 'Song(id_name_pair={}, artist={}, album={},'.format(
+            self.id_name_pair,
+            self.artist,
+            self.album
+        ) + \
+            ' explicit={}, popularity={}, spotify_url={})'.format(
+                self.explicit,
+                self.popularity,
+                self.spotify_url
+            )
 
 
-	# top_song_2 = db.Column(db.String, ForeignKey('Song.name'), nullable=True)
-	# top_song_3 = db.Column(db.String, ForeignKey('Song.name'), nullable=True)
-	# top_song_4 = db.Column(db.String, ForeignKey('Song.name'), nullable=True)
-	# top_song_5 = db.Column(db.String, ForeignKey('Song.name'), nullable=True)
-	# top_song_6 = db.Column(db.String, ForeignKey('Song.name'), nullable=True)
-	# top_song_7 = db.Column(db.String, ForeignKey('Song.name'), nullable=True)
-	# top_song_8 = db.Column(db.String, ForeignKey('Song.name'), nullable=True)
-	# top_song_9 = db.Column(db.String, ForeignKey('Song.name'), nullable=True)
-	# top_song_10 = db.Column(db.String, ForeignKey('Song.name'), nullable=True)
+class Genre(BASE):
 
-	# year_1 = db.Column(db.Integer)
-	# year_2 = db.Column(db.Integer, ForeignKey('Year.year'))
-	# year_3 = db.Column(db.Integer, ForeignKey('Year.year'))
-	# year_4 = db.Column(db.Integer, ForeignKey('Year.year'))
-	# year_5 = db.Column(db.Integer, ForeignKey('Year.year'))
-	# artist_1 = db.Column(db.String(50), ForeignKey('Artist.name'))
-	# artist_2 = db.Column(db.String(50), ForeignKey('Artist.name'))
-	# artist_3 = db.Column(db.String(50), ForeignKey('Artist.name'))
-	# artist_4 = db.Column(db.String(50), ForeignKey('Artist.name'))
-	# artist_5 = db.Column(db.String(50), ForeignKey('Artist.name')) 
+    """
+    Database model of table 'Genre' which has:
+        name: genre's name
+        description: genre's description
+        years_on_top: all of the years in which this genre had the #1 song
+        artists: all of the artists who have been associated with this genre
+        related_genres: all of the genres that have been associated with this genre
+    """
 
-	# related_genre_1 = db.Column(db.String(50), ForeignKey('Genre.name'))
-	# related_genre_2 = db.Column(db.String(50), ForeignKey('Genre.name'))
-	# related_genre_3 = db.Column(db.String(50), ForeignKey('Genre.name'))
-	# related_genre_4 = db.Column(db.String(50), ForeignKey('Genre.name'))
-	# related_genre_5 = db.Column(db.String(50), ForeignKey('Genre.name'))
-	# related_genres = db.Column(db.ARRAY[String])
+    __tablename__ = 'Genre'
 
-	# def __init__(self, name, description, \
-	# 	year_1 = None, artist_1 = None, related_genre_1 = None, \
-	# 	year_2 = None, artist_2 = None, related_genre_2 = None, \
-	# 	year_3 = None, artist_3 = None, related_genre_3 = None, \
-	# 	year_4 = None, artist_4 = None, related_genre_4 = None, \
-	# 	year_5 = None, artist_5 = None, related_genre_5 = None) :
+    name = Column(String(50), primary_key=True)
+    description = Column(String(300))
+    years_on_top = Column(ARRAY(Integer))
+    artists = Column(ARRAY(String))
+    related_genres = Column(ARRAY(String))
 
-	# 	self.name = name
-	# 	self.year_1 = year_1
-	# 	self.year_2 = year_2
-	# 	self.year_3 = year_3
-	# 	self.year_4 = year_4
-	# 	self.year_5 = year_5
-	# 	self.artist_1 = artist_1
-	# 	self.artist_2 = artist_2
-	# 	self.artist_3 = artist_3
-	# 	self.artist_4 = artist_4
-	# 	self.artist_5 = artist_5
-	# 	self.description = description
-	# 	self.related_genre_1 = related_genre_1
-	# 	self.related_genre_2 = related_genre_2
-	# 	self.related_genre_3 = related_genre_3
-	# 	self.related_genre_4 = related_genre_4
-	# 	self.related_genre_5 = related_genre_5
-
-
-
+    def __repr__(self):
+        return 'Genre=(name={}, description={}, years='.format(
+            self.name, self.description) + self.years_on_top + ', artists=' + \
+            self.artists + ', related_genres=' + self.related_genres + ')'
