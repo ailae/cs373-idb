@@ -9,7 +9,7 @@ import json
 class APIUnitTests(TestCase):
 
 	def setUp(self):
-		self.base_api_url = "http://sweetify.me/"
+		self.base_api_url = "http://sweetify.me"
 	
 	def years_get_test_1(self):
 		final_url = self.base_api_url + "/years/2000"
