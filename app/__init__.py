@@ -1,6 +1,35 @@
 from flask import Flask, render_template
+from models import *
+from sqlalchemy.orm import sessionmaker
+
+
+TEST_DATA = {
+	'name': 'Drake',
+	'num_followers':123,
+	'artist_id':'abcd',
+	'image_url':'http://www.google.com',
+	'popularity':72,
+	'spotify_url': 'http://www.spotify.com',
+}
 
 app = Flask(__name__)
+engine = db_connect()
+create_all_tables(engine)
+session_maker = sessionmaker(bind=engine)
+session = session_maker()
+
+try:
+	#artist = Artist(**TEST_DATA)
+	#artist2 = Artist(name='Drake', num_followers=123, artist_id='abcd', image_url='http://www.google.com', popularity=72, spotify_url='http://www.spotify.com')
+	#session.add(artist)
+	#session.delete(artist2)
+	#session.query(Artist).filter(Artist.name=="Drake").delete()
+	session.commit()
+except: 
+	session.rollback()
+	raise
+finally:
+	session.close()
 
 @app.route('/')
 def homepage():

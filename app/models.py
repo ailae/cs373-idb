@@ -2,11 +2,28 @@
 This module demonstrates a model of our datebase used by sweetify.me
 """
 
-from sqlalchemy import Table, Column, ForeignKey, Integer, String, Boolean
-from sqlalchemy.orm import relationship
+from sqlalchemy import create_engine, Table, Column, ForeignKey, Integer, String, Boolean
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy.orm import relationship
+from sqlalchemy.engine.url import URL
+
+DATABASE = {
+    'drivername': 'postgres',
+    'host': 'localhost',
+    'port': '5432',
+    'username': 'ailae',
+    'password': '',
+    'database': 'sweetify'
+}
 
 BASE = declarative_base()
+
+def db_connect():
+    return create_engine(URL(**DATABASE))
+
+def create_all_tables(engine):
+    BASE.metadata.create_all(engine)
 
 # A many to many association between Artists and Genres.
 # artists_genres_association = Table(
@@ -24,7 +41,7 @@ YEARS_SONGS_ASSOCIATION = Table(
     'years_songs',
     BASE.metadata,
     Column('year', Integer, ForeignKey('Year.year')),
-    Column('song', String(150), ForeignKey('Song.id')),
+    Column('song', String(150), ForeignKey('Song.song_id')),
     Column('rank', Integer)
 )
 
@@ -36,7 +53,6 @@ RELATED_GENRES_ASSOCIATION = Table(
     Column('genre1', String(100), ForeignKey('Genre.name')),
     Column('genre2', String(100), ForeignKey('Genre.name'))
 )
-
 
 class Artist(BASE):
 
@@ -156,7 +172,7 @@ class Song(BASE):
                                  back_populates="top_songs")
 
     # A many to one relationship between Songs and Artist.
-    artist = relationship("Artist", back_populates="songs")
+    artist = relationship("Artist", back_populates="charted_songs")
 
 
     def __repr__(self):
@@ -196,7 +212,8 @@ class Genre(BASE):
 
     # Many to many relationship between this Genre and other Genres.
     related_genres = relationship('Genre', secondary=RELATED_GENRES_ASSOCIATION,
-                                  back_populates="related_genres")
+                                  back_populates="related_genres", primaryjoin=(RELATED_GENRES_ASSOCIATION.c.genre1 == name), 
+                                  secondaryjoin=(RELATED_GENRES_ASSOCIATION.c.genre2 == name))
 
     def __repr__(self):
         return 'Genre=(name={}, description={})'.format(
