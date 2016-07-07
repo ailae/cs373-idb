@@ -3,27 +3,36 @@ This module demonstrates a model of our datebase used by sweetify.me
 """
 
 from sqlalchemy import Table, Column, ForeignKey, Integer, String, Boolean
+from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
 BASE = declarative_base()
 
 # A many to many association between Artists and Genres.
-artists_genres_association = Table('artists_genres', BASE.metadata,
+# artists_genres_association = Table(
+ARTISTS_GENRES_ASSOCIATION = Table(
+    'artists_genres',
+    BASE.metadata,
     Column('genre_name', String(100), ForeignKey('Genre.name')),
     Column('artist_name', String(150), ForeignKey('Artist.name'))
 )
 
 # A many to many association between Years and Songs. Contains the rank
 # that song held in that year.
-years_songs_association = Table('years_songs', BASE.metadata,
+# years_songs_association = Table(
+YEARS_SONGS_ASSOCIATION = Table(
+    'years_songs',
+    BASE.metadata,
     Column('year', Integer, ForeignKey('Year.year')),
     Column('song', String(150), ForeignKey('Song.id')),
-    Column('rank', Integer))
+    Column('rank', Integer)
 )
 
-
 # A many to many association between Genres and their Related Genres
-related_genres_association = Table('genres_to_genres', BASE.metadata,
+# related_genres_association = Table(
+RELATED_GENRES_ASSOCIATION = Table(
+    'genres_to_genres',
+    BASE.metadata,
     Column('genre1', String(100), ForeignKey('Genre.name')),
     Column('genre2', String(100), ForeignKey('Genre.name'))
 )
@@ -51,22 +60,27 @@ class Artist(BASE):
     image_url = Column(String(350))
     popularity = Column(Integer)
     spotify_url = Column(String(300))
-    
+
     # Bidirectional one to many relationship between artists and songs.
     charted_songs = relationship("Song", back_populates="artist")
+
     # Many to many relationship.
-    genres = relationship('Genre', secondary=artists_genres_association, 
+    genres = relationship('Genre', secondary=ARTISTS_GENRES_ASSOCIATION,
                           back_populates="artists")
 
     def __repr__(self):
-        return 'Artist(name={}, image_url={}, genre='.format(
-            self.name,
-            self.image_url,
-        ) + self.genres + \
-            ', popularity={}, spotifyUrl={}, topTracks='.format(
-                self.popularity,
-                self.spotifyUrl) \
-            + self.top_songs_id_name_pair + ')'
+        return "{'Artist': {'name': '%s', " %  self.name +          \
+        "'num_followers': '%s', "           %  self.num_followers + \
+        "'artist_id': '%s', "               %  self.artist_id +     \
+        "'image_url': '%s', "               %  self.image_url +     \
+        "'popularity': '%s', "              %  self.popularity +    \
+        "'spotify_url': '%s'}}"             %  self.spotify_url
+
+    # def __repr__(self):
+    #     return "Artist(name={}, num_follower{}, artist_id={}, ".format(
+    #         self.name, self.num_followers, self.artsit_id) + \
+    #     'image_url={}, popularity={}, spotify_url={}'.format(
+    #         self.image_url, self.popularity, self.spotify_url)
 
 
 class Year(BASE):
@@ -82,7 +96,6 @@ class Year(BASE):
         top_genre: a relationship that marks this year as one of the
                    ones in which this genre had a top song
         top_songs: The top 100 songs of that year
-        
     """
     __tablename__ = 'Year'
 
@@ -93,24 +106,22 @@ class Year(BASE):
 
 
     # Unidirectional one to one relationship between year and top_album_artist's name
-    top_album_artist_name = Column(String(100), ForeignKey('Artist.name')) 
-    
+    top_album_artist_name = Column(String(100), ForeignKey('Artist.name'))
+
     # Many to one relationship between Years and Genre.
     top_genre = relationship("Genre", back_populates="years_on_top")
 
     # A many to many relationship between Songs and Years
-    top_songs = relationship("Song", secondary=years_songs_association,
+    top_songs = relationship("Song", secondary=YEARS_SONGS_ASSOCIATION,
                              back_populates="years_charted")
 
     def __repr__(self):
-        return 'Year(year={}, top_songs_id_name_pair={}, top_genre={}, '.format(
+        return 'Year(year={}, top_album_name={}, '.format(
             self.year,
-            self.top_songs_id_name_pair,
-            self.top_genre
-        ) + \
-            'top_artist={}, top_album={})'.format(
-                self.top_artist,
-                self.top_album)
+            self.top_album_name
+        ) + 'top_album_id={}, top_genre_name={})'.format(
+            self.top_album_id,
+            self.top_genre_name)
 
 
 class Song(BASE):
@@ -130,7 +141,7 @@ class Song(BASE):
     """
 
     __tablename__ = 'Song'
-    song_id = Column(String(150), primary_key=True))
+    song_id = Column(String(150), primary_key=True)
     song_name = Column(String(100))
 
     artist_name = Column(String(150), ForeignKey('Artist.name'))
@@ -141,23 +152,23 @@ class Song(BASE):
     # A many to many relationship between years and songs. Songs uses this
     # to find all of the years it charted, and its rank in each of those
     # years.
-    years_charted = relationship("Year", secondary=years_songs_association,
-                               back_populates=top_songs)
-    
+    years_charted = relationship("Year", secondary=YEARS_SONGS_ASSOCIATION,
+                                 back_populates="top_songs")
+
     # A many to one relationship between Songs and Artist.
     artist = relationship("Artist", back_populates="songs")
 
 
     def __repr__(self):
-        return 'Song(id_name_pair={}, artist={}, album={},'.format(
-            self.id_name_pair,
-            self.artist,
-            self.album
+        return 'Song(song_id={}, song_name={}, artist_name={}, '.format(
+            self.song_id,
+            self.song_name,
+            self.artist_name
         ) + \
-            ' explicit={}, popularity={}, spotify_url={})'.format(
+            'album_name={}, explicit={}, popularity={})'.format(
+                self.album_name,
                 self.explicit,
-                self.popularity,
-                self.spotify_url)
+                self.popularity)
 
 
 class Genre(BASE):
@@ -178,15 +189,22 @@ class Genre(BASE):
 
     # One to many relationship between Genre and Years.
     years_on_top = relationship("Year", back_populates="top_genre")
-    
+
     # Many to many relationship between Artists and Genres.
-    artists = relationship('Artist', secondary=artists_genres_association, 
-                            back_populates="genres")
+    artists = relationship('Artist', secondary=ARTISTS_GENRES_ASSOCIATION,
+                           back_populates="genres")
 
     # Many to many relationship between this Genre and other Genres.
-    related_genres = relationship('Genre', secondary=related_genres_association, 
-                            back_populates="related_genres")
+    related_genres = relationship('Genre', secondary=RELATED_GENRES_ASSOCIATION,
+                                  back_populates="related_genres")
+
     def __repr__(self):
-        return 'Genre=(name={}, description={}, years='.format(
-            self.name, self.description) + self.years_on_top + ', artists=' + \
-            self.artists + ', related_genres=' + self.related_genres + ')'
+        return 'Genre=(name={}, description={})'.format(
+            self.name, self.description)
+
+
+
+
+
+
+
