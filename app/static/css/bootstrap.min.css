@@ -4688,11 +4688,13 @@ fieldset[disabled] .navbar-default .btn-link:hover {
     background-color: #222;
     border-color: #080808;
     font-family: Trebuchet MS;
-    font-weight: bold
+    font-weight: bold;
+    letter-spacing: 4px;
 }
 .navbar-inverse .navbar-brand {
-    color: #F29CB9;
-    font-family: Trebuchet MS
+    color: #E91E63;
+    font-family: Trebuchet MS;
+    letter-spacing: 4px;
 }
 .navbar-inverse .navbar-brand:focus,
 .navbar-inverse .navbar-brand:hover {
