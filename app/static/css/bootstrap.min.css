@@ -4449,11 +4449,11 @@ textarea.input-group-sm>.input-group-btn>.btn {
 }
 @media (min-width: 768px) {
     .navbar-nav {
-        float: left;
-        margin: 0
+        display: inline-block;
+        float: none;
     }
     .navbar-nav>li {
-        float: left
+        float: left;
     }
     .navbar-nav>li>a {
         padding-top: 15px;
