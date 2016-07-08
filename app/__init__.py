@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from models import *
 from sqlalchemy.orm import sessionmaker
+import ast
 
 
 TEST_DATA = {
@@ -17,8 +18,16 @@ engine = db_connect()
 create_all_tables(engine)
 session_maker = sessionmaker(bind=engine)
 session = session_maker()
+json = open('JSON/songs.txt', 'r').read()
+songs = ast.literal_eval(json)
 
 try:
+	for s in songs:
+		song = Song(song_id = s['song_id'], song_name = s['song_name'],
+			artist_name = s['artist_name'], album_name = s['album_name'],
+			explicit = s['explicit'], popularity = s['popularity'])
+		session.add(song)
+
 	#artist = Artist(**TEST_DATA)
 	#artist2 = Artist(name='Drake', num_followers=123, artist_id='abcd', image_url='http://www.google.com', popularity=72, spotify_url='http://www.spotify.com')
 	#session.add(artist)
