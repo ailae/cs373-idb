@@ -31,7 +31,7 @@ ARTISTS_GENRES_ASSOCIATION = Table(
     'artists_genres',
     BASE.metadata,
     Column('genre_name', String(100), ForeignKey('Genre.name')),
-    Column('artist_name', String(150), ForeignKey('Artist.name'))
+    Column('artist_id', String(150), ForeignKey('Artist.artist_id'))
 )
 
 # A many to many association between Years and Songs. Contains the rank
@@ -70,9 +70,9 @@ class Artist(BASE):
 
     __tablename__ = 'Artist'
 
-    name = Column(String(150), primary_key=True)
+    artist_id = Column(String(150), primary_key=True)
+    name = Column(String(150))
     num_followers = Column(Integer)
-    artist_id = Column(String(150))
     image_url = Column(String(350))
     popularity = Column(Integer)
     spotify_url = Column(String(300))
@@ -122,7 +122,7 @@ class Year(BASE):
 
 
     # Unidirectional one to one relationship between year and top_album_artist's name
-    top_album_artist_name = Column(String(100), ForeignKey('Artist.name'))
+    top_album_artist_id = Column(String(100), ForeignKey('Artist.artist_id'))
 
     # Many to one relationship between Years and Genre.
     top_genre = relationship("Genre", back_populates="years_on_top")
@@ -160,7 +160,8 @@ class Song(BASE):
     song_id = Column(String(150), primary_key=True)
     song_name = Column(String(100))
 
-    artist_name = Column(String(150), ForeignKey('Artist.name'))
+    artist_name = Column(String(150))
+    artist_id = Column(String(150), ForeignKey('Artist.artist_id'))
     album_name = Column(String(100))
     explicit = Column(Boolean)
     popularity = Column(Integer)
@@ -176,10 +177,11 @@ class Song(BASE):
 
 
     def __repr__(self):
-        return 'Song(song_id={}, song_name={}, artist_name={}, '.format(
+        return 'Song(song_id={}, song_name={}, artist_name={}, artist_id={},'.format(
             self.song_id,
             self.song_name,
-            self.artist_name
+            self.artist_name,
+            self.artist_id
         ) + \
             'album_name={}, explicit={}, popularity={})'.format(
                 self.album_name,

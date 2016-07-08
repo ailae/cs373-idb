@@ -20,12 +20,21 @@ session_maker = sessionmaker(bind=engine)
 session = session_maker()
 json = open('JSON/songs.txt', 'r').read()
 songs = ast.literal_eval(json)
+json2 = open('JSON/artists.txt', 'r').read()
+artists = ast.literal_eval(json2)
 
 try:
+	for a in artists:
+		artist = Artist(name=a['name'], num_followers=a['num_followers'], 
+			artist_id=a['artist_id'], image_url=a['image_url'], 
+			popularity=a['popularity'])
+		session.add(artist)
+
 	for s in songs:
 		song = Song(song_id = s['song_id'], song_name = s['song_name'],
-			artist_name = s['artist_name'], album_name = s['album_name'],
-			explicit = s['explicit'], popularity = s['popularity'])
+			artist_id = s['artist_id'], artist_name = s['artist_name'], 
+			album_name = s['album_name'], explicit = s['explicit'], 
+			popularity = s['popularity'])
 		session.add(song)
 
 	#artist = Artist(**TEST_DATA)
