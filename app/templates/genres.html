@@ -137,7 +137,12 @@
 
     <script>
     $(document).ready(function(){
-        $('#genres').dataTable();
+      var table = $('#genres').DataTable( {
+      rowReorder: {
+        selector: 'td:nth-child(2)'
+      },
+      responsive: true
+    } );
     });
     </script>        
   </body>
