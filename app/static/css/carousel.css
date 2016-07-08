@@ -15,7 +15,7 @@ body {
 .carousel {
   height: 500px;
   margin-bottom: 60px;
-  background-color: #E91E63;
+  background-color: #fff;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
@@ -25,7 +25,7 @@ body {
 /* Declare heights because of positioning of img element */
 .carousel .item {
   height: 500px;
-  background-color: #777;
+  background-color: #fff;
 }
 .carousel-inner > .item > img {
   background-color: #E91E63;
