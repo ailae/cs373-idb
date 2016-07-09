@@ -8,7 +8,7 @@ import unittest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from models import Artist, Year, Song, Genre
+from models import *
 
 
 class ModelUnitTests(unittest.TestCase):
@@ -20,11 +20,11 @@ class ModelUnitTests(unittest.TestCase):
     """
 
     def setUp(self):
-        self.base = declarative_base()
+        self.base = BASE
         self.engine = create_engine("sqlite:///:memory:")
         self.made_session = sessionmaker(bind=self.engine)
         self.session = self.made_session()
-        self.base.metadata.create_all(self.engine)
+        create_all_tables(self.engine)
 
     def tearDown(self):
         self.base.metadata.drop_all(self.engine)
@@ -33,21 +33,29 @@ class ModelUnitTests(unittest.TestCase):
     # Tests that once the instance is added to the database, it is found
     # and checks that one of its attributes returns the specified value.
     def test_artist_1(self):
+        artist_id = "abcd"
         name = "Kanye West"
-        image_url = "http://cdn.uinterview.com/wp-content/uploads/2016/02/news-kanye-west.jpg"
-        genres = ["Rap", "Hip Hop"]
+        num_followers = 20000000
+        image_url = "www.kanye.com/image.jpg"
         popularity = 50
-        top_songs = ["Blood On The Leaves:3032a29s", "Saint Pablo:30924p"]
         spotify_url = "http://www.spotify.com/kanye"
         test_artist = Artist(
-            name=name, image_url=image_url, genres=genres, spotify_url=spotify_url,
-            top_songs_id_name_pair=top_songs, popularity=popularity)
+            artist_id=artist_id, name=name, num_followers=num_followers,
+            image_url=image_url, popularity=popularity, spotify_url=spotify_url)
+
+        charted_song = Song(song_id="123abc", song_name="Good Life")
+        artist_genre_1 = Genre(name="Rap", description="Intense music.")
+        test_artist.charted_songs.append(charted_song)
+        self.session.add(charted_song)
+        test_artist.genres.append(artist_genre_1)
+        self.session.add(artist_genre_1)
+        self.session.commit()
         self.session.add(test_artist)
         self.session.commit()
         self.assertTrue(test_artist in self.session)
         kanye = self.session.query(Artist).filter_by(name="Kanye West").first()
         kanye_image = kanye.image_url
-        self.assertEqual(kanye_image, image_url)
+        self.assertEqual(kanye_image, "www.kanye.com/image.jpg")
 
     # Add two artists, and ensure they are in the database. Search for an artist that
     # wasn't added, and ensure that it is not found in the database.

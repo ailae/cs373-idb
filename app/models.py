@@ -56,10 +56,14 @@ RELATED_GENRES_ASSOCIATION = Table(
 class Years_Songs_Association(BASE):
     __tablename__ = 'years_songs_association'
 
-    year_num = Column('year', Integer, ForeignKey('Year.year'), primary_key=True),
-    song_id = Column('song', String(150), ForeignKey('Song.song_id'), primary_key=True),
+    # Some unique id for this association
+    assoc_id = Column(Integer, primary_key=True, autoincrement=True)
+    
+    year_num = Column('year', Integer, ForeignKey('Year.year'))
+    song_id = Column('song', String(150), ForeignKey('Song.song_id'))
     rank = Column('rank', Integer)
-    song = relationship("Song")
+    year = relationship("Year", back_populates="top_songs")
+    song = relationship("Song", back_populates="years_charted")
 
 
 
@@ -137,7 +141,7 @@ class Year(BASE):
     top_genre = relationship("Genre", back_populates="years_on_top")
 
     # A many to many relationship between Songs and Years
-    top_songs = relationship("Years_Songs_Association", back_populates="years_charted")
+    top_songs = relationship("Years_Songs_Association", back_populates="year")
 
     def __repr__(self):
         return 'Year(year={}, top_album_name={}, '.format(
@@ -170,6 +174,7 @@ class Song(BASE):
     explicit = Column(Boolean)
     popularity = Column(Integer)
 
+    years_charted = relationship("Years_Songs_Association", back_populates="song")
 
 
 
@@ -223,7 +228,7 @@ class Genre(BASE):
     __tablename__ = 'Genre'
 
     name = Column(String(100), primary_key=True)
-    description = Column(String(300))
+    description = Column(String(1500))
 
     # One to many relationship between Genre and Years.
     years_on_top = relationship("Year", back_populates="top_genre")
