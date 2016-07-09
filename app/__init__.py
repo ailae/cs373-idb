@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify, abort
 from models import *
 from sqlalchemy.orm import sessionmaker
 import ast
@@ -14,13 +14,11 @@ def artists_and_songs(session):
 
 	try:
 		for a in artists:
-			test_done = session.query(Artist).filter_by(artist_id = a['artist_id'])
-			if not test_done:
-				artist = Artist(name=a['name'], num_followers=a['num_followers'], 
-				artist_id=a['artist_id'], image_url=a['image_url'], 
-				popularity=a['popularity'])
-				session.add(artist)
-				session.commit()
+			artist = Artist(name=a['name'], num_followers=a['num_followers'], 
+			artist_id=a['artist_id'], image_url=a['image_url'], 
+			popularity=a['popularity'])
+			session.add(artist)
+			session.commit()
 
 		# Now, make an association between the artist and their genres.
 		# artist_genres = a['genres']
@@ -44,10 +42,10 @@ def artists_and_songs(session):
 
 app = Flask(__name__)
 engine = db_connect()
-init(engine) # Comment this out if the table is made!
+#init(engine) # Comment this out if the table is made!
 session_maker = sessionmaker(bind=engine)
 session = session_maker()
-artists_and_songs(session)
+#artists_and_songs(session)
 
 #json3 = open('JSON/years.txt', 'r').read()
 #years = ast.literal_eval(json3)
@@ -177,6 +175,57 @@ def genre2():
 @app.route('/genre3')
 def genre3():
 	return render_template('genre3.html')
+
+@app.route('/api/songs', methods=['GET'])
+def get_songs() :
+	songs = session.query(Song).all()
+	song_names = list()
+	for song in songs:
+		song_names += [song.song_name]
+	return jsonify({'result' : song_names, 'success' : True})
+	
+@app.route('/api/songs/<string:name>', methods=['GET'])
+def get_songs_by_name(name) :
+	song = session.query(Song).filter_by(song_name=name).first()
+	
+	if not song :
+		abort(400)
+	
+	return jsonify({'result' : song.dictify(), 'success' : True})
+	
+@app.route('/api/songs/artist/<string:name>', methods=['GET'])
+def get_songs_for_artist(name) :
+	artist = session.query(Artist).filter_by(name=name).first()
+	
+	if not artist :
+		abort(400)
+	
+	charted_songs = artist.charted_songs
+	charted_songs_dict = list()
+	for song in charted_songs :
+		charted_songs_dict += [song.dictify()]
+	
+	if not artist :
+		return jsonify({'success' : False})
+	
+	return jsonify({'result' : {'name' : name, 'songs' : charted_songs_dict}, 'success' : True})
+	
+@app.route('/api/artists', methods=['GET'])
+def get_artists() :
+	artists = session.query(Artist).all()
+	artist_names = list()
+	for artist in artists:
+		artist_names += [artist.name]
+	return jsonify({'result' : artist_names, 'success' : True})
+	
+@app.route('/api/artists/<string:name>', methods=['GET'])
+def get_artists_by_name(name) :
+	artist = session.query(Artist).filter_by(name=name).first()
+	
+	if not artist :
+		abort(400)
+	
+	return jsonify({'result' : artist.dictify(), 'success' : True})
 
 if __name__ == "__main__":
 	app.run()

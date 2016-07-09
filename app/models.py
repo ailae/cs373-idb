@@ -87,7 +87,17 @@ class Artist(BASE):
         "'artist_id': '%s', "               %  self.artist_id +     \
         "'image_url': '%s', "               %  self.image_url +     \
         "'popularity': '%s', "              %  self.popularity
-
+        
+    def dictify(self) :
+        artist_dict = dict()
+        artist_dict['artist_id'] = self.artist_id
+        artist_dict['name'] = self.name
+        artist_dict['num_followers'] = self.num_followers
+        artist_dict['image_url'] = self.image_url
+        artist_dict['popularity'] = self.popularity
+        artist_dict['charted_songs'] = [song.dictify() for song in self.charted_songs]
+#        artist_dict['genres'] = [genre.dictify() for genre in self.genres]
+        return artist_dict
 
 
 class Year(BASE):
@@ -154,9 +164,17 @@ class Song(BASE):
 
     years_charted = relationship("Years_Songs_Association", back_populates="song")
 
-
-
-
+    def dictify(self):
+        song_dict = dict()
+        song_dict['song_id'] = self.song_id
+        song_dict['song_name'] = self.song_name
+        song_dict['artist_name'] = self.artist_name
+        song_dict['artist_id'] = self.artist_id
+        song_dict['album_name'] = self.album_name
+        song_dict['explicit'] = self.explicit
+        song_dict['popularity'] = self.popularity
+#        song_dict['years_charted'] = list()
+        return song_dict
 
 
 # EDIT THIS FOR THE ASSOCIATION OBJECT CHANGE
@@ -223,10 +241,3 @@ class Genre(BASE):
     def __repr__(self):
         return 'Genre=(name={}, description={})'.format(
             self.name, self.description)
-
-
-
-
-
-
-
