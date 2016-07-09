@@ -12,8 +12,8 @@ DATABASE = {
     'drivername': 'postgres',
     'host': 'localhost',
     'port': '5432',
-    'username': 'ailae',
-    'password': '',
+    'username': 'postgres',
+    'password': 'test_password',
     'database': 'sweetify'
 }
 
@@ -34,16 +34,13 @@ ARTISTS_GENRES_ASSOCIATION = Table(
     Column('artist_id', String(150), ForeignKey('Artist.artist_id'))
 )
 
-# A many to many association between Years and Songs. Contains the rank
-# that song held in that year.
-# years_songs_association = Table(
-YEARS_SONGS_ASSOCIATION = Table(
-    'years_songs',
-    BASE.metadata,
-    Column('year', Integer, ForeignKey('Year.year')),
-    Column('song', String(150), ForeignKey('Song.song_id')),
-    Column('rank', Integer)
-)
+
+# # years_songs_association = Table(
+# YEARS_SONGS_ASSOCIATION = Table(
+#     'years_songs',
+#     BASE.metadata,
+
+# )
 
 # A many to many association between Genres and their Related Genres
 # related_genres_association = Table(
@@ -53,6 +50,18 @@ RELATED_GENRES_ASSOCIATION = Table(
     Column('genre1', String(100), ForeignKey('Genre.name')),
     Column('genre2', String(100), ForeignKey('Genre.name'))
 )
+
+# A many to many association between Years and Songs. Contains the rank
+# that song held in that year.
+class Years_Songs_Association(BASE):
+    __tablename__ = 'years_songs_association'
+
+    year_num = Column('year', Integer, ForeignKey('Year.year'), primary_key=True),
+    song_id = Column('song', String(150), ForeignKey('Song.song_id'), primary_key=True),
+    rank = Column('rank', Integer)
+    song = relationship("Song")
+
+
 
 class Artist(BASE):
 
@@ -128,8 +137,7 @@ class Year(BASE):
     top_genre = relationship("Genre", back_populates="years_on_top")
 
     # A many to many relationship between Songs and Years
-    top_songs = relationship("Song", secondary=YEARS_SONGS_ASSOCIATION,
-                             back_populates="years_charted")
+    top_songs = relationship("Years_Songs_Association", back_populates="years_charted")
 
     def __repr__(self):
         return 'Year(year={}, top_album_name={}, '.format(
@@ -144,14 +152,10 @@ class Song(BASE):
 
     """
     Database model of table 'Song' which stores each song's:
-        song_id: a string containing the song's Spotify ID (if the
-                 song is not available on Spotify, it will be manually
-                 assigned to just be the song's name and artist combined
-                 into one string)
+        song_id: a string containing the song's Spotify ID
         song_name: the name of the song
         artist_name: artist who made the song
-        album_name: album the song comes from, as its name/id pair (id of\
-               the album from Spotify)
+        album_name: album the song comes from
         explict: true if the song is explicit, false if it is not
         popularity: the popularity of the song (from Spotify)
     """
@@ -166,11 +170,27 @@ class Song(BASE):
     explicit = Column(Boolean)
     popularity = Column(Integer)
 
+
+
+
+
+
+
+# EDIT THIS FOR THE ASSOCIATION OBJECT CHANGE
+
+
+
     # A many to many relationship between years and songs. Songs uses this
     # to find all of the years it charted, and its rank in each of those
     # years.
-    years_charted = relationship("Year", secondary=YEARS_SONGS_ASSOCIATION,
-                                 back_populates="top_songs")
+ ####  ## years_charted = relationship("Year", secondary=YEARS_SONGS_ASSOCIATION,
+    ############                             back_populates="top_songs)
+
+
+
+
+
+
 
     # A many to one relationship between Songs and Artist.
     artist = relationship("Artist", back_populates="charted_songs")
