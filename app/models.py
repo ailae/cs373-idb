@@ -35,13 +35,6 @@ ARTISTS_GENRES_ASSOCIATION = Table(
 )
 
 
-# # years_songs_association = Table(
-# YEARS_SONGS_ASSOCIATION = Table(
-#     'years_songs',
-#     BASE.metadata,
-
-# )
-
 # A many to many association between Genres and their Related Genres
 # related_genres_association = Table(
 RELATED_GENRES_ASSOCIATION = Table(
@@ -76,7 +69,6 @@ class Artist(BASE):
         artist_id: Spotify ID of the artist
         image_url: a link to the artist's picture on Spotify
         popularity: the popularity of the artist (as measured by Spotify)
-        spotify_url: the url to the artist's Spotify page
         charted_songs: all of the artist's songs we have in our database
         genres: all of the genres the artist is associated with
     """
@@ -88,7 +80,6 @@ class Artist(BASE):
     num_followers = Column(Integer)
     image_url = Column(String(350))
     popularity = Column(Integer)
-    spotify_url = Column(String(300))
 
     # Bidirectional one to many relationship between artists and songs.
     charted_songs = relationship("Song", back_populates="artist")
@@ -102,14 +93,8 @@ class Artist(BASE):
         "'num_followers': '%s', "           %  self.num_followers + \
         "'artist_id': '%s', "               %  self.artist_id +     \
         "'image_url': '%s', "               %  self.image_url +     \
-        "'popularity': '%s', "              %  self.popularity +    \
-        "'spotify_url': '%s'}}"             %  self.spotify_url
+        "'popularity': '%s', "              %  self.popularity
 
-    # def __repr__(self):
-    #     return "Artist(name={}, num_follower{}, artist_id={}, ".format(
-    #         self.name, self.num_followers, self.artsit_id) + \
-    #     'image_url={}, popularity={}, spotify_url={}'.format(
-    #         self.image_url, self.popularity, self.spotify_url)
 
 
 class Year(BASE):
@@ -166,7 +151,7 @@ class Song(BASE):
 
     __tablename__ = 'Song'
     song_id = Column(String(150), primary_key=True)
-    song_name = Column(String(100))
+    song_name = Column(String(250))
 
     artist_name = Column(String(150))
     artist_id = Column(String(150), ForeignKey('Artist.artist_id'))
