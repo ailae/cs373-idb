@@ -3,64 +3,58 @@ from models import *
 from sqlalchemy.orm import sessionmaker
 import ast
 
+def init(engine):
+	create_all_tables(engine)
 
-TEST_DATA = {
-	'name': 'Drake',
-	'num_followers':123,
-	'artist_id':'abcd',
-	'image_url':'http://www.google.com',
-	'popularity':72,
-	'spotify_url': 'http://www.spotify.com',
-}
+def artists_and_songs(session):
+	json = open('JSON/songs.txt', 'r').read()
+	songs = ast.literal_eval(json)
+	json2 = open('JSON/artists.txt', 'r').read()
+	artists = ast.literal_eval(json2)
 
-app = Flask(__name__)
-engine = db_connect()
-create_all_tables(engine)
-session_maker = sessionmaker(bind=engine)
-session = session_maker()
-json = open('JSON/songs.txt', 'r').read()
-songs = ast.literal_eval(json)
-json2 = open('JSON/artists.txt', 'r').read()
-artists = ast.literal_eval(json2)
-#json3 = open('JSON/years.txt', 'r').read()
-#years = ast.literal_eval(json3)
-#json4 = open('JSON/genres.txt', 'r').read()
-#genres = ast.literal.eval(json4)
-# Note: genres should contain all genres, meaning the genres of each artist
-# AND the genre of all #1 songs of each year.
-
-
-try:
 	try:
-	for a in artists:
-		artist = Artist(name=a['name'], num_followers=a['num_followers'], 
-			artist_id=a['artist_id'], image_url=a['image_url'], 
-			popularity=a['popularity'])
+		for a in artists:
+			test_done = session.query(Artist).filter_by(artist_id = a['artist_id'])
+			if not test_done:
+				artist = Artist(name=a['name'], num_followers=a['num_followers'], 
+				artist_id=a['artist_id'], image_url=a['image_url'], 
+				popularity=a['popularity'])
+				session.add(artist)
+				session.commit()
 
 		# Now, make an association between the artist and their genres.
 		# artist_genres = a['genres']
 		# for a_genre in artist_genres:
 		# 	genre_to_add = session.query(Genre).filter_by(name=a_genre).first()
 		# 	artist.genres.append(genre_to_add)
-		session.add(artist)
-		session.commit()
+
+		for s in songs:  
+			test_song = session.query(Song).filter_by(song_id=s['song_id']).first()
+			if not test_song:
+				song = Song(song_id = s['song_id'], song_name = s['song_name'],
+					artist_id = s['artist_id'], artist_name = s['artist_name'], 
+					album_name = s['album_name'], explicit = s['explicit'], 
+					popularity = s['popularity'])
+				session.add(song)
+				session.commit()
+
 	except:
 		session.rollback()
 		raise
 
-	try: 
-	for s in songs:  
-		test_song = session.query(Song).filter_by(song_id=s['song_id']).first()
-		if not test_song:
-			song = Song(song_id = s['song_id'], song_name = s['song_name'],
-				artist_id = s['artist_id'], artist_name = s['artist_name'], 
-				album_name = s['album_name'], explicit = s['explicit'], 
-				popularity = s['popularity'])
-			session.add(song)
-			session.commit()
-	except:
-		session.rollback()
-		raise
+app = Flask(__name__)
+engine = db_connect()
+init(engine) # Comment this out if the table is made!
+session_maker = sessionmaker(bind=engine)
+session = session_maker()
+artists_and_songs(session)
+
+#json3 = open('JSON/years.txt', 'r').read()
+#years = ast.literal_eval(json3)
+#json4 = open('JSON/genres.txt', 'r').read()
+#genres = ast.literal.eval(json4)
+# Note: genres should contain all genres, meaning the genres of each artist
+# AND the genre of all #1 songs of each year.
 
 	# try:
 	# 	for g in genres:
@@ -128,11 +122,6 @@ try:
 	#session.delete(artist2)
 	#session.query(Artist).filter(Artist.name=="Drake").delete()
 	# session.commit()
-except: 
-	session.rollback()
-	raise
-finally:
-	session.close()
 
 @app.route('/')
 def homepage():
