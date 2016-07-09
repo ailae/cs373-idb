@@ -152,27 +152,11 @@ class Song(BASE):
     explicit = Column(Boolean)
     popularity = Column(Integer)
 
-    years_charted = relationship("Years_Songs_Association", back_populates="song")
-
-
-
-
-
-
-# EDIT THIS FOR THE ASSOCIATION OBJECT CHANGE
-
-
 
     # A many to many relationship between years and songs. Songs uses this
     # to find all of the years it charted, and its rank in each of those
     # years.
- ####  ## years_charted = relationship("Year", secondary=YEARS_SONGS_ASSOCIATION,
-    ############                             back_populates="top_songs)
-
-
-
-
-
+    years_charted = relationship("Years_Songs_Association", back_populates="song")
 
 
     # A many to one relationship between Songs and Artist.
