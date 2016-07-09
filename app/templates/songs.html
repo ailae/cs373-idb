@@ -72,27 +72,15 @@
         </tr>
       </thead>  
       <tbody>
+        {% for song in songs %}
           <tr>
-          <td><a href="song1">One Dance</a></td>
-          <td><a href="artist1">Drake</a></td>
-          <td>Views</td>
-          <td>No</td>
-          <td>50</td>
+          <td><a href="song1">{{ song.song_name }}</a></td>
+          <td><a href="artist1">{{ song.artist_name }}</a></td>
+          <td>{{ song.album_name }}</td>
+          <td>{{ song.explicit }}</td>
+          <td>{{ song.popularity }}</td>
         </tr>
-        <tr>
-          <td><a href="song2">Dog Days are Over</a></td>
-          <td><a href="artist2">Florence + The Machine</a></td>
-          <td>Lungs</td>
-          <td>No</td>
-          <td>70</td>
-        </tr>
-        <tr>
-          <td><a href="song3">Lose It</a></td>
-          <td><a href="artist3">Flume</a></td>
-          <td>Skin</td>
-          <td>Yes</td>
-          <td>83</td>
-        </tr>
+        {% endfor %}
       </tbody>
     </table>
     </div>    

@@ -3,9 +3,6 @@ from models import *
 from sqlalchemy.orm import sessionmaker
 import ast
 
-def init(engine):
-	create_all_tables(engine)
-
 def artists_and_songs(session):
 	json = open('JSON/songs.txt', 'r').read()
 	songs = ast.literal_eval(json)
@@ -14,13 +11,11 @@ def artists_and_songs(session):
 
 	try:
 		for a in artists:
-			test_done = session.query(Artist).filter_by(artist_id = a['artist_id'])
-			if not test_done:
-				artist = Artist(name=a['name'], num_followers=a['num_followers'], 
-				artist_id=a['artist_id'], image_url=a['image_url'], 
-				popularity=a['popularity'])
-				session.add(artist)
-				session.commit()
+			artist = Artist(name=a['name'], num_followers=a['num_followers'], 
+			artist_id=a['artist_id'], image_url=a['image_url'], 
+			popularity=a['popularity'])
+			session.add(artist)
+			session.commit()
 
 		# Now, make an association between the artist and their genres.
 		# artist_genres = a['genres']
@@ -38,16 +33,24 @@ def artists_and_songs(session):
 				session.add(song)
 				session.commit()
 
+		# Make the charted_songs and artist relationship
+		for a in session.query(Artist).all():
+			for s in session.query(Song).filter_by(artist_id = a.artist_id).all():
+				a.charted_songs.append(s)
+				# print a.artist_id
+				# print s.artist.artist_id
+				# s.artist = a
+
 	except:
 		session.rollback()
 		raise
 
 app = Flask(__name__)
 engine = db_connect()
-init(engine) # Comment this out if the table is made!
+create_all_tables(engine)
 session_maker = sessionmaker(bind=engine)
 session = session_maker()
-artists_and_songs(session)
+# artists_and_songs(session)
 
 #json3 = open('JSON/years.txt', 'r').read()
 #years = ast.literal_eval(json3)
@@ -134,10 +137,12 @@ def years():
 	return render_template('years.html')
 @app.route('/songs')
 def songs():
-	return render_template('songs.html')
+	song = session.query(Song).all()
+	return render_template('songs.html', songs=song)
 @app.route('/artists')
 def artists():
-	return render_template('artists.html')
+	artist = session.query(Artist).all()
+	return render_template('artists.html', artists=artist)
 @app.route('/genres')
 def genres():
 	return render_template('genres.html')
