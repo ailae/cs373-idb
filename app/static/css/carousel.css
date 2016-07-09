@@ -8,6 +8,19 @@ body {
   text-align: center;
 }
 
+.logo {
+  height: 250px;
+  padding-top: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #E91E63;
+}
+
+b {
+  color: #E91E63;
+}
+
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
@@ -15,7 +28,7 @@ body {
 .carousel {
   height: 500px;
   margin-bottom: 60px;
-  background-color: #fff;
+  background-color: #E91E63;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
@@ -25,14 +38,16 @@ body {
 /* Declare heights because of positioning of img element */
 .carousel .item {
   height: 500px;
-  background-color: #fff;
+  background-color: #E91E63;
 }
 .carousel-inner > .item > img {
   background-color: #E91E63;
   top: 0;
   left: 0;
-  position: absolute;
-  min-width: 100%;
+  display: block;
+  margin: 0 auto;
+  /*position: absolute;
+*/  /*min-width: 100%;*/
   height: 500px;
 }
 

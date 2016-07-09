@@ -8,19 +8,12 @@ from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.orm import relationship
 from sqlalchemy.engine.url import URL
 
-DATABASE = {
-    'drivername': 'postgres',
-    'host': 'localhost',
-    'port': '5432',
-    'username': 'postgres',
-    'password': 'test_password',
-    'database': 'sweetify'
-}
+import settings
 
 BASE = declarative_base()
 
 def db_connect():
-    return create_engine(URL(**DATABASE))
+    return create_engine(URL(**settings.DATABASE))
 
 def create_all_tables(engine):
     BASE.metadata.create_all(engine)
@@ -155,7 +148,7 @@ class Song(BASE):
 
     artist_name = Column(String(150))
     artist_id = Column(String(150), ForeignKey('Artist.artist_id'))
-    album_name = Column(String(100))
+    album_name = Column(String(250))
     explicit = Column(Boolean)
     popularity = Column(Integer)
 

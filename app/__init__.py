@@ -32,72 +32,80 @@ artists = ast.literal_eval(json2)
 
 try:
 	try:
-		for g in genres:
-			genre = Genre(name=g['name'], description=g['description'])
-			session.add(genre)
-		# Commit after adding genres so we can query for them later.
+	for a in artists:
+		artist = Artist(name=a['name'], num_followers=a['num_followers'], 
+			artist_id=a['artist_id'], image_url=a['image_url'], 
+			popularity=a['popularity'])
+
+		# Now, make an association between the artist and their genres.
+		# artist_genres = a['genres']
+		# for a_genre in artist_genres:
+		# 	genre_to_add = session.query(Genre).filter_by(name=a_genre).first()
+		# 	artist.genres.append(genre_to_add)
+		session.add(artist)
 		session.commit()
 	except:
 		session.rollback()
 		raise
 
-	try:
-		# Now that we have added all of our genres, we make associations 
-		# between related genres.
-		for g in genres:
-			this_genre = session.query(Genre).filter_by(name=g['name']).first()
-			related_genres = g['related_genres']
-			for related_genre in related_genres:
-				# Get the object of the related genre.
-				rg_object = session.query(Genre).filter_by(name=related_genre)
-				# Append that genre to this genre's related genres column.
-				this_genre.related_genres.append(rg_object)
-		session.commit()
+	try: 
+	for s in songs:  
+		test_song = session.query(Song).filter_by(song_id=s['song_id']).first()
+		if not test_song:
+			song = Song(song_id = s['song_id'], song_name = s['song_name'],
+				artist_id = s['artist_id'], artist_name = s['artist_name'], 
+				album_name = s['album_name'], explicit = s['explicit'], 
+				popularity = s['popularity'])
+			session.add(song)
+			session.commit()
 	except:
 		session.rollback()
 		raise
 
-	try:
-		for a in artists:
-			artist = Artist(name=a['name'], num_followers=a['num_followers'], 
-				artist_id=a['artist_id'], image_url=a['image_url'], 
-				popularity=a['popularity'])
+	# try:
+	# 	for g in genres:
+	# 		genre = Genre(name=g['name'], description=g['description'])
+	# 		session.add(genre)
+	# 	# Commit after adding genres so we can query for them later.
+	# 	session.commit()
+	# except:
+	# 	session.rollback()
+	# 	raise
 
-			# Now, make an association between the artist and their genres.
-			artist_genres = a['genres']
-			for a_genre in artist_genres:
-				genre_to_add = session.query(Genre).filter_by(name=a_genre).first()
-				artist.genres.append(genre_to_add)
-			session.add(artist)
-		session.commit()
-	except:
-		session.rollback()
-		raise
+	# try:
+	# 	# Now that we have added all of our genres, we make associations 
+	# 	# between related genres.
+	# 	for g in genres:
+	# 		this_genre = session.query(Genre).filter_by(name=g['name']).first()
+	# 		related_genres = g['related_genres']
+	# 		for related_genre in related_genres:
+	# 			# Get the object of the related genre.
+	# 			rg_object = session.query(Genre).filter_by(name=related_genre)
+	# 			# Append that genre to this genre's related genres column.
+	# 			this_genre.related_genres.append(rg_object)
+	# 	session.commit()
+	# except:
+	# 	session.rollback()
+	# 	raise
 
-	try:
-		for y in years:
-			year = Year(year=y['year'], top_album_name=y['top_album_name'], 
-						top_album_id=y['top_album_id'], top_genre_name=y['top_genre_name'],
-						top_album_artist_id=y['top_album_artist_id'])
+	# try:
+	# 	for y in years:
+	# 		year = Year(year=y['year'], top_album_name=y['top_album_name'], 
+	# 					top_album_id=y['top_album_id'], top_genre_name=y['top_genre_name'],
+	# 					top_album_artist_id=y['top_album_artist_id'])
 
 			
-			# Now we will add this year to the its top genre's years_on_top column.
-			# This code assumes the top genre for each year was also added to the
-			# genres file--therefore it thinks all genres exist in the database at this
-			# point, so it can query for them.
-			top_genre_object = session.query(Genre).filter_by(name=y['top_genre_name'])
-			top_genre_object.years_on_top.append(year)
-			session.add(year)
-		session.commit()
-	except
-
-	for s in songs:  
-		song = Song(song_id = s['song_id'], song_name = s['song_name'],
-			artist_id = s['artist_id'], artist_name = s['artist_name'], 
-			album_name = s['album_name'], explicit = s['explicit'], 
-			popularity = s['popularity'])
-		session.add(song)
-
+	# 		# Now we will add this year to the its top genre's years_on_top column.
+	# 		# This code assumes the top genre for each year was also added to the
+	# 		# genres file--therefore it thinks all genres exist in the database at this
+	# 		# point, so it can query for them.
+	# 		top_genre_object = session.query(Genre).filter_by(name=y['top_genre_name'])
+	# 		top_genre_object.years_on_top.append(year)
+	# 		session.add(year)
+	# 	session.commit()
+	# except:
+	# 	session.rollback()
+	# 	raise
 
 	## Once all songs and years have been added, it's time to add the top songs to each year
 		# make a file that looks just like merged_charts.txt but has removed all of the
@@ -119,7 +127,7 @@ try:
 	#session.add(artist)
 	#session.delete(artist2)
 	#session.query(Artist).filter(Artist.name=="Drake").delete()
-	session.commit()
+	# session.commit()
 except: 
 	session.rollback()
 	raise
