@@ -27,8 +27,7 @@ sweetify is an API designed on top of Spotify to return information on the top h
 ### Get information on a song by name [GET]
 
 + Parameters
-    + song_name (string, optional) - The song name you want information on; if none provided, returns a list of all songs
-    + artist_name (string, optional) - The artist whose songs you want to view
+    + name (string) - The song name you want information on; if none provided, returns a list of all songs
 
 + Response 200 (application/json)
 
@@ -43,44 +42,9 @@ sweetify is an API designed on top of Spotify to return information on the top h
             "success": true
         }
 
-## Songs [/songs/artist/<string:name>]
-
-### Get all the songs by an artist [GET]
-
-+ Parameters
-    + artist_name (string) - The artist whose songs you want to view
-
-+ Response 200 (application/json)
-
-        {
-            "result": {
-                "artist": "Drake"
-                "songs": [
-                    {
-                        "song_name": "One Dance" 
-                        "album": "Views",
-                        "artist": "Drake",
-                        "explicit": true,
-                        "popularity": "75"
-                    },
-                    {
-                        "song_name": "Hello"
-                        "album": "Views",
-                        "artist": "Drake",
-                        "explicit": true,
-                        "popularity": "50"
-                    }
-                ],
-            }
-            "success": true
-        }
-
-## Artists [/artists?artist_name={string, optional}]
+## Artists [/artists]
     
-### Get all artists or information on an artist by name [GET]
-
-+ Parameters
-    + artist_name (string, optional) - The artist name, if none provided, return lists of artists
+### Get all artists [GET]
 
 + Response 200 (application/json)
 
@@ -93,6 +57,13 @@ sweetify is an API designed on top of Spotify to return information on the top h
             }
             "success": true
         }
+
+## Artists [/artists/<string:name>]
+    
+### Get information on an artist by name [GET]
+
++ Parameters
+    + name (string) - The artist name
 
 + Response 200 (application/json)
 
@@ -111,12 +82,9 @@ sweetify is an API designed on top of Spotify to return information on the top h
             "success": true
         }
 
-## Years  [/years?year={int, optional}]
+## Years  [/years]
 
-### Get all years or information on a specific year [GET]
-
-+ Parameters
-    + year (int, optional) - The year to get information on; if none provided, returns a list of years
+### Get all years [GET]
 
 + Response 200 (application/json)
 
@@ -130,6 +98,13 @@ sweetify is an API designed on top of Spotify to return information on the top h
             }
             "success": true
         }
+
+## Years  [/years/<int:year>]
+
+### Get information on a specific year [GET]
+
++ Parameters
+    + year (int) - The year to get information on
         
 + Response 200 (application/json)
 
@@ -144,12 +119,9 @@ sweetify is an API designed on top of Spotify to return information on the top h
             "success": true
         }
 
-## Genres [/genres?genre_name={string, optional}]
+## Genres [/genres]
 
-### Get all genres or information on a genre [GET]
-
-+ Parameters
-    + name (string, optional) - The genre you want information on; if none provided, returns a list of all genres
+### Get all genres
 
 + Response 200 (application/json)
 
@@ -163,6 +135,13 @@ sweetify is an API designed on top of Spotify to return information on the top h
             }
             "success": true
         }
+
+## Genres [/genres/<string:name>]
+
+### Get information on a genre [GET]
+
++ Parameters
+    + name (string) - The genre you want information on
 
 + Response 200 (application/json)
 
