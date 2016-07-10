@@ -4,11 +4,14 @@ import ast
 import requests
 import operator
 
-json = open('artist_genres.txt', 'r').read()
-artists = ast.literal_eval(json)
+json = open('genre_descriptions.txt', 'r').read()
+genres = ast.literal_eval(json)
 totals = dict()
-artist_genres = list()
 
+for genre in genres:
+	sep = " <"
+	genre['summary'] = genre['summary'].split(sep, 1)[0]
+	genre['content'] = genre['content'].split(sep, 1)[0]
 # for artist in artists:
 # 	uppercase_list = list()
 # 	for genre in artist['genres']:
@@ -26,20 +29,22 @@ artist_genres = list()
 # f.write(str(artists))
 # f.close()
 
-empty_dicts = list()
-genre_set = set()
+# empty_dicts = list()
+# genre_set = set()
 
-for artist in artists:
-	if 'Alternative' in artist['genres']:
-		artist['genres'].remove('Alternative')
-		if 'Alternative Rock' not in artist['genres']:
-			artist['genres'] += ['Alternative Rock']
+# for artist in artists:
+# 	if 'Alternative' in artist['genres']:
+# 		artist['genres'].remove('Alternative')
+# 		if 'Alternative Rock' not in artist['genres']:
+# 			artist['genres'] += ['Alternative Rock']
 # for genre in genre_set:
 # 	empty_dicts += [{'name' : genre, 'related' : []}]
 # 	print genre
 	# json = requests.get("http://ws.audioscrobbler.com/2.0/?method=tag.getinfo&tag=" + genre + "&api_key=5da0c4646700667bf92c6faa09a6c909&format=json").json()
 	# descriptions += [{'name' : genre, 'summary' : json['tag']['wiki']['summary'], 'content' : json['tag']['wiki']['content']}]
 
-f = open('artist_genres.txt', 'w')
-f.write(str(artists))
+print(str(genres))
+
+f = open('genre_descriptions.txt', 'w')
+f.write(str(genres))
 f.close()
