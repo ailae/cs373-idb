@@ -50,7 +50,7 @@ engine = db_connect()
 create_all_tables(engine)
 session_maker = sessionmaker(bind=engine)
 session = session_maker()
-# artists_and_songs(session)
+artists_and_songs(session)
 
 #json3 = open('JSON/years.txt', 'r').read()
 #years = ast.literal_eval(json3)
@@ -96,13 +96,13 @@ session = session_maker()
 			# This code assumes the top genre for each year was also added to the
 			# genres file--therefore it thinks all genres exist in the database at this
 			# point, so it can query for them.
-			top_genre_object = session.query(Genre).filter_by(name=y['top_genre_name'])
-			top_genre_object.years_on_top.append(year)
-			session.add(year)
-		session.commit()
-	except:
-		session.rollback()
-		raise
+	# 		top_genre_object = session.query(Genre).filter_by(name=y['top_genre_name'])
+	# 		top_genre_object.years_on_top.append(year)
+	# 		session.add(year)
+	# 	session.commit()
+	# except:
+	# 	session.rollback()
+	# 	raise
 
 	## Once all songs and years have been added, it's time to add the top songs to each year
 		# make a file that looks just like merged_charts.txt but has removed all of the
@@ -115,24 +115,6 @@ session = session_maker()
 
 		# The above code will append the song object to the year's top songs, and then 
 		# by association add that year to the song's years_charted column
-
-
-
-
-	#artist = Artist(**TEST_DATA)
-	#artist2 = Artist(name='Drake', num_followers=123, artist_id='abcd', image_url='http://www.google.com', popularity=72, spotify_url='http://www.spotify.com')
-	#session.add(artist)
-	#session.delete(artist2)
-	#session.query(Artist).filter(Artist.name=="Drake").delete()
-	# session.commit()
-<<<<<<< HEAD
-# except: 
-# 	session.rollback()
-# 	raise
-# finally:
-# 	session.close()
-=======
->>>>>>> e0d657b7821c433ef1b0fd2b0e767a94d96ef6ed
 
 @app.route('/')
 def homepage():
