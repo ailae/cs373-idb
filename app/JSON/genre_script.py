@@ -4,14 +4,17 @@ import ast
 import requests
 import operator
 
-json = open('genre_descriptions.txt', 'r').read()
-genres = ast.literal_eval(json)
+json = open('artists.txt', 'r').read()
+my_json = open('artist_genres.txt', 'r').read()
+artists = ast.literal_eval(json)
+artist_genres = ast.literal_eval(my_json)
 totals = dict()
 
-for genre in genres:
-	sep = " <"
-	genre['summary'] = genre['summary'].split(sep, 1)[0]
-	genre['content'] = genre['content'].split(sep, 1)[0]
+for artist in artists:
+	for artist_genre in artist_genres:
+		if artist_genre['name'] == artist['name']:
+			artist_genre['artist_id'] = artist['artist_id']
+
 # for artist in artists:
 # 	uppercase_list = list()
 # 	for genre in artist['genres']:
@@ -43,8 +46,8 @@ for genre in genres:
 	# json = requests.get("http://ws.audioscrobbler.com/2.0/?method=tag.getinfo&tag=" + genre + "&api_key=5da0c4646700667bf92c6faa09a6c909&format=json").json()
 	# descriptions += [{'name' : genre, 'summary' : json['tag']['wiki']['summary'], 'content' : json['tag']['wiki']['content']}]
 
-print(str(genres))
+print(str(artist_genres))
 
-f = open('genre_descriptions.txt', 'w')
-f.write(str(genres))
+f = open('artist_genres.txt', 'w')
+f.write(str(artist_genres))
 f.close()
