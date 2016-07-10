@@ -276,13 +276,13 @@ def get_years() :
 	return jsonify({'result' : year_names, 'success' : True})
 	
 @app.route('/api/years/<int:year>', methods=['GET'])
-def get_year_by_name(name) :
+def get_year_by_name(year) :
 	year_obj = session.query(Year).filter_by(year=year).first()
 	
-	if not year :
+	if not year_obj :
 		abort(400)
 	
-	return jsonify({'result' : year.dictify(), 'success' : True})
+	return jsonify({'result' : year_obj.dictify(), 'success' : True})
 
 if __name__ == "__main__":
 	app.run()

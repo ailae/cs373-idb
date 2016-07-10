@@ -142,7 +142,6 @@ class Year(BASE):
         year_dict['top_album_id'] = self.top_album_id
         year_dict['top_genre_name'] = self.top_genre_name
         year_dict['top_album_artist_id'] = self.top_album_artist_id
-        year_dict['top_genre'] = self.top_genre.dictify()
         year_dict['top_songs'] = [song.dictify() for song in self.top_songs]
         return year_dict
 
@@ -240,8 +239,8 @@ class Genre(BASE):
         genre_dict = dict()
         genre_dict['name'] = self.name
         genre_dict['description'] = self.description
-        genre_dict['years_on_top'] = self.years_on_top
-        genre_dict['artists'] = self.artists
-        genre_dict['related_genres'] = self.related_genres
+        genre_dict['years_on_top'] = [year.year for year in self.years_on_top]
+        genre_dict['artists'] = [artist.name for artist in self.artists]
+        genre_dict['related_genres'] = [genre.name for genre in self.related_genres]
         return genre_dict
         
