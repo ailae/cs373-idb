@@ -174,7 +174,7 @@ def get_songs() :
 	return jsonify({'result' : song_names, 'success' : True})
 	
 @app.route('/api/songs/<string:name>', methods=['GET'])
-def get_songs_by_name(name) :
+def get_song_by_name(name) :
 	song = session.query(Song).filter_by(song_name=name).first()
 	
 	if not song :
@@ -191,13 +191,47 @@ def get_artists() :
 	return jsonify({'result' : artist_names, 'success' : True})
 	
 @app.route('/api/artists/<string:name>', methods=['GET'])
-def get_artists_by_name(name) :
+def get_artist_by_name(name) :
 	artist = session.query(Artist).filter_by(name=name).first()
 	
 	if not artist :
 		abort(400)
 	
 	return jsonify({'result' : artist.dictify(), 'success' : True})
+	
+@app.route('/api/genres', methods=['GET'])
+def get_genres() :
+	genres = session.query(Genre).all()
+	genre_names = list()
+	for genre in genres:
+		genre_names += [genre.name]
+	return jsonify({'result' : genre_names, 'success' : True})
+	
+@app.route('/api/genres/<string:name>', methods=['GET'])
+def get_genre_by_name(name) :
+	genre = session.query(Genre).filter_by(name=name).first()
+	
+	if not genre :
+		abort(400)
+	
+	return jsonify({'result' : genre.dictify(), 'success' : True})
+	
+@app.route('/api/years', methods=['GET'])
+def get_years() :
+	years = session.query(Year).all()
+	year_names = list()
+	for year in years:
+		year_names += [year.year]
+	return jsonify({'result' : year_names, 'success' : True})
+	
+@app.route('/api/years/<int:year>', methods=['GET'])
+def get_year_by_name(name) :
+	year_obj = session.query(Year).filter_by(year=year).first()
+	
+	if not year :
+		abort(400)
+	
+	return jsonify({'result' : year.dictify(), 'success' : True})
 
 if __name__ == "__main__":
 	app.run()
