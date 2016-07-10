@@ -92,8 +92,8 @@ class Artist(BASE):
         artist_dict['num_followers'] = self.num_followers
         artist_dict['image_url'] = self.image_url
         artist_dict['popularity'] = self.popularity
-        artist_dict['charted_songs'] = [song.dictify() for song in self.charted_songs]
-        artist_dict['genres'] = [genre.dictify() for genre in self.genres]
+        artist_dict['charted_songs'] = [song.song_name for song in self.charted_songs]
+        artist_dict['genres'] = [genre.name for genre in self.genres]
         return artist_dict
 
 
