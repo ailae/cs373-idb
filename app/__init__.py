@@ -49,10 +49,10 @@ def artists_and_songs(session):
 
 app = Flask(__name__)
 engine = db_connect()
-create_all_tables(engine)
+#create_all_tables(engine)
 session_maker = sessionmaker(bind=engine)
 session = session_maker()
-artists_and_songs(session)
+#artists_and_songs(session)
 
 #json3 = open('JSON/years.txt', 'r').read()
 #years = ast.literal_eval(json3)
@@ -181,23 +181,6 @@ def get_songs_by_name(name) :
 		abort(400)
 	
 	return jsonify({'result' : song.dictify(), 'success' : True})
-	
-@app.route('/api/songs/artist/<string:name>', methods=['GET'])
-def get_songs_for_artist(name) :
-	artist = session.query(Artist).filter_by(name=name).first()
-	
-	if not artist :
-		abort(400)
-	
-	charted_songs = artist.charted_songs
-	charted_songs_dict = list()
-	for song in charted_songs :
-		charted_songs_dict += [song.dictify()]
-	
-	if not artist :
-		return jsonify({'success' : False})
-	
-	return jsonify({'result' : {'name' : name, 'songs' : charted_songs_dict}, 'success' : True})
 	
 @app.route('/api/artists', methods=['GET'])
 def get_artists() :
