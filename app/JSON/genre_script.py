@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# import urllib2
+import urllib2
 import ast
 import requests
 import operator
@@ -7,17 +7,26 @@ import operator
 json = open('artist_genres.txt', 'r').read()
 artists = ast.literal_eval(json)
 totals = dict()
-# artist_genres = list()
+artist_genres = list()
+
 for artist in artists:
+	uppercase_list = list()
 	for genre in artist['genres']:
-		if genre in totals:
-			totals[genre] = totals[genre] + 1
-		else:
-			totals[genre] = 1
+		uppercase_list += [' '.join(s[0].upper() + s[1:] for s in genre.split())]
+	artist['genres'] = uppercase_list	
+# for artist in artists:
+# 	for genre in artist['genres']:
+# 		if genre in totals:
+# 			totals[genre] = totals[genre] + 1
+# 		else:
+# 			totals[genre] = 1
 
-trimmed_totals = {k:v for k, v in totals.items() if v >= 5}
+print str(sorted(totals.items(), key=operator.itemgetter(1), reverse=True))
+f = open('artist_genres.txt', 'w')
+f.write(str(artists))
+f.close()
 
-sorted_totals = sorted(trimmed_totals.items(), key=operator.itemgetter(1), reverse=True)
+# sorted_totals = sorted(trimmed_totals.items(), key=operator.itemgetter(1), reverse=True)
 # for artist in artists:
 # 	try:
 # 		name = artist['name']
