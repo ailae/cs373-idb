@@ -14,9 +14,10 @@ for artist in artists:
 		url = "http://ws.audioscrobbler.com/2.0/?method=artist.gettoptags&artist=" + name + "&api_key=5da0c4646700667bf92c6faa09a6c909&format=json"
 		tags = requests.get(url).json()	
 		if tags['toptags']['tag']:
-			artist_genres += [{name : (tags['toptags']['tag'][0]['name'], tags['toptags']['tag'][1]['name'], tags['toptags']['tag'][2]['name'])}]
+			artist_genres += [{'name' : name, 'genres' : [tags['toptags']['tag'][0]['name'], tags['toptags']['tag'][1]['name'], tags['toptags']['tag'][2]['name']]}]
 	except:
-		artist_genres += [{name : ('no genre given')}]
+		artist_genres += [{'name' : name, 'genres' : ['no genre given']}]
+	# 	pass
 f = open ('artist_genres.txt', 'w')
 f.write(str(artist_genres))
 f.close()		
