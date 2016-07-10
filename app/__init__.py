@@ -10,12 +10,13 @@ def artists_and_songs(session):
 	artists = ast.literal_eval(json2)
 
 	try:
-		for a in artists:
-			artist = Artist(name=a['name'], num_followers=a['num_followers'], 
-			artist_id=a['artist_id'], image_url=a['image_url'], 
-			popularity=a['popularity'])
-			session.add(artist)
-			session.commit()
+		if not session.query(Artist).first():
+			for a in artists:
+				artist = Artist(name=a['name'], num_followers=a['num_followers'], 
+				artist_id=a['artist_id'], image_url=a['image_url'], 
+				popularity=a['popularity'])
+				session.add(artist)
+				session.commit()
 
 		# Now, make an association between the artist and their genres.
 		# artist_genres = a['genres']
@@ -35,8 +36,9 @@ def artists_and_songs(session):
 
 		# Make the charted_songs and artist relationship
 		for a in session.query(Artist).all():
-			for s in session.query(Song).filter_by(artist_id = a.artist_id).all():
-				a.charted_songs.append(s)
+			if not a.charted_songs:
+				for s in session.query(Song).filter_by(artist_id = a.artist_id).all():
+					a.charted_songs.append(s)
 				# print a.artist_id
 				# print s.artist.artist_id
 				# s.artist = a
@@ -129,22 +131,21 @@ def years():
 def songs():
 	song = session.query(Song).all()
 	return render_template('songs.html', songs=song)
+@app.route('/songs/<id>')
+def song(id):
+	s = session.query(Song).filter_by(song_id = id).first()
+	return render_template('song1.html', song=s)
 @app.route('/artists')
 def artists():
 	artist = session.query(Artist).all()
 	return render_template('artists.html', artists=artist)
+@app.route('/artists/<id>')
+def artist(id):
+	a = session.query(Artist).filter_by(artist_id = id).first()
+	return render_template('artist1.html', artist=a)
 @app.route('/genres')
 def genres():
 	return render_template('genres.html')
-@app.route('/artist1')
-def artist1():
-	return render_template('artist1.html')
-@app.route('/artist2')
-def artist2():
-	return render_template('artist2.html')
-@app.route('/artist3')
-def artist3():
-	return render_template('artist3.html')		
 @app.route('/year1')
 def year1():
 	return render_template('year1.html')
@@ -154,15 +155,6 @@ def year2():
 @app.route('/year3')
 def year3():
 	return render_template('year3.html')		
-@app.route('/song1')
-def song1():
-	return render_template('song1.html')
-@app.route('/song2')
-def song2():
-	return render_template('song2.html')
-@app.route('/song3')
-def song3():
-	return render_template('song3.html')	
 @app.route('/genre1')
 def genre1():
 	return render_template('genre1.html')

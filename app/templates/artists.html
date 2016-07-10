@@ -74,12 +74,12 @@
       <tbody>
         {% for artist in artists %}
         <tr>
-        <td>{{ artist.name }}</td>
+        <td><a href="/artists/{{ artist.artist_id }}">{{ artist.name }}</a></td>
         <td><img class="img-circle" src="{{ artist.image_url }}" alt="Generic placeholder image" width="75" height="75"></td>
         <td>Genre here</td>
         <td>{{ artist.popularity }}</td>
         <td>{% for song in artist.charted_songs %}      
-            {{ song.song_name }},
+            <a href="/songs/{{ song.song_id }}">{{ song.song_name }}</a>,
             {% endfor %}</td>
       </tr>
       {% endfor %}

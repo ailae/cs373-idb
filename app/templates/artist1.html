@@ -12,7 +12,8 @@
     <title>Artists</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="static/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
 
 
@@ -28,7 +29,9 @@
     <![endif]-->
 
     <!-- Custom styles for this template -->
-    <link href="static/css/carousel.css" rel="stylesheet">
+    <!-- <link href="static/css/carousel.css" rel="stylesheet"> -->
+    <link href="{{ url_for('static', filename='css/carousel.css') }}" rel="stylesheet">
+
   </head>
 <!-- NAVBAR
 ================================================== -->
@@ -47,11 +50,11 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="/">HOME</a></li>
-                <li><a href="about">ABOUT</a></li>
-                <li><a href="years">YEARS</a></li>
-                <li><a href="songs">SONGS</a></li>
-                <li class="active"><a href="artists">ARTISTS</a></li>
-                <li><a href="genres">GENRES</a></li>
+                <li><a href="/about">ABOUT</a></li>
+                <li><a href="/years">YEARS</a></li>
+                <li><a href="/songs">SONGS</a></li>
+                <li class="active"><a href="/artists">ARTISTS</a></li>
+                <li><a href="/genres">GENRES</a></li>
               </ul>
             </div>
           </div>
@@ -60,23 +63,22 @@
     <div class="padding">
     <div class="row featurette">
         <div class="col-md-8">
-          <h2 class="featurette-heading">Drake</h2>
-          <h3><span class="text-muted">Rap</span></h3>
+          <h2 class="featurette-heading">{{ artist.name }}</h2>
+          <h3><span class="text-muted">Genre</span></h3>
           </h2>
-          <p class="lead">Popularity: 50
+          <p class="lead">Popularity: {{ artist.popularity }}
+            <br>Number of followers: {{ artist.num_followers }}
           <ol class ="list-group">
             <u>Top tracks:</u>
-            <li><a href="song1">One Dance</a></li>
-            <li>Too Good</li>
-            <li>Controlla</li>
-            <li>Jumpman</li>
-            <li>Pop Style</li>
+            {% for s in artist.charted_songs %}
+            <li><a href="/songs/{{ s.song_id }}">{{ s.song_name }}</a></li>
+            {% endfor %}
           </ol>
           </p>
-          <p><a class="btn btn-default" href="https://play.spotify.com/artist/3TVXtAsR1Inumwj472S9r4" role="button">Link to artist on Spotify &raquo;</a></p>
+          <p><a class="btn btn-default" href="https://play.spotify.com/artist/{{ artist.artist_id }}" role="button">Link to artist on Spotify &raquo;</a></p>
         </div>
         <div class="col-md-1">
-          <img class="artist-image" src="static/Drake1.png" alt="Generic placeholder image">
+          <img class="artist-image" src="{{ artist.image_url }}" alt="Generic placeholder image">
         </div>
       </div>
     </div>
