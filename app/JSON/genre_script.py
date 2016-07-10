@@ -1,26 +1,37 @@
 #!/usr/bin/python
-import urllib2
+# import urllib2
 import ast
 import requests
+import operator
 
-json = open('artists.txt', 'r').read()
+json = open('artist_genres.txt', 'r').read()
 artists = ast.literal_eval(json)
-artist_genres = list()
-
+totals = dict()
+# artist_genres = list()
 for artist in artists:
-	try:
-		name = artist['name']
-		name.replace(" ", "")	
-		url = "http://ws.audioscrobbler.com/2.0/?method=artist.gettoptags&artist=" + name + "&api_key=5da0c4646700667bf92c6faa09a6c909&format=json"
-		tags = requests.get(url).json()	
-		if tags['toptags']['tag']:
-			artist_genres += [{'name' : name, 'genres' : [tags['toptags']['tag'][0]['name'], tags['toptags']['tag'][1]['name'], tags['toptags']['tag'][2]['name']]}]
-	except:
-		artist_genres += [{'name' : name, 'genres' : ['no genre given']}]
-	# 	pass
-f = open ('artist_genres.txt', 'w')
-f.write(str(artist_genres))
-f.close()		
+	for genre in artist['genres']:
+		if genre in totals:
+			totals[genre] = totals[genre] + 1
+		else:
+			totals[genre] = 1
+
+trimmed_totals = {k:v for k, v in totals.items() if v >= 5}
+
+sorted_totals = sorted(trimmed_totals.items(), key=operator.itemgetter(1), reverse=True)
+# for artist in artists:
+# 	try:
+# 		name = artist['name']
+# 		name.replace(" ", "")	
+# 		url = "http://ws.audioscrobbler.com/2.0/?method=artist.gettoptags&artist=" + name + "&api_key=5da0c4646700667bf92c6faa09a6c909&format=json"
+# 		tags = requests.get(url).json()	
+# 		if tags['toptags']['tag']:
+# 			artist_genres += [{'name' : name, 'genres' : [tags['toptags']['tag'][0]['name'], tags['toptags']['tag'][1]['name'], tags['toptags']['tag'][2]['name']]}]
+# 	except:
+# 		artist_genres += [{'name' : name, 'genres' : ['no genre given']}]
+# 	# 	pass
+# f = open ('artist_genres.txt', 'w')
+# f.write(str(artist_genres))
+# f.close()		
 	# genres.add()
 # for genre in genres :
 # 	try:
