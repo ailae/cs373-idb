@@ -117,7 +117,7 @@ class Year(BASE):
     __tablename__ = 'Year'
 
     year = Column(Integer, primary_key=True)
-    top_album_name = Column(String(100))
+    top_album_name = Column(String(250))
     top_album_id = Column(String(150))
     top_genre_name = Column(String(100), ForeignKey('Genre.name'))
 

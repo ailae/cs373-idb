@@ -194,88 +194,112 @@ class ModelUnitTests(unittest.TestCase):
 
     # The following tests check the Year model
 
-    # # Add a year to the database, verify that it can be found,
-    # # retrieve the top_genre from that year, and verify it matches
-    # # what is expected.
-    # def test_year_1(self):
-    #     year = 2001
-    #     top_songs = ["Some Really Popular Song:5423", "Some Other Song:04921"]
-    #     top_genre = "Dubstep"
-    #     top_artist = "NSYNC"
-    #     top_album = "The Best Album:123098"
-    #     test_year = Year(
-    #         year=year, top_songs_id_name_pair=top_songs, top_genre=top_genre,
-    #         top_artist=top_artist, top_album=top_album)
-    #     self.session.add(test_year)
-    #     self.session.commit()
+    # Add a year to the database, verify that it can be found,
+    # retrieve the top_genre from that year, and verify it matches
+    # what is expected.
+    def test_year_1(self):
+        year = 2001
+        top_album_name = "Some Album"
+        top_album_id = "1234"
+        top_genre_name = "Top Genre Name"
+        top_album_artist_id = "artist123"
+        top_genre = Genre(name="Top Genre Name", description="Generic genre.")
+        self.session.add(top_genre)
+        self.session.commit()
+        test_year = Year(year=year, top_album_name=top_album_name, 
+                         top_album_id=top_album_id, top_genre_name=top_genre_name,
+                         top_album_artist_id=top_album_artist_id)
+        top_song = Song(song_id="same_id", song_name="Some Song")
+        top_songb = Song(song_id="other_id", song_name="Other Song")
+        
+        test_assoc = Years_Songs_Association(rank=1)
+        test_assoc.song = top_song
+        test_year.top_songs.append(test_assoc)
 
-    #     self.assertTrue(test_year in self.session)
-    #     actual_year = self.session.query(Year).filter_by(year=2001).first()
-    #     actual_top_genre = actual_year.top_genre
-    #     self.assertEqual(top_genre, actual_top_genre)
+        test_assocb = Years_Songs_Association(rank=85)
+        test_assocb.song = top_songb
+        test_year.top_songs.append(test_assocb)
+        self.session.add(top_song)
+        self.session.add(top_songb)
+        self.session.commit()
+        self.session.add(test_year)
+        self.session.commit()
+        self.assertTrue(test_year in self.session)
+        actual_year = self.session.query(Year).filter_by(year=2001).first()
+        actual_top_genre = actual_year.top_genre
+        self.assertEqual("Top Genre Name", actual_top_genre.name)
+        self.assertEqual("Generic genre.", actual_top_genre.description)
 
-    # def test_year_2(self):
-    #     year = 2015
-    #     top_songs = ["New Song:19651469", "Old Song:65165162"]
-    #     top_genre = "Pop"
-    #     top_artist = "Some Important Artist"
-    #     top_album = "The Biggest Album of 2015:2193810"
-    #     test_year = Year(
-    #         year=year, top_songs_id_name_pair=top_songs, top_genre=top_genre,
-    #         top_artist=top_artist, top_album=top_album)
-    #     year_2 = 2014
-    #     top_songs_2 = ["Another New Song:5165065", "Older Song:45980515"]
-    #     top_genre_2 = "Rap"
-    #     top_artist_2 = "Rapper"
-    #     top_album_2 = "The Biggest Album of 2014:201932019"
-    #     test_year_2 = Year(
-    #         year=year_2, top_songs_id_name_pair=top_songs_2, top_genre=top_genre_2,
-    #         top_artist=top_artist_2, top_album=top_album_2)
+        all_songs = actual_year.top_songs
+        self.assertEqual("Some Song", all_songs[0].song.song_name)
+        self.assertEqual("Other Song", all_songs[1].song.song_name)
+        self.assertEqual(1, all_songs[0].rank)
+        self.assertEqual(85, all_songs[1].rank)
+        
 
-    #     self.session.add_all([test_year, test_year_2])
-    #     self.session.commit()
 
-    #     fifteen = self.session.query(Year).filter_by(year=2015).first()
-    #     fourteen = self.session.query(Year).filter_by(year=2014).first()
-    #     self.assertTrue(fifteen is not None)
-    #     self.assertTrue(fourteen is not None)
-    #     fifteen_top_album = fifteen.top_album
-    #     fourteen_top_album = fourteen.top_album
-    #     correct_albums = fifteen_top_album == top_album and fourteen_top_album == top_album_2
-    #     self.assertTrue(correct_albums)
+    def test_year_2(self):
+        year = 2015
+        top_songs = ["New Song:19651469", "Old Song:65165162"]
+        top_genre = "Pop"
+        top_artist = "Some Important Artist"
+        top_album = "The Biggest Album of 2015:2193810"
+        test_year = Year(
+            year=year, top_songs_id_name_pair=top_songs, top_genre=top_genre,
+            top_artist=top_artist, top_album=top_album)
+        year_2 = 2014
+        top_songs_2 = ["Another New Song:5165065", "Older Song:45980515"]
+        top_genre_2 = "Rap"
+        top_artist_2 = "Rapper"
+        top_album_2 = "The Biggest Album of 2014:201932019"
+        test_year_2 = Year(
+            year=year_2, top_songs_id_name_pair=top_songs_2, top_genre=top_genre_2,
+            top_artist=top_artist_2, top_album=top_album_2)
 
-    # def test_year_3(self):
-    #     year = 2015
-    #     top_songs = ["New Song:9862162", "Old Song:98498216565162"]
-    #     top_genre = "Rap"
-    #     top_artist = "Some Important Artist"
-    #     top_album = "The Biggest Album of 2015:212981"
-    #     test_year = Year(
-    #         year=year, top_songs_id_name_pair=top_songs, top_genre=top_genre,
-    #         top_artist=top_artist, top_album=top_album)
-    #     year_2 = 2014
-    #     top_songs_2 = ["Another New Song:989826515", "Older Song:648915484"]
-    #     top_genre_2 = "Rap"
-    #     top_artist_2 = "Rapper"
-    #     top_album_2 = "The Biggest Album of 2014:21839189"
-    #     test_year_2 = Year(
-    #         year=year_2, top_songs_id_name_pair=top_songs_2, top_genre=top_genre_2,
-    #         top_artist=top_artist_2, top_album=top_album_2)
-    #     year_3 = 2013
-    #     top_songs_3 = ["thirteen:9216519819", "another thirteen:2151248"]
-    #     top_genre_3 = "Pop"
-    #     top_artist_3 = "Some dude"
-    #     top_album_3 = "The Biggest Album of 2013:2193871764"
-    #     test_year_3 = Year(
-    #         year=year_3, top_songs_id_name_pair=top_songs_3, top_genre=top_genre_3,
-    #         top_artist=top_artist_3, top_album=top_album_3)
-    #     self.session.add_all([test_year, test_year_2, test_year_3])
-    #     self.session.commit()
+        self.session.add_all([test_year, test_year_2])
+        self.session.commit()
 
-    #     # If we search for years who only had a top genre of rap, we should
-    #     # only get two years, not three.
-    #     years_list = self.session.query(Year).filter_by(top_genre="Rap").all()
-    #     self.assertTrue(len(years_list) == 2)
+        fifteen = self.session.query(Year).filter_by(year=2015).first()
+        fourteen = self.session.query(Year).filter_by(year=2014).first()
+        self.assertTrue(fifteen is not None)
+        self.assertTrue(fourteen is not None)
+        fifteen_top_album = fifteen.top_album
+        fourteen_top_album = fourteen.top_album
+        correct_albums = fifteen_top_album == top_album and fourteen_top_album == top_album_2
+        self.assertTrue(correct_albums)
+
+    def test_year_3(self):
+        year = 2015
+        top_songs = ["New Song:9862162", "Old Song:98498216565162"]
+        top_genre = "Rap"
+        top_artist = "Some Important Artist"
+        top_album = "The Biggest Album of 2015:212981"
+        test_year = Year(
+            year=year, top_songs_id_name_pair=top_songs, top_genre=top_genre,
+            top_artist=top_artist, top_album=top_album)
+        year_2 = 2014
+        top_songs_2 = ["Another New Song:989826515", "Older Song:648915484"]
+        top_genre_2 = "Rap"
+        top_artist_2 = "Rapper"
+        top_album_2 = "The Biggest Album of 2014:21839189"
+        test_year_2 = Year(
+            year=year_2, top_songs_id_name_pair=top_songs_2, top_genre=top_genre_2,
+            top_artist=top_artist_2, top_album=top_album_2)
+        year_3 = 2013
+        top_songs_3 = ["thirteen:9216519819", "another thirteen:2151248"]
+        top_genre_3 = "Pop"
+        top_artist_3 = "Some dude"
+        top_album_3 = "The Biggest Album of 2013:2193871764"
+        test_year_3 = Year(
+            year=year_3, top_songs_id_name_pair=top_songs_3, top_genre=top_genre_3,
+            top_artist=top_artist_3, top_album=top_album_3)
+        self.session.add_all([test_year, test_year_2, test_year_3])
+        self.session.commit()
+
+        # If we search for years who only had a top genre of rap, we should
+        # only get two years, not three.
+        years_list = self.session.query(Year).filter_by(top_genre="Rap").all()
+        self.assertTrue(len(years_list) == 2)
 
     # # The following tests will check the Song model
     # def test_song_1(self):
