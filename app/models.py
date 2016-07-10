@@ -104,11 +104,10 @@ class Year(BASE):
         year: the year's number
         top_album_name: the name of the top album
         top_album_id: the Spotify id of the top album
-        top_genre_name: the name of the genre of the top song
+        top_genre_name: the name of the genre of the year's top album
         top_album_artist_name: the name of the artist who made the
                                top album
-        top_genre: a relationship that marks this year as one of the
-                   ones in which this genre had a top song
+        top_genre: the genre of the year's top album
         top_songs: The top 100 songs of that year
     """
     __tablename__ = 'Year'
@@ -211,7 +210,7 @@ class Genre(BASE):
     Database model of table 'Genre' which has:
         name: genre's name
         description: genre's description
-        years_on_top: all of the years in which this genre had the #1 song
+        years_on_top: all of the years in which this genre was the top genre
         artists: all of the artists who have been associated with this genre
         related_genres: all of the genres that have been associated with this genre
     """
