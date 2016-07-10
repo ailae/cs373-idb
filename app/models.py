@@ -41,12 +41,9 @@ RELATED_GENRES_ASSOCIATION = Table(
 # that song held in that year.
 class Years_Songs_Association(BASE):
     __tablename__ = 'years_songs_association'
-
-    # Some unique id for this association
-    assoc_id = Column(Integer, primary_key=True, autoincrement=True)
     
-    year_num = Column('year', Integer, ForeignKey('Year.year'))
-    song_id = Column('song', String(150), ForeignKey('Song.song_id'))
+    year_num = Column('year', Integer, ForeignKey('Year.year'), primary_key=True)
+    song_id = Column('song', String(150), ForeignKey('Song.song_id'), primary_key=True)
     rank = Column('rank', Integer)
     year = relationship("Year", back_populates="top_songs")
     song = relationship("Song", back_populates="years_charted")
@@ -172,10 +169,6 @@ class Song(BASE):
     album_name = Column(String(250))
     explicit = Column(Boolean)
     popularity = Column(Integer)
-
-# EDIT THIS FOR THE ASSOCIATION OBJECT CHANGE
-
-
 
     # A many to many relationship between years and songs. Songs uses this
     # to find all of the years it charted, and its rank in each of those
