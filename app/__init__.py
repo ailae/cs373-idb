@@ -8,6 +8,14 @@ def artists_and_songs(session):
 	songs = ast.literal_eval(json)
 	json2 = open('JSON/artists.txt', 'r').read()
 	artists = ast.literal_eval(json2)
+	json3 = open('JSON/genre_descriptions.txt', 'r').read()
+	genres = ast.literal_eval(json3)
+	json4 = open('JSON/years.txt', 'r').read()
+	years = ast.literal_eval(json4)
+	json5 = open('JSON/artist_genres.txt', 'r').read()
+	artist_genres = ast.literal_eval(json5)
+	json6 = open('JSON/related_genres.txt', 'r').read()
+	related_genres = ast.literal_eval(json6)
 
 	try:
 		if not session.query(Artist).first():
@@ -42,6 +50,35 @@ def artists_and_songs(session):
 				# print a.artist_id
 				# print s.artist.artist_id
 				# s.artist = a
+		
+		if not session.query(Genre).first():
+			for g in genres:
+				genre = Genre(name=g['name'], description=g['summary'])
+				session.add(genre)
+				session.commit()
+
+		if not session.query(Year).first():
+			for y in years:
+				if not session.query(Artist).filter_by(artist_id=y['top_album_artist_id']).first():
+					year = Year(year=y['year'], top_album_name=y['top_album_name'], 
+						top_album_id=y['top_album_id'],
+						top_genre_name=y['top_genre_name'])
+				else:
+					year = Year(year=y['year'], top_album_name=y['top_album_name'], 
+						top_album_id=y['top_album_id'],
+						top_genre_name=y['top_genre_name'], 
+						top_album_artist_id=y['top_album_artist_id'])
+				session.add(year)
+				session.commit()
+
+		# Artist genres relation
+		# for ag in artist_genres:
+		# 	session.query(Artist).filter_by()
+
+		# Year top genre relation
+
+		# Related genres relation
+
 
 	except:
 		session.rollback()
