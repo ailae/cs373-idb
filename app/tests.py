@@ -30,8 +30,7 @@ class ModelUnitTests(unittest.TestCase):
         self.base.metadata.drop_all(self.engine)
 
     # These tests ensure that the Artist model behaves as expected.
-    # Tests that once the instance is added to the database, it is found
-    # and checks that one of its attributes returns the specified value.
+
     def test_artist_1(self):
         artist_id = "abcd"
         name = "Kanye West"
@@ -53,8 +52,7 @@ class ModelUnitTests(unittest.TestCase):
         kanye_image = kanye.image_url
         self.assertEqual(kanye_image, "www.kanye.com/image.jpg")
 
-    # Add two artists, and ensure they are in the database. Search for an artist that
-    # wasn't added, and ensure that it is not found in the database.
+
     def test_artist_2(self):
         artist_id = "abcd"
         name = "Beyonce"
@@ -194,9 +192,6 @@ class ModelUnitTests(unittest.TestCase):
 
     # The following tests check the Year model
 
-    # Add a year to the database, verify that it can be found,
-    # retrieve the top_genre from that year, and verify it matches
-    # what is expected.
     def test_year_1(self):
         year = 2001
         top_album_name = "Some Album"
@@ -398,8 +393,6 @@ class ModelUnitTests(unittest.TestCase):
         self.session.add(test_year_3)
         self.session.commit()
 
-        # If we search for years who only had a top genre of rap, we should
-        # only get two years, not three.
         years_list = self.session.query(Year).filter_by(top_genre_name="Rap").all()
         self.assertTrue(len(years_list) == 2)
         self.assertTrue(test_year in years_list and test_year_2 in years_list and \
@@ -413,6 +406,7 @@ class ModelUnitTests(unittest.TestCase):
         self.assertEqual(not_rap_list[0].year, 2013)
 
     # The following tests will check the Song model
+
     def test_song_1(self):
 
         song_id = "99999"
@@ -489,45 +483,64 @@ class ModelUnitTests(unittest.TestCase):
         self.assertTrue(correct_explicits)
 
     def test_song_3(self):
-        name = "Some Song:123"
-        artist = "The Same Artist"
-        album = "The Same Album:123121"
+
+        song_id = "123"
+        song_name = "Some Song"
+        artist_name = "The Same Artist"
+        artist_id = "123121"
+        album_name = "The Same Album"
         explicit = True
         popularity = 100
-        spotify_url = "www.spotify.com/some_url"
-        test_song = Song(
-            id_name_pair=name, artist=artist, album=album, explict=explicit,
-            popularity=popularity, spotify_url=spotify_url)
 
-        name_2 = "Different Song Same Album:321"
-        artist_2 = "The Same Artist"
-        album_2 = "The Same Album:123121"
+        test_song = Song(song_id=song_id, song_name=song_name, artist_name=artist_name,\
+                         artist_id=artist_id, album_name=album_name, explicit=explicit, \
+                         popularity=popularity)
+
+        song_id_2 = "321"
+        song_name_2 = "Different Song Same Album"
+        artist_name_2 = "The Same Artist"
+        artist_id_2 ="123121"
+        album_name_2 = "The Same Album"
         explicit_2 = True
         popularity_2 = 99
-        spotify_url_2 = "www.spotify.com/some_url_of_diff_song"
-        test_song_2 = Song(
-            id_name_pair=name_2, artist=artist_2, album=album_2, explict=explicit_2,
-            popularity=popularity_2, spotify_url=spotify_url_2)
 
-        name_3 = "Different Song Diff Album:444"
-        artist_3 = "Diff Artist"
-        album_3 = "Diff Album:08342"
+        test_song_2 = Song(song_id=song_id_2, song_name=song_name_2, artist_name=artist_name_2,\
+                           artist_id=artist_id_2, album_name=album_name_2, explicit=explicit_2, \
+                           popularity=popularity_2)
+
+
+        song_id_3 = "4444"
+        song_name_3 = "Different Song Different Album"
+        artist_name_3 = "Different Artist"
+        artist_id_3 ="00000"
+        album_name_3 = "Different Album"
         explicit_3 = False
         popularity_3 = 20
-        spotify_url_3 = "www.spotify.com/totally_diff"
-        test_song_3 = Song(
-            id_name_pair=name_3, artist=artist_3, album=album_3, explict=explicit_3,
-            popularity=popularity_3, spotify_url=spotify_url_3)
+
+        test_song_3 = Song(song_id=song_id_3, song_name=song_name_3, artist_name=artist_name_3, \
+                           artist_id=artist_id_3, album_name=album_name_3, explicit=explicit_3, \
+                           popularity=popularity_3)
+
+
 
         self.session.add_all([test_song, test_song_2, test_song_3])
         self.session.commit()
 
-        songs_list = self.session.query(Song).filter_by(
-            album="The Same Album:123121").all()
-        self.assertTrue(len(songs_list) == 2)
-        not_songs_list = self.session.query(
-            Song).filter_by(explicit=False).all()
-        self.assertTrue(len(not_songs_list) == 1)
+
+        same_album_list = self.session.query(Song).filter_by(
+            album_name="The Same Album").all()
+        self.assertEqual(len(same_album_list), 2)
+        self.assertTrue(test_song in same_album_list and test_song_2 in same_album_list \
+                        and test_song_3 not in same_album_list)
+
+        not_same_album_list = self.session.query(
+            Song).filter_by(album_name="Different Album").all()
+        self.assertEqual(len(not_same_album_list), 1)
+        self.assertTrue(test_song not in not_same_album_list and \
+                        test_song_2 not in not_same_album_list and \
+                        test_song_3 in not_same_album_list)
+
+
 
     # # The following tests check the Genre model
     # def test_genre_1(self):
