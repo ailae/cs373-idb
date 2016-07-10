@@ -72,13 +72,27 @@ def artists_and_songs(session):
 				session.commit()
 
 		# Artist genres relation
-		# for ag in artist_genres:
-		# 	session.query(Artist).filter_by()
+		for ag in artist_genres:
+			artist = session.query(Artist).filter_by(artist_id=ag['artist_id']).first()
+			if not artist.genres:
+				for g in ag['genres']:
+					artist.genres.append(session.query(Genre).filter_by(name=g).first())
 
 		# Year top genre relation
+		for y in session.query(Year).all():
+			if not y.top_genre:
+				y.top_genre = session.query(Genre).filter_by(name=y.top_genre_name).first()
 
 		# Related genres relation
-
+		for g in related_genres:
+			genre = session.query(Genre).filter_by(name=g['name']).first()
+			if genre:
+				if not genre.related_genres:
+					if g['related']:
+						for relations in g['related']:
+							result = session.query(Genre).filter_by(name=relations).first()
+							if result:
+								genre.related_genres.append(result)
 
 	except:
 		session.rollback()
