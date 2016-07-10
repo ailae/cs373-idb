@@ -49,10 +49,10 @@ def artists_and_songs(session):
 
 app = Flask(__name__)
 engine = db_connect()
-#create_all_tables(engine)
+create_all_tables(engine)
 session_maker = sessionmaker(bind=engine)
 session = session_maker()
-#artists_and_songs(session)
+artists_and_songs(session)
 
 #json3 = open('JSON/years.txt', 'r').read()
 #years = ast.literal_eval(json3)
