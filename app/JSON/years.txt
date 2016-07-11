@@ -9,42 +9,42 @@
     {
         'top_album_artist_id': '4iHNK0tOyZPYnBU7nGAgpQ',
         'top_genre_name': 'Pop',
-        'top_album_name': 'MariahCarey',
+        'top_album_name': 'Mariah Carey',
         'top_album_id': '5SwNGsGw1I8H361DKiYnnn',
         'year': '1991'
     },
     {
         'top_album_artist_id': '4BclNkZtAUq1YrYNzye3N7',
         'top_genre_name': 'Country',
-        'top_album_name': 'Ropin\xe2\x80\x99theWind',
+        'top_album_name': "Ropin' the Wind",
         'top_album_id': 'NO_ALBUM_ID',
         'year': '1992'
     },
     {
         'top_album_artist_id': '6XpaIBNiVzIetEPCWDvAFP',
         'top_genre_name': 'Pop',
-        'top_album_name': 'TheBodyguard',
+        'top_album_name': 'The Bodyguard',
         'top_album_id': '7JVJlkNNobS0GSoy4tCS96',
         'year': '1993'
     },
     {
         'top_album_artist_id': '5ksRONqssB7BR161NTtJAm',
         'top_genre_name': 'Pop',
-        'top_album_name': 'TheSign',
+        'top_album_name': 'The Sign',
         'top_album_id': '5UwIyIyFzkM7wKeGtRJPgB',
         'year': '1994'
     },
     {
         'top_album_artist_id': '08ct2eZF5lUPdJpHwNKWof',
         'top_genre_name': 'Rock',
-        'top_album_name': 'CrackedRearView',
+        'top_album_name': 'Cracked Rear View',
         'top_album_id': '5AYmpTfdv1OoASUJ5rZB7K',
         'year': '1995'
     },
     {
         'top_album_artist_id': '6ogn9necmbUdCppmNnGOdi',
         'top_genre_name': 'Alternative Rock',
-        'top_album_name': 'JaggedLittlePill',
+        'top_album_name': 'Jagged Little Pill',
         'top_album_id': '09AwlP99cHfKVNKv4FC8VW',
         'year': '1996'
     },
@@ -58,7 +58,7 @@
     {
         'top_album_artist_id': '3PhL2Vdao2v8SS8AptuhAr',
         'top_genre_name': 'Soundtrack',
-        'top_album_name': 'Titanic: MusicfromtheMotionPicture',
+        'top_album_name': 'Titanic: Music from the Motion Picture',
         'top_album_id': '6RborRBSQ9KgnSJv7ciL69',
         'year': '1998'
     },
@@ -72,7 +72,7 @@
     {
         'top_album_artist_id': '6Ff53KvcvAj5U7Z1vojB5o',
         'top_genre_name': 'Boybands',
-        'top_album_name': 'NoStringsAttached',
+        'top_album_name': 'No Strings Attached',
         'top_album_id': '20RMokVwJ2wjQ0s8FOdOFC',
         'year': '2000'
     },
@@ -86,14 +86,14 @@
     {
         'top_album_artist_id': '7dGJo4pcD2V6oG8kP0tJRR',
         'top_genre_name': 'Rap',
-        'top_album_name': 'TheEminemShow',
+        'top_album_name': 'The Eminem Show',
         'top_album_id': '2cWBwpqMsDJC1ZUwz813lo',
         'year': '2002'
     },
     {
         'top_album_artist_id': '3q7HBObVc0L8jNeTe5Gofh',
         'top_genre_name': 'Hip-Hop',
-        'top_album_name': 'GetRichorDieTryin\xe2\x80\x99',
+        'top_album_name': "Get Richor Die Tryin'",
         'top_album_id': '4ycNE7y1rp5215g1kkqk1P',
         'year': '2003'
     },
@@ -107,28 +107,28 @@
     {
         'top_album_artist_id': '3q7HBObVc0L8jNeTe5Gofh',
         'top_genre_name': 'Hip-Hop',
-        'top_album_name': 'TheMassacre',
+        'top_album_name': 'The Massacre',
         'top_album_id': '5U3tO3xfGNvuq5FZ8SrZs9',
         'year': '2005'
     },
     {
         'top_album_artist_id': 'NO_ARTIST_ID',
         'top_genre_name': 'Soundtrack',
-        'top_album_name': 'HighSchoolMusical',
+        'top_album_name': 'High School Musical',
         'top_album_id': '4dOvFkIgrb6b9zCcGfCcci',
         'year': '2006'
     },
     {
         'top_album_artist_id': '6cXMpsP9x0SH4kFfMyVezF',
         'top_genre_name': 'Pop',
-        'top_album_name': 'No\xc3\xabl',
+        'top_album_name': 'Noel',
         'top_album_id': '4kqXw1yf9EKamws0zCarGt',
         'year': '2007'
     },
     {
         'top_album_artist_id': '3DiDSECUqqY1AuBP8qtaIa',
         'top_genre_name': 'RnB',
-        'top_album_name': 'AsIAm',
+        'top_album_name': 'As I Am',
         'top_album_id': '0neqylYFL6s6Ikdf3UFmUo',
         'year': '2008'
     },
@@ -142,7 +142,7 @@
     {
         'top_album_artist_id': '1qAuetfG6mhtDgsVIffWQc',
         'top_genre_name': 'Soundtrack',
-        'top_album_name': 'IDreamedaDream',
+        'top_album_name': 'I Dreamed a Dream',
         'top_album_id': '7ItTgSAt7No6Yv0aDu2nqU',
         'year': '2010'
     },
@@ -163,7 +163,7 @@
     {
         'top_album_artist_id': '31TPClRtHm23RisEBtV3X7',
         'top_genre_name': 'Pop',
-        'top_album_name': 'The20/20Experience',
+        'top_album_name': 'The 20/20 Experience',
         'top_album_id': '41br7lBSZOr9RjJAjk0om6',
         'year': '2013'
     },

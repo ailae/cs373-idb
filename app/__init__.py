@@ -202,7 +202,8 @@ def genres():
 @app.route('/years/<year>')
 def year(year):
 	y = session.query(Year).filter_by(year = year).first()
-	return render_template('year1.html', year=y)		
+	a = session.query(Artist).filter_by(artist_id = y.top_album_artist_id).first()
+	return render_template('year1.html', year=y, artist=a)		
 @app.route('/genres/<name>')
 def genre(name):
 	g = session.query(Genre).filter_by(name = name).first()

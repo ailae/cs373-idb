@@ -81,7 +81,7 @@
           {% endfor %}
         </td>
         <td>{{ genre.description }}</td>
-        <td>Only pull top three artists?
+        <td>Pull top 3 artists or something
         </td>
         <td>{% for g in genre.related_genres%}
             <a href="/genres/{{ g.name }}">{{ g.name }}</a>{% if not loop.last %},
