@@ -705,6 +705,200 @@ class ModelUnitTests(unittest.TestCase):
         self.assertTrue(actual_artist in actual_genre_1.artists)
         self.assertTrue(actual_artist in actual_genre_3.artists)
 
+    # The following tests evaluate the dictify method on each of the models.
+    def test_dictify_artist(self):
+        expected = {
+            'artist_id': 'abcd',
+            'name': 'Drake',
+            'num_followers': 12345,
+            'image_url': "www.drake.com",
+            'popularity': 100,
+            'charted_songs': ['One Dance', 'Take Care'],
+            'genres': ['Rap', 'Hip-Hop']
+        }
+
+        drake = Artist(artist_id="abcd", name="Drake", num_followers=12345,
+                       image_url="www.drake.com", popularity=100)
+        one_dance = Song(song_name="One Dance", song_id="od")
+        take_care = Song(song_name="Take Care", song_id="tc")
+
+        rap = Genre(name="Rap", description="Rap music.")
+        hip_hop = Genre(name="Hip-Hop", description="Hip hop music.")
+
+        drake.charted_songs.append(one_dance)
+        drake.charted_songs.append(take_care)
+
+        drake.genres.append(rap)
+        drake.genres.append(hip_hop)
+
+        self.session.add_all([drake, one_dance, take_care, rap, hip_hop])
+        self.session.commit()
+
+        returned_drake = self.session.query(
+            Artist).filter_by(name="Drake").first()
+
+        actual_dict = returned_drake.dictify()
+
+        # The lists in the dictionary can be in any order, so
+        # we have to compare the values line by line or it will fail.
+        self.assertEqual(expected['artist_id'], actual_dict['artist_id'])
+        self.assertEqual(expected['name'], actual_dict['name'])
+        self.assertEqual(expected['num_followers'],
+                         actual_dict['num_followers'])
+        self.assertEqual(expected['image_url'], actual_dict['image_url'])
+        self.assertEqual(expected['popularity'], actual_dict['popularity'])
+
+        self.assertEqual(len(actual_dict['genres']), 2)
+        self.assertTrue("Rap" in actual_dict['genres'])
+        self.assertTrue("Hip-Hop" in actual_dict['genres'])
+        self.assertEqual(len(actual_dict['charted_songs']), 2)
+        self.assertTrue("One Dance" in actual_dict['charted_songs'])
+        self.assertTrue("Take Care" in actual_dict['charted_songs'])
+
+    def test_dictify_genre(self):
+        expected = {
+            'name': 'Dance',
+            'description': "Dance music.",
+            'years_on_top': [],
+            'artists': ['Ke$ha', 'Dancer 1'],
+            'related_genres': ['Trance']
+        }
+
+        dance = Genre(name='Dance', description='Dance music.')
+        kesha = Artist(artist_id='abcd', name='Ke$ha')
+        dancer1 = Artist(artist_id='defg', name='Dancer 1')
+        trance = Genre(name='Trance', description='Trance music.')
+
+        dance.artists.append(kesha)
+        dance.artists.append(dancer1)
+
+        dance.related_genres.append(trance)
+
+        self.session.add_all([dance, kesha, dancer1, trance])
+        self.session.commit()
+
+        returned_dance = self.session.query(Genre) \
+            .filter_by(name="Dance").first()
+        actual_dict = returned_dance.dictify()
+        self.assertEqual(expected['name'], actual_dict['name'])
+        self.assertEqual(expected['description'], actual_dict['description'])
+        self.assertEqual(expected['years_on_top'],
+                         actual_dict['years_on_top'])
+
+        self.assertEqual(len(actual_dict['artists']), 2)
+        self.assertTrue("Ke$ha" in actual_dict['artists'])
+        self.assertTrue("Dancer 1" in actual_dict['artists'])
+        self.assertEqual(len(actual_dict['related_genres']), 1)
+        self.assertTrue("Trance" in actual_dict['related_genres'])
+
+    def test_dictify_song(self):
+        expected = {
+            'song_id': 'abcd',
+            'song_name': 'A Song Name',
+            'artist_name': 'Artist Name',
+            'artist_id': 'efgh',
+            'album_name': 'The Album Name',
+            'explicit': True,
+            'popularity': 20,
+            'years_charted': [1990, 1991, 1992, 2015]
+        }
+
+        some_song = Song(song_id="abcd", song_name="A Song Name",
+                         artist_name="Artist Name", artist_id="efgh",
+                         album_name="The Album Name", explicit=True,
+                         popularity=20)
+
+        artist = Artist(name="Artist Name", artist_id="efgh")
+
+        year1 = Year(year=1990)
+        year2 = Year(year=1991)
+        year3 = Year(year=1992)
+        year4 = Year(year=2015)
+
+        assoc_y1 = YearsSongsAssociation(year_num=1990, rank=1,
+                                         song_id="abcd")
+        assoc_y1.year = year1
+        assoc_y2 = YearsSongsAssociation(year_num=1991, rank=1,
+                                         song_id="abcd")
+        assoc_y2.year = year2
+        assoc_y3 = YearsSongsAssociation(year_num=1992, rank=1,
+                                         song_id="abcd")
+        assoc_y3.year = year3
+
+        assoc_y4 = YearsSongsAssociation(year_num=2015, rank=1,
+                                         song_id="abcd")
+        assoc_y4.year = year4
+
+        some_song.years_charted.append(assoc_y1)
+        some_song.years_charted.append(assoc_y2)
+        some_song.years_charted.append(assoc_y3)
+        some_song.years_charted.append(assoc_y4)
+
+        self.session.add_all([some_song, artist, year1, year2, year3, year4,
+                              assoc_y1, assoc_y2, assoc_y3, assoc_y4])
+        self.session.commit()
+
+        returned_song = self.session.query(Song) \
+            .filter_by(song_name="A Song Name").first()
+
+        actual_dict = returned_song.dictify()
+
+        self.assertEqual(actual_dict['song_id'], 'abcd')
+        self.assertEqual(actual_dict['song_name'], 'A Song Name')
+        self.assertEqual(actual_dict['artist_name'], 'Artist Name')
+        self.assertEqual(actual_dict['artist_id'], 'efgh')
+        self.assertEqual(actual_dict['album_name'], 'The Album Name')
+        self.assertEqual(actual_dict['explicit'], True)
+        self.assertEqual(actual_dict['popularity'], 20)
+
+        self.assertTrue(1990 in actual_dict['years_charted'])
+        self.assertTrue(1991 in actual_dict['years_charted'])
+        self.assertTrue(1992 in actual_dict['years_charted'])
+        self.assertTrue(2015 in actual_dict['years_charted'])
+
+    def test_dictify_year(self):
+        expected = {
+            'year': 2000,
+            'top_album_name': 'Top Album',
+            'top_album_id': 'tgvjs',
+            'top_genre_name': 'Top Genre',
+            'top_album_artist_id': 'sadsd',
+            'top_songs': ['Top Song 1', 'Top Song 2']
+        }
+
+        year = Year(year=2000, top_album_name='Top Album',
+                    top_album_id='tgvjs', top_genre_name='Top Genre',
+                    top_album_artist_id='sadsd')
+
+        song1 = Song(song_id='abcd', song_name='Top Song 1')
+        assoc_s1 = YearsSongsAssociation(year_num=2000, rank=2,
+                                         song_id="abcd")
+        assoc_s1.song = song1
+        song2 = Song(song_id='efgh', song_name='Top Song 2')
+        assoc_s2 = YearsSongsAssociation(year_num=2000, rank=1,
+                                         song_id="efgh")
+        assoc_s2.song = song2
+
+        year.top_songs.append(assoc_s1)
+        year.top_songs.append(assoc_s2)
+
+        self.session.add_all([year, song1, song2, assoc_s1, assoc_s2])
+        self.session.commit()
+
+        returned_year = self.session.query(Year) \
+            .filter_by(year=2000).first()
+
+        actual_dict = returned_year.dictify()
+
+        self.assertEqual(actual_dict['year'], 2000)
+        self.assertEqual(actual_dict['top_album_name'], 'Top Album')
+        self.assertEqual(actual_dict['top_album_id'], 'tgvjs')
+        self.assertEqual(actual_dict['top_genre_name'], 'Top Genre')
+        self.assertEqual(actual_dict['top_album_artist_id'], 'sadsd')
+
+        self.assertTrue('Top Song 1' in actual_dict['top_songs'])
+        self.assertTrue('Top Song 2' in actual_dict['top_songs'])
+
 
 if __name__ == '__main__':
     unittest.main()

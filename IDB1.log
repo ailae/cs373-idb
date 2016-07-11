@@ -1,3 +1,9 @@
+commit 04b60513328c67861baa03ccc8c08fd1bff8c83e
+Author: Samarth Dhruva <samarthdhruva@live.com>
+Date:   Mon Jul 11 00:16:08 2016 -0500
+
+    Removed repr from models--added coverage to the makefile. Coverage currently doesn't cover dictify in models. Overall coverage is hurt by inclusion of other imported files, maybe this needs to be fixed.
+
 commit 22eeede0637d30d6ee262f5a931e1b61ddd3ccf6
 Author: Samarth Dhruva <samarthdhruva@utexas.edu>
 Date:   Sun Jul 10 20:17:48 2016 -0500

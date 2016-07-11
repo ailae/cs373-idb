@@ -91,14 +91,14 @@ class Artist(BASE):
 
     def dictify(self):
         artist_dict = dict()
-        artist_dict['artist_id'] = self.artist_id
-        artist_dict['name'] = self.name
+        artist_dict['artist_id'] = str(self.artist_id)
+        artist_dict['name'] = str(self.name)
         artist_dict['num_followers'] = self.num_followers
-        artist_dict['image_url'] = self.image_url
+        artist_dict['image_url'] = str(self.image_url)
         artist_dict['popularity'] = self.popularity
         artist_dict['charted_songs'] = [
-            song.song_name for song in self.charted_songs]
-        artist_dict['genres'] = [genre.name for genre in self.genres]
+            str(song.song_name) for song in self.charted_songs]
+        artist_dict['genres'] = [str(genre.name) for genre in self.genres]
         return artist_dict
 
 
@@ -135,13 +135,12 @@ class Year(BASE):
     def dictify(self):
         year_dict = dict()
         year_dict['year'] = self.year
-        year_dict['top_album_name'] = self.top_album_name
-        year_dict['top_album_id'] = self.top_album_id
-        year_dict['top_genre_name'] = self.top_genre_name
-        year_dict['top_album_artist_id'] = self.top_album_artist_id
-        year_dict['top_genre'] = self.top_genre.dictify()
+        year_dict['top_album_name'] = str(self.top_album_name)
+        year_dict['top_album_id'] = str(self.top_album_id)
+        year_dict['top_genre_name'] = str(self.top_genre_name)
+        year_dict['top_album_artist_id'] = str(self.top_album_artist_id)
         year_dict['top_songs'] = [
-            assoc.song.dictify() for assoc in self.top_songs]
+            assoc.song.song_name for assoc in self.top_songs]
         return year_dict
 
 
@@ -178,14 +177,15 @@ class Song(BASE):
 
     def dictify(self):
         song_dict = dict()
-        song_dict['song_id'] = self.song_id
-        song_dict['song_name'] = self.song_name
-        song_dict['artist_name'] = self.artist_name
-        song_dict['artist_id'] = self.artist_id
-        song_dict['album_name'] = self.album_name
+        song_dict['song_id'] = str(self.song_id)
+        song_dict['song_name'] = str(self.song_name)
+        song_dict['artist_name'] = str(self.artist_name)
+        song_dict['artist_id'] = str(self.artist_id)
+        song_dict['album_name'] = str(self.album_name)
         song_dict['explicit'] = self.explicit
         song_dict['popularity'] = self.popularity
-        song_dict['years_charted'] = self.years_charted
+        song_dict['years_charted'] = [assoc.year_num for assoc
+                                      in self.years_charted]
         return song_dict
 
 
@@ -222,10 +222,10 @@ class Genre(BASE):
 
     def dictify(self):
         genre_dict = dict()
-        genre_dict['name'] = self.name
-        genre_dict['description'] = self.description
+        genre_dict['name'] = str(self.name)
+        genre_dict['description'] = str(self.description)
         genre_dict['years_on_top'] = [year.year for year in self.years_on_top]
-        genre_dict['artists'] = [artist.name for artist in self.artists]
+        genre_dict['artists'] = [str(artist.name) for artist in self.artists]
         genre_dict['related_genres'] = [
-            genre.name for genre in self.related_genres]
+            str(genre.name) for genre in self.related_genres]
         return genre_dict
