@@ -89,13 +89,6 @@ class Artist(BASE):
     genres = relationship('Genre', secondary=ARTISTS_GENRES_ASSOCIATION,
                           back_populates="artists")
 
-    def __repr__(self):
-        return "{'Artist': {'name': '%s', " %  self.name +          \
-            "'num_followers': '%s', "           %  self.num_followers + \
-            "'artist_id': '%s', "               %  self.artist_id +     \
-            "'image_url': '%s', "               %  self.image_url +     \
-            "'popularity': '%s', " % self.popularity
-
     def dictify(self):
         artist_dict = dict()
         artist_dict['artist_id'] = self.artist_id
@@ -103,14 +96,9 @@ class Artist(BASE):
         artist_dict['num_followers'] = self.num_followers
         artist_dict['image_url'] = self.image_url
         artist_dict['popularity'] = self.popularity
-<<<<<<< Updated upstream
-        artist_dict['charted_songs'] = [song.song_name for song in self.charted_songs]
-        artist_dict['genres'] = [genre.name for genre in self.genres]
-=======
         artist_dict['charted_songs'] = [
-            song.dictify() for song in self.charted_songs]
-        artist_dict['genres'] = [genre.dictify() for genre in self.genres]
->>>>>>> Stashed changes
+            song.song_name for song in self.charted_songs]
+        artist_dict['genres'] = [genre.name for genre in self.genres]
         return artist_dict
 
 
@@ -144,14 +132,6 @@ class Year(BASE):
     # A many to many relationship between Songs and Years
     top_songs = relationship("YearsSongsAssociation", back_populates="year")
 
-    def __repr__(self):
-        return 'Year(year={}, top_album_name={}, '.format(
-            self.year,
-            self.top_album_name
-        ) + 'top_album_id={}, top_genre_name={})'.format(
-            self.top_album_id,
-            self.top_genre_name)
-
     def dictify(self):
         year_dict = dict()
         year_dict['year'] = self.year
@@ -159,11 +139,9 @@ class Year(BASE):
         year_dict['top_album_id'] = self.top_album_id
         year_dict['top_genre_name'] = self.top_genre_name
         year_dict['top_album_artist_id'] = self.top_album_artist_id
-<<<<<<< Updated upstream
         year_dict['top_genre'] = self.top_genre.dictify()
         year_dict['top_songs'] = [
             assoc.song.dictify() for assoc in self.top_songs]
->>>>>>> Stashed changes
         return year_dict
 
 
@@ -197,19 +175,6 @@ class Song(BASE):
 
     # A many to one relationship between Songs and Artist.
     artist = relationship("Artist", back_populates="charted_songs")
-
-    def __repr__(self):
-        return 'Song(song_id={}, song_name={}, artist_name={}, artist_id={},'\
-            .format(
-                self.song_id,
-                self.song_name,
-                self.artist_name,
-                self.artist_id
-            ) + \
-            'album_name={}, explicit={}, popularity={})'.format(
-                self.album_name,
-                self.explicit,
-                self.popularity)
 
     def dictify(self):
         song_dict = dict()
@@ -255,15 +220,12 @@ class Genre(BASE):
         primaryjoin=(RELATED_GENRES_ASSOCIATION.c.genre1 == name),
         secondaryjoin=(RELATED_GENRES_ASSOCIATION.c.genre2 == name))
 
-    def __repr__(self):
-        return 'Genre=(name={}, description={})'.format(
-            self.name, self.description)
-
     def dictify(self):
         genre_dict = dict()
         genre_dict['name'] = self.name
         genre_dict['description'] = self.description
         genre_dict['years_on_top'] = [year.year for year in self.years_on_top]
         genre_dict['artists'] = [artist.name for artist in self.artists]
-        genre_dict['related_genres'] = [genre.name for genre in self.related_genres]
+        genre_dict['related_genres'] = [
+            genre.name for genre in self.related_genres]
         return genre_dict

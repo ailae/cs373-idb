@@ -8,7 +8,7 @@ import unittest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import BASE, create_all_tables, YearsSongsAssociation, \
-                   Artist, Year, Song, Genre
+    Artist, Year, Song, Genre
 
 
 class ModelUnitTests(unittest.TestCase):
@@ -139,7 +139,7 @@ class ModelUnitTests(unittest.TestCase):
         test_artist_2.genres.append(artist_genre_2b)
 
         self.session.add_all(
-            [charted_song_2, charted_song_2b, artist_genre_2,\
+            [charted_song_2, charted_song_2b, artist_genre_2,
              artist_genre_2b, test_artist_2])
         self.session.commit()
 
@@ -175,29 +175,29 @@ class ModelUnitTests(unittest.TestCase):
         potato_artist_list = self.session.query(
             Genre).filter_by(name="Potato").first().artists
         self.assertEqual(len(potato_artist_list), 2)
-        self.assertTrue(test_artist in potato_artist_list and \
-                        test_artist_3 in potato_artist_list and \
+        self.assertTrue(test_artist in potato_artist_list and
+                        test_artist_3 in potato_artist_list and
                         test_artist_2 not in potato_artist_list)
 
         tomato_artist_list = self.session.query(
             Genre).filter_by(name="Tomato").first().artists
         self.assertEqual(len(tomato_artist_list), 2)
-        self.assertTrue(test_artist in tomato_artist_list and \
-                        test_artist_3 in tomato_artist_list and \
+        self.assertTrue(test_artist in tomato_artist_list and
+                        test_artist_3 in tomato_artist_list and
                         test_artist_2 not in tomato_artist_list)
 
         eggplant_artist_list = self.session.query(
             Genre).filter_by(name="Eggplant").first().artists
         self.assertEqual(len(eggplant_artist_list), 1)
-        self.assertTrue(test_artist not in eggplant_artist_list and \
-                        test_artist_3 not in eggplant_artist_list and \
+        self.assertTrue(test_artist not in eggplant_artist_list and
+                        test_artist_3 not in eggplant_artist_list and
                         test_artist_2 in eggplant_artist_list)
 
         radish_artist_list = self.session.query(
             Genre).filter_by(name="Radish").first().artists
         self.assertEqual(len(radish_artist_list), 1)
-        self.assertTrue(test_artist not in radish_artist_list and \
-                        test_artist_3 not in radish_artist_list \
+        self.assertTrue(test_artist not in radish_artist_list and
+                        test_artist_3 not in radish_artist_list
                         and test_artist_2 in radish_artist_list)
 
     # The following tests check the Year model
@@ -314,9 +314,9 @@ class ModelUnitTests(unittest.TestCase):
         self.assertTrue(correct_albums)
 
         correct_album_artists = fifteen_top_album_artist == \
-                                "TopAlbumArtist2015" and \
-                                fourteen_top_album_artist == \
-                                "TopAlbumArtist2014"
+            "TopAlbumArtist2015" and \
+            fourteen_top_album_artist == \
+            "TopAlbumArtist2014"
         self.assertTrue(correct_album_artists)
 
     def test_year_3(self):
@@ -411,14 +411,14 @@ class ModelUnitTests(unittest.TestCase):
         years_list = self.session.query(
             Year).filter_by(top_genre_name="Rap").all()
         self.assertTrue(len(years_list) == 2)
-        self.assertTrue(test_year in years_list and \
+        self.assertTrue(test_year in years_list and
                         test_year_2 in years_list and
                         test_year_3 not in years_list)
 
         not_rap_list = self.session.query(
             Year).filter_by(top_genre_name="Not Rap").all()
         self.assertTrue(len(not_rap_list) == 1)
-        self.assertTrue(test_year not in not_rap_list and \
+        self.assertTrue(test_year not in not_rap_list and
                         test_year_2 not in not_rap_list and
                         test_year_3 in not_rap_list)
         self.assertEqual(not_rap_list[0], test_year_3)
@@ -549,8 +549,8 @@ class ModelUnitTests(unittest.TestCase):
         same_album_list = self.session.query(Song).filter_by(
             album_name="The Same Album").all()
         self.assertEqual(len(same_album_list), 2)
-        self.assertTrue(test_song in same_album_list and \
-                        test_song_2 in same_album_list \
+        self.assertTrue(test_song in same_album_list and
+                        test_song_2 in same_album_list
                         and test_song_3 not in same_album_list)
 
         not_same_album_list = self.session.query(
@@ -689,7 +689,7 @@ class ModelUnitTests(unittest.TestCase):
 
         first_relateds = actual_genre_1.related_genres
         self.assertTrue(
-            actual_genre_2 in first_relateds and \
+            actual_genre_2 in first_relateds and
             actual_genre_3 in first_relateds)
 
         second_relateds = actual_genre_2.related_genres

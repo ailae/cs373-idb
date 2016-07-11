@@ -1,3 +1,79 @@
+commit 22eeede0637d30d6ee262f5a931e1b61ddd3ccf6
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sun Jul 10 20:17:48 2016 -0500
+
+    All unit tests are passing with the new model structure, and the association table was successfully turned into an association object and is being used that way. (Fixes #19 and Fixes #24)
+
+commit f524f746f445ebe2a21908dbea73488ed817a17a
+Merge: 58c3bc4 ee8a316
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 10 20:12:48 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 58c3bc4ef6c344af00aaee4a9675d0f3e26a01a0
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 10 20:12:41 2016 -0500
+
+    Added rough dynamic data into years and genres
+
+commit ee8a316cb09560bf9a0dd53fa2f07632fa55b2bd
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Sun Jul 10 18:41:20 2016 -0500
+
+    Modified the apis to only print the related names not the objects. Touches #25
+
+commit 426a31f9e602700a1625ee93f76473cde614eabb
+Merge: c00db14 86dac48
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 10 18:37:25 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit c00db147dbe185aba5afbf673a7ce215fb32cc10
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 10 18:37:19 2016 -0500
+
+    Added relations for genres and years
+
+commit 86dac48b15fccd9351e2a42e7470ca71e69a2b2f
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Sun Jul 10 18:32:54 2016 -0500
+
+    Fixed the restful apis for years and genres after getting the getting for those two models. Touches #25
+
+commit ba576863cd31042d4408ce9f96301dffd26085fa
+Merge: 8605d5c d2b9ba3
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 10 18:16:58 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 8605d5c7228277b10ccb310e8cce8874b8424b3f
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 10 18:16:50 2016 -0500
+
+    Years and genre basic data added
+
+commit d2b9ba37d54557f61a90a6109585bba722779cce
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sun Jul 10 18:09:11 2016 -0500
+
+    added artist ID to artist_genres
+
+commit b160ba89295f253825dcbfbba4747085e8a8ccde
+Merge: ecc76c6 c04a4bf
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sun Jul 10 17:59:32 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit ecc76c6f9432559ce6e51dbdfba811879c24fcd7
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sun Jul 10 17:59:23 2016 -0500
+
+    removed links to last.fm
+
 commit c04a4bfd7c670f951fe4e25100f54a67372907c6
 Author: Samarth Dhruva <samarthdhruva@utexas.edu>
 Date:   Sun Jul 10 17:52:11 2016 -0500

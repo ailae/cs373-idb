@@ -4,3 +4,6 @@ app/__pycache__
 APIUnitTests.py
 app/settings.py
 pylint.output
+.coverage
+.pylintrc
+TestModels.tmp

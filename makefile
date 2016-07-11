@@ -21,6 +21,10 @@ models.html: app/models.py
 models.log:
 	git log > IDB1.log
 
+TestModels.tmp:
+	$(COVERAGE) run --branch app/tests.py > TestModels.tmp 2>&1
+	$(COVERAGE) report -m                 >> TestModels.tmp
+	cat TestModels.tmp
 
 pylint_models_tests: .pylintrc 
 	-$(PYLINT) app/models.py
@@ -66,7 +70,7 @@ status:
 	git remote -v
 	git status
 
-test: models.html models.log format pylint_models_tests check
+test: models.html models.log format pylint_models_tests check TestModels.tmp
 
 
 
