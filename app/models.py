@@ -110,8 +110,7 @@ class Year(BASE):
         top_album_name: the name of the top album
         top_album_id: the Spotify id of the top album
         top_genre_name: the name of the genre of the year's top album
-        top_album_artist_name: the name of the artist who made the
-                               top album
+        top_album_artist_id: the id of the artist who made the top album
         top_genre: the genre of the year's top album
         top_songs: The top 100 songs of that year
     """
@@ -152,9 +151,12 @@ class Song(BASE):
         song_id: a string containing the song's Spotify ID
         song_name: the name of the song
         artist_name: artist who made the song
+        artist_id: the id of the artist who made the song
         album_name: album the song comes from
         explict: true if the song is explicit, false if it is not
         popularity: the popularity of the song (from Spotify)
+        years_charted: years in which this song was in the top chart
+        artist: artist who made the song
     """
 
     __tablename__ = 'Song'
@@ -197,8 +199,7 @@ class Genre(BASE):
         description: genre's description
         years_on_top: all of the years in which this genre was the top genre
         artists: all of the artists who have been associated with this genre
-        related_genres: all of the genres that have been associated with this
-        genre
+        related_genres: all of the genres that have been associated with this genre
     """
 
     __tablename__ = 'Genre'
