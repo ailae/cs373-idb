@@ -156,7 +156,7 @@ class Song(BASE):
         explict: true if the song is explicit, false if it is not
         popularity: the popularity of the song (from Spotify)
         years_charted: years in which this song was in the top chart
-        artist: artist who made the song
+        artist: the object of the artist who made the song
     """
 
     __tablename__ = 'Song'
