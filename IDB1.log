@@ -1,3 +1,447 @@
+commit c04a4bfd7c670f951fe4e25100f54a67372907c6
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sun Jul 10 17:52:11 2016 -0500
+
+    Updated models documentation to reflect the fact that our top genre of the year is now the top genre of the album, and completed unit tests for songs. Genres still not tested.
+
+commit 0e92ec74b2fc0d5cfc211815fd8c0ef79c32c0c4
+Merge: 4d39bbc b06dc79
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sun Jul 10 17:46:10 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 4d39bbc10ada2f26af1ac7a1eecd5a37a025e538
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sun Jul 10 17:46:08 2016 -0500
+
+    Finished genre JSONs
+
+commit b06dc79a811fa63eac891f1a4c5c2bfc7d4836a9
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sun Jul 10 17:28:42 2016 -0500
+
+    Added the list of all Billboard data we have for songs/years into the JSON folder.
+
+commit 5d5492cf02d4b325e92e874bf0c14efccf661aba
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sun Jul 10 17:23:24 2016 -0500
+
+    Added years and songs tests. Still incomplete
+
+commit 189cebce8ab4183803720de5d816df8b8286e1d9
+Merge: 8693325 d8aa8b3
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Sun Jul 10 16:32:34 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 8693325ade4978a736cf570f57fc279c692e6829
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Sun Jul 10 16:32:30 2016 -0500
+
+    Updated the apiary to include the /api/ we added. Touches #26.
+
+commit d8aa8b330e5d65ec6dadb2a5091fabfdd457c0d6
+Merge: 4f6b2c4 43aef77
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 10 16:31:15 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 43aef77ec1cd6a35bab3b3e8bf6ee3db422f22f1
+Merge: e466da8 d4eb1d7
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Sun Jul 10 16:30:45 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit e466da8a66c5efe38c58d47bc6a12b32a4a388b7
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Sun Jul 10 16:30:43 2016 -0500
+
+    Finished up the initial implementation of the restful api.
+
+commit 4f6b2c4847615b7228f6bd957b0baede93172231
+Merge: c487b27 d4eb1d7
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 10 16:29:48 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit c487b2767ad92565d7abef82060a5a5798019906
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 10 16:29:40 2016 -0500
+
+    Uncommented code in init so that DB always works, removed 3 template files that are not unused
+
+commit d4eb1d7921a60a420d1d3292bb9526ea07cea981
+Merge: a0f0740 4cbe08b
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sun Jul 10 16:21:27 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit a0f074055a6832cdf9b8e137ec003fa074f69fb8
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sun Jul 10 16:21:23 2016 -0500
+
+    finalized artist genres
+
+commit 4cbe08b8dafd1291b69c4ed48b9cf78b88ad16ef
+Merge: a3a5df7 aef0053
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 10 16:03:59 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit a3a5df763b8553368a9721d05f67de78ae9c6321
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 10 16:03:53 2016 -0500
+
+    Made the dynamic artist and song pages
+
+commit aef0053c696568422e6625d2cb0bb36ea119c960
+Merge: 742b98a 8a9c9aa
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sun Jul 10 16:02:27 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 742b98a4931898784f5b5a5ce87132efa1f89665
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sun Jul 10 16:02:08 2016 -0500
+
+    artist genre list done
+
+commit 8a9c9aa3af816f41885bbfe0769b3b2728d64024
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Sun Jul 10 15:45:38 2016 -0500
+
+    Updated the apiary and removed old unneeded files. Touches #26
+
+commit 6bcf38438ecac64964c9a0c7866ad8bae62902dd
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sun Jul 10 14:52:16 2016 -0500
+
+    almost done with genre test
+
+commit 821441e3d596416c0aa6ea066b8fa19cc62fe3b4
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sat Jul 9 19:41:37 2016 -0500
+
+    Added first year test, still need to finish more tests. Extended a model's name string max length
+
+commit de0fc5c3c0c53d87d04f6f7e9548d48fd8f7530f
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sat Jul 9 19:21:08 2016 -0500
+
+    updated artist_genres.txt
+
+commit 10e659612b30ea8c7ad552f5def306f674fcc629
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sat Jul 9 19:12:43 2016 -0500
+
+    Somehow init got messed up with merging in the past
+
+commit 89427f01cb9fc8b685f00c16f846d007f778dbbf
+Merge: 61aa658 e0d657b
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sat Jul 9 19:06:51 2016 -0500
+
+    merge?
+
+commit 61aa658e8c4f8ee9fc64ec9f3535a1cb14e13d87
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sat Jul 9 19:02:05 2016 -0500
+
+    dumped genre/artist correlation
+
+commit e0d657b7821c433ef1b0fd2b0e767a94d96ef6ed
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sat Jul 9 19:00:02 2016 -0500
+
+    Made headings pink and caps
+
+commit 750040e38c5712c69923e6e968ec83b253dd4894
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sat Jul 9 18:45:33 2016 -0500
+
+    Artists and songs are now loaded dynamically
+
+commit 164b9872ba94cfb81fc4e3db8a98930b82c8729a
+Merge: 9582477 1c90e33
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sat Jul 9 18:36:51 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 958247774492dafb05260ed843b4495ae3a7e580
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sat Jul 9 18:35:57 2016 -0500
+
+    Embedded data into artists and songs page dynamically
+
+commit 1c90e3363c4705693b766e17e0d758edeec71106
+Author: Brady Miller <bratxdy@utexas.edu>
+Date:   Sat Jul 9 18:30:49 2016 -0500
+
+    Touches #26. Updated the apiary
+
+commit d4b6699f3efeb73d080999dd182e239c24649d33
+Merge: acea2d0 5068dec
+Author: Alexander Cheng <akc2267@cs.utexas.edu>
+Date:   Sat Jul 9 18:29:54 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit acea2d0717072077064355b936ee85bc0cd2cea1
+Author: Alexander Cheng <akc2267@cs.utexas.edu>
+Date:   Sat Jul 9 18:29:17 2016 -0500
+
+    added album and artist id
+
+commit d40753d76e8a1309f76c9a92b65cd7ef1fffa615
+Author: Alexander Cheng <akc2267@cs.utexas.edu>
+Date:   Sat Jul 9 18:28:34 2016 -0500
+
+    added album and artist id
+
+commit 5068dece67571692afe7320f06edbcf83566b170
+Merge: e55798c f75b451
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Sat Jul 9 18:22:05 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit e55798cd7c96c6f923bd904deb4dceefe9374201
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Sat Jul 9 18:21:44 2016 -0500
+
+    finished the songs and artists api
+
+commit f75b4516acf6c3a4c4240f37938369a4984cd99e
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sat Jul 9 18:20:46 2016 -0500
+
+    Updated artists unit tests to new specs, they're passing. Stil need to finish others.
+
+commit 00b8963d565f8ca5938e33394da9a4422398fc1d
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sat Jul 9 16:55:57 2016 -0500
+
+    Added settings to gitignore
+
+commit 91eb854d0c7c4fcf165265253ba9763e66dc7d98
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sat Jul 9 16:36:34 2016 -0500
+
+    Moved DB settings to a new folder
+
+commit fe355aa1c84016cccfb4a8236e3183a3b9205307
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sat Jul 9 16:22:06 2016 -0500
+
+    Updated models to support more characters in names, and removed spotify_url field because it is unnecessary
+
+commit a7870608b378b8ef28bdc65f37788f4fb36f40b0
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sat Jul 9 16:10:13 2016 -0500
+
+    Updated models and tests to use Association table, still need to fix tests.
+
+commit fa597e5c3bc0ca7f24e71a72826fce67405e7fa3
+Merge: 49bed53 699264e
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Sat Jul 9 15:24:06 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 49bed53e3e95a67ca5aea2a272b132aa025a4d88
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Sat Jul 9 15:24:00 2016 -0500
+
+    Updating the artists data with genres
+
+commit 699264e4d04bb1dba7414b0b85d8ae46acb1ec4c
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Fri Jul 8 22:45:41 2016 -0500
+
+    Updated init.py to reflect a little bit about how we may approach adding all of the elements. Models was also updated because an association table cannot hold extra data (which we needed to hold rank for a song/year combo)--using an association object now, but this implementation is not complete.
+
+commit b5d9598db5515d52f41efd0fc126c836f0ee090d
+Merge: 31d146f ab337d2
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Fri Jul 8 18:15:47 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 31d146f4241f2abdd0eda41465d125c8fa749431
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Fri Jul 8 18:15:45 2016 -0500
+
+    Added the artists script that was used to build the artists data
+
+commit ab337d2d43ed908fff5f81dae8224bebffbdabe8
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Fri Jul 8 17:38:37 2016 -0500
+
+    Modified the models to make artist_id the PK
+
+commit 508c247900851be050b68187b36a4e4f5809abf8
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Fri Jul 8 16:33:15 2016 -0500
+
+    Added the artists data
+
+commit 45083d6fe13d5e9c329c59154fb3afd7e2c6f1a8
+Author: Alexander Cheng <akc2267@cs.utexas.edu>
+Date:   Fri Jul 8 15:49:05 2016 -0500
+
+    mobile tables js
+
+commit 10aa62534521714c9731632813df08ff5ef3f6ef
+Merge: 9e377e0 1a78750
+Author: Alexander Cheng <akc2267@cs.utexas.edu>
+Date:   Fri Jul 8 15:43:43 2016 -0500
+
+    mobile tables js
+
+commit 9e377e0760f5fa24bdd7cb1924b544fb090c2a22
+Author: Alexander Cheng <akc2267@cs.utexas.edu>
+Date:   Fri Jul 8 15:42:20 2016 -0500
+
+    added JS for mobile table
+
+commit 1a78750d18fbb5916b651301146da85d8e72b08a
+Merge: 36198f8 f75728b
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Fri Jul 8 15:35:33 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 36198f89cca8b6ec0e4c8a601c55c533ed2964e5
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Fri Jul 8 15:34:34 2016 -0500
+
+    Adding all this data doesn't work
+
+commit f75728b9802c19613dde58f023c3401ac8aa214a
+Author: Alexander Cheng <akc2267@cs.utexas.edu>
+Date:   Fri Jul 8 15:32:53 2016 -0500
+
+    added mobile tables
+
+commit c48c2e309924e254fd3efbbfb4878ad37d97fc25
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Fri Jul 8 14:31:14 2016 -0500
+
+    Updated the songs txt file with all the songs.
+
+commit dfbf14f063f9630cd90ffea087305910deae55ec
+Merge: b9c77f1 49256ca
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Fri Jul 8 14:06:54 2016 -0500
+
+    Merge branch 'master' of https://github.com/ailae/cs373-idb into dev
+
+commit b9c77f14842e8046e4a47d9fb62dc35b4a3b0dbe
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Fri Jul 8 12:25:37 2016 -0500
+
+    Centered the navbar. Had to remove the navbar brand, and add in the carousel CSS sheet for the years, artists, genres, and songs general pages to get it to work. Weird.
+
+commit 8cd064b568ca30734143684ac21ed505a2bf5e4d
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Fri Jul 8 12:05:44 2016 -0500
+
+    Made carousel background color pink and added transparent image
+
+commit 49256cac6b25635355d028eac22a29279397978d
+Author: bratxdy <bratxdy@utexas.edu>
+Date:   Fri Jul 8 01:51:34 2016 -0500
+
+    Adding the script I used to build the songs json, also the songs.json and the missing songs.
+
+commit b1202bac884688be31fff77b0e44595e754ec60a
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Fri Jul 8 01:07:48 2016 -0500
+
+    Capitalized all the navbar items on each page and made the active link actually correct on some of them
+
+commit ecb2e14f1e7d54415aabbabcc13d18411aff1dff
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Fri Jul 8 00:51:29 2016 -0500
+
+    Changed font to Trebuchet MS for navbar
+
+commit 8ca5c88ec107076cc82953b73240c43b21709098
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Fri Jul 8 00:45:24 2016 -0500
+
+    Had to remove imported stylesheet so that the pink links persist/use our modified stylesheet
+
+commit bcff9a3b01ccfb4357a6186b5c015223f9f3dc41
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Fri Jul 8 00:37:36 2016 -0500
+
+    Made the navbar static top and removed all the padding from the old navbar
+
+commit fc7f8459359fba53cc646c1499a39625941c8ca6
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Thu Jul 7 18:27:38 2016 -0500
+
+    Got the Postgres DB up and running, can add and remove data
+
+commit bc2348ead09f11049af7d24354107241e422721f
+Author: Yajieniu <fineyear3714@gmail.com>
+Date:   Thu Jul 7 02:39:56 2016 -0500
+
+    fixed __repr__ and    syntax of models.py
+
+commit fa4a93ce9739c5bcdbdb243d973898f5ac84e498
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Wed Jul 6 17:41:27 2016 -0500
+
+    Updated and redesigned models to include relationships rather than arrays.
+
+commit eee2cf52ff6cdab05b9bb3bdfa83c9b5196651bb
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Wed Jul 6 15:29:43 2016 -0500
+
+    Jk looked at project requirements and it's safer to have our app folder called app, not sweetify like it had been on the host server
+
+commit 3f77b9e86dce3b980f9d2d6eaafc3e31fec9e3d7
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Wed Jul 6 15:24:31 2016 -0500
+
+    Restructuring the directories so it will be easier to merge with the server when the time has come
+
+commit b54b21aac1443e86f2a9a640eaad2bfa964f11b7
+Merge: ed87541 5d5c16e
+Author: Samarth Dhruva <samarthdhruva@live.com>
+Date:   Tue Jul 5 21:18:06 2016 -0500
+
+    Fixed gitignore
+
+commit 5d5c16e1c6c3e90d40bc1b845475214d288dde5f
+Author: Samarth Dhruva <samarthdhruva@live.com>
+Date:   Tue Jul 5 21:14:33 2016 -0500
+
+    Final commit, deleted temporary APIUnittests
+
+commit ed87541750f4b1faad693c1cdfb1fb44bf89ebdd
+Author: Yajieniu <fineyear3714@gmail.com>
+Date:   Tue Jul 5 21:07:11 2016 -0500
+
+    the last
+
+commit 31a253e7f47235dfa5187558c2943162e19fd5bc
+Author: Yajieniu <fineyear3714@gmail.com>
+Date:   Tue Jul 5 20:47:33 2016 -0500
+
+    makefile created
+
 commit 8686c2677efad19eb354e4400bda5d5d92a0f749
 Author: Samarth Dhruva <samarthdhruva@live.com>
 Date:   Tue Jul 5 20:19:19 2016 -0500

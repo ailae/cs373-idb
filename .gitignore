@@ -3,3 +3,4 @@ app/.DS_Store
 app/__pycache__
 APIUnitTests.py
 app/settings.py
+pylint.output

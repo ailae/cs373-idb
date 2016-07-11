@@ -2,9 +2,9 @@
 This module demonstrates a model of our datebase used by sweetify.me
 """
 
-from sqlalchemy import create_engine, Table, Column, ForeignKey, Integer, String, Boolean
+from sqlalchemy import create_engine, Table, Column, ForeignKey, Integer, \
+    String, Boolean
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.orm import relationship
 from sqlalchemy.engine.url import URL
 
@@ -12,10 +12,18 @@ import settings
 
 BASE = declarative_base()
 
+
 def db_connect():
+    """
+    Function used to connect to the database specified in the settings file.
+    """
     return create_engine(URL(**settings.DATABASE))
 
+
 def create_all_tables(engine):
+    """
+    Given an engine, creates all tables for these models.
+    """
     BASE.metadata.create_all(engine)
 
 # A many to many association between Artists and Genres.
@@ -39,15 +47,18 @@ RELATED_GENRES_ASSOCIATION = Table(
 
 # A many to many association between Years and Songs. Contains the rank
 # that song held in that year.
-class Years_Songs_Association(BASE):
-    __tablename__ = 'years_songs_association'
-    
-    year_num = Column('year', Integer, ForeignKey('Year.year'), primary_key=True)
-    song_id = Column('song', String(150), ForeignKey('Song.song_id'), primary_key=True)
+
+
+class YearsSongsAssociation(BASE):
+    __tablename__ = 'yearssongsassociation'
+
+    year_num = Column(
+        'year', Integer, ForeignKey('Year.year'), primary_key=True)
+    song_id = Column(
+        'song', String(150), ForeignKey('Song.song_id'), primary_key=True)
     rank = Column('rank', Integer)
     year = relationship("Year", back_populates="top_songs")
     song = relationship("Song", back_populates="years_charted")
-
 
 
 class Artist(BASE):
@@ -80,20 +91,26 @@ class Artist(BASE):
 
     def __repr__(self):
         return "{'Artist': {'name': '%s', " %  self.name +          \
-        "'num_followers': '%s', "           %  self.num_followers + \
-        "'artist_id': '%s', "               %  self.artist_id +     \
-        "'image_url': '%s', "               %  self.image_url +     \
-        "'popularity': '%s', "              %  self.popularity
-        
-    def dictify(self) :
+            "'num_followers': '%s', "           %  self.num_followers + \
+            "'artist_id': '%s', "               %  self.artist_id +     \
+            "'image_url': '%s', "               %  self.image_url +     \
+            "'popularity': '%s', " % self.popularity
+
+    def dictify(self):
         artist_dict = dict()
         artist_dict['artist_id'] = self.artist_id
         artist_dict['name'] = self.name
         artist_dict['num_followers'] = self.num_followers
         artist_dict['image_url'] = self.image_url
         artist_dict['popularity'] = self.popularity
+<<<<<<< Updated upstream
         artist_dict['charted_songs'] = [song.song_name for song in self.charted_songs]
         artist_dict['genres'] = [genre.name for genre in self.genres]
+=======
+        artist_dict['charted_songs'] = [
+            song.dictify() for song in self.charted_songs]
+        artist_dict['genres'] = [genre.dictify() for genre in self.genres]
+>>>>>>> Stashed changes
         return artist_dict
 
 
@@ -117,15 +134,15 @@ class Year(BASE):
     top_album_id = Column(String(150))
     top_genre_name = Column(String(100), ForeignKey('Genre.name'))
 
-
-    # Unidirectional one to one relationship between year and top_album_artist's name
+    # Unidirectional one to one relationship between year and
+    # top_album_artist's name
     top_album_artist_id = Column(String(100), ForeignKey('Artist.artist_id'))
 
     # Many to one relationship between Years and Genre.
     top_genre = relationship("Genre", back_populates="years_on_top")
 
     # A many to many relationship between Songs and Years
-    top_songs = relationship("Years_Songs_Association", back_populates="year")
+    top_songs = relationship("YearsSongsAssociation", back_populates="year")
 
     def __repr__(self):
         return 'Year(year={}, top_album_name={}, '.format(
@@ -134,15 +151,19 @@ class Year(BASE):
         ) + 'top_album_id={}, top_genre_name={})'.format(
             self.top_album_id,
             self.top_genre_name)
-            
-    def dictify(self) :
+
+    def dictify(self):
         year_dict = dict()
         year_dict['year'] = self.year
         year_dict['top_album_name'] = self.top_album_name
         year_dict['top_album_id'] = self.top_album_id
         year_dict['top_genre_name'] = self.top_genre_name
         year_dict['top_album_artist_id'] = self.top_album_artist_id
-        year_dict['top_songs'] = [song.dictify() for song in self.top_songs]
+<<<<<<< Updated upstream
+        year_dict['top_genre'] = self.top_genre.dictify()
+        year_dict['top_songs'] = [
+            assoc.song.dictify() for assoc in self.top_songs]
+>>>>>>> Stashed changes
         return year_dict
 
 
@@ -171,25 +192,25 @@ class Song(BASE):
     # A many to many relationship between years and songs. Songs uses this
     # to find all of the years it charted, and its rank in each of those
     # years.
-    years_charted = relationship("Years_Songs_Association", back_populates="song")
-
+    years_charted = relationship(
+        "YearsSongsAssociation", back_populates="song")
 
     # A many to one relationship between Songs and Artist.
     artist = relationship("Artist", back_populates="charted_songs")
 
-
     def __repr__(self):
-        return 'Song(song_id={}, song_name={}, artist_name={}, artist_id={},'.format(
-            self.song_id,
-            self.song_name,
-            self.artist_name,
-            self.artist_id
-        ) + \
+        return 'Song(song_id={}, song_name={}, artist_name={}, artist_id={},'\
+            .format(
+                self.song_id,
+                self.song_name,
+                self.artist_name,
+                self.artist_id
+            ) + \
             'album_name={}, explicit={}, popularity={})'.format(
                 self.album_name,
                 self.explicit,
                 self.popularity)
-                
+
     def dictify(self):
         song_dict = dict()
         song_dict['song_id'] = self.song_id
@@ -211,7 +232,8 @@ class Genre(BASE):
         description: genre's description
         years_on_top: all of the years in which this genre was the top genre
         artists: all of the artists who have been associated with this genre
-        related_genres: all of the genres that have been associated with this genre
+        related_genres: all of the genres that have been associated with this
+        genre
     """
 
     __tablename__ = 'Genre'
@@ -227,15 +249,17 @@ class Genre(BASE):
                            back_populates="genres")
 
     # Many to many relationship between this Genre and other Genres.
-    related_genres = relationship('Genre', secondary=RELATED_GENRES_ASSOCIATION,
-                                  back_populates="related_genres", primaryjoin=(RELATED_GENRES_ASSOCIATION.c.genre1 == name), 
-                                  secondaryjoin=(RELATED_GENRES_ASSOCIATION.c.genre2 == name))
+    related_genres = relationship(
+        'Genre', secondary=RELATED_GENRES_ASSOCIATION,
+        back_populates="related_genres",
+        primaryjoin=(RELATED_GENRES_ASSOCIATION.c.genre1 == name),
+        secondaryjoin=(RELATED_GENRES_ASSOCIATION.c.genre2 == name))
 
     def __repr__(self):
         return 'Genre=(name={}, description={})'.format(
             self.name, self.description)
-            
-    def dictify(self) :
+
+    def dictify(self):
         genre_dict = dict()
         genre_dict['name'] = self.name
         genre_dict['description'] = self.description
@@ -243,4 +267,3 @@ class Genre(BASE):
         genre_dict['artists'] = [artist.name for artist in self.artists]
         genre_dict['related_genres'] = [genre.name for genre in self.related_genres]
         return genre_dict
-        
