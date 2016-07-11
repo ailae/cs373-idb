@@ -63,14 +63,21 @@
         <div class="col-lg-6">
           <img class="img-circle" src="static/markronson.jpg" alt="Generic placeholder image" width="140" height="140">
           <h3>Top Song</h3>
-          <h2>Top Song Artit</h2>
+          <h2>Top Song Artist</h2>
           <iframe src="https://embed.spotify.com/?uri=spotify:track:32OlwWuMpZ6b0aN2RZOeMS" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-6">
-          <img class="img-circle" src="static/taylorswift.jpg" alt="Generic placeholder image" width="140" height="140">
+          {% if artist %}
+          <img class="img-circle" src="{{ artist.image_url }}" alt="Generic placeholder image" width="140" height="140">
+          {% endif %}
           <h3>{{ year.top_album_name }} </h3>
-          <h2>Top Album Artist</h2>
-          <iframe src="https://embed.spotify.com/?uri=spotify:track:32OlwWuMpZ6b0aN2RZOeMS" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+          <h2>{% if artist %}
+            <a href="/artists/{{ artist.artist_id }}">{{ artist.name }}</a>
+            {% endif %}
+          </h2>
+          {% if year.top_album_id %}
+          <iframe src="https://embed.spotify.com/?uri=spotify:album:{{ year.top_album_id }}" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+          {% endif %}
         </div><!-- /.col-lg-4 -->
     </div>  
   </div>
