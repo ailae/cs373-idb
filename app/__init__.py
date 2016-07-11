@@ -177,7 +177,8 @@ def about():
 	return render_template('about.html')
 @app.route('/years')
 def years():
-	return render_template('years.html')
+	year = session.query(Year).all()
+	return render_template('years.html', years=year)
 @app.route('/songs')
 def songs():
 	song = session.query(Song).all()
@@ -196,25 +197,16 @@ def artist(id):
 	return render_template('artist1.html', artist=a)
 @app.route('/genres')
 def genres():
-	return render_template('genres.html')
-@app.route('/year1')
-def year1():
-	return render_template('year1.html')
-@app.route('/year2')
-def year2():
-	return render_template('year2.html')
-@app.route('/year3')
-def year3():
-	return render_template('year3.html')		
-@app.route('/genre1')
-def genre1():
-	return render_template('genre1.html')
-@app.route('/genre2')
-def genre2():
-	return render_template('genre2.html')
-@app.route('/genre3')
-def genre3():
-	return render_template('genre3.html')
+	genre = session.query(Genre).all()
+	return render_template('genres.html', genres=genre)
+@app.route('/years/<year>')
+def year(year):
+	y = session.query(Year).filter_by(year = year).first()
+	return render_template('year1.html', year=y)		
+@app.route('/genres/<name>')
+def genre(name):
+	g = session.query(Genre).filter_by(name = name).first()
+	return render_template('genre1.html', genre=g)
 
 @app.route('/api/songs', methods=['GET'])
 def get_songs() :

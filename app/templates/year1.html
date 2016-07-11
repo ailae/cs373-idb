@@ -12,10 +12,8 @@
     <title>Year</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="static/css/bootstrap.min.css" rel="stylesheet">
-
-
-
+    <link href="{{ url_for('static', filename='css/carousel.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -28,7 +26,6 @@
     <![endif]-->
 
     <!-- Custom styles for this template -->
-    <link href="static/css/carousel.css" rel="stylesheet">
   </head>
 <!-- NAVBAR
 ================================================== -->
@@ -47,33 +44,33 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="/">HOME</a></li>
-                <li><a href="about">ABOUT</a></li>
-                <li class="active"><a href="years">YEARS</a></li>
-                <li><a href="songs">SONGS</a></li>
-                <li><a href="artists">ARTISTS</a></li>
-                <li><a href="genres">GENRES</a></li>
+                <li><a href="/about">ABOUT</a></li>
+                <li class="active"><a href="/years">YEARS</a></li>
+                <li><a href="/songs">SONGS</a></li>
+                <li><a href="/artists">ARTISTS</a></li>
+                <li><a href="/genres">GENRES</a></li>
               </ul>
             </div>
           </div>
         </nav>
 
     <div class="padding">
-          <h2 class="featurette-heading">2015<span class="text-muted"><br />Top Genre</span></h2>
+          <h2 class="featurette-heading">{{ year.year }}<span class="text-muted"><br /><a href="/genres/{{ year.top_genre.name }}">{{ year.top_genre.name}}</a></span></h2>
     
 <div class="container marketing">
 <h3>Top Song and Top Album</h3>
       <!-- Three columns of text below the carousel -->
         <div class="col-lg-6">
           <img class="img-circle" src="static/markronson.jpg" alt="Generic placeholder image" width="140" height="140">
-          <h3>Uptown Funk</h3>
-          <h2>Mark Ronson feat Bruno Mars</h2>
+          <h3>Top Song</h3>
+          <h2>Top Song Artit</h2>
           <iframe src="https://embed.spotify.com/?uri=spotify:track:32OlwWuMpZ6b0aN2RZOeMS" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-6">
           <img class="img-circle" src="static/taylorswift.jpg" alt="Generic placeholder image" width="140" height="140">
-          <h3>1989</h3>
-          <h2>Taylor Swift</h2>
-          <p>We're sorry, this artist is not on Spotify.</p>
+          <h3>{{ year.top_album_name }} </h3>
+          <h2>Top Album Artist</h2>
+          <iframe src="https://embed.spotify.com/?uri=spotify:track:32OlwWuMpZ6b0aN2RZOeMS" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
         </div><!-- /.col-lg-4 -->
     </div>  
   </div>

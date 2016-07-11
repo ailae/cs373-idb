@@ -72,27 +72,23 @@
       </tr>
       </thead>
       <tbody>
+      {% for genre in genres %}
       <tr>
-        <td><a href="genre3">Electronica</td>
-        <td>2005</td>
-        <td>Electronica is an umbrella term that encompasses a broad group of electronic-based styles such as techno, house, ambient, drum and bass, jungle, and industrial dance, among others. It has been used to describe the rise of electronic music styles intended not just for dancing but also concentrated listening.</td>
-        <td><a href="artist3">Flume</a></td>
-        <td>Electro House</td>
+        <td><a href="/genres/{{ genre.name }}">{{ genre.name }}</td>
+        <td>Years on top: 
+          {% for y in genre.years_on_top %}
+            {{ y.year }},
+          {% endfor %}
+        </td>
+        <td>{{ genre.description }}</td>
+        <td>Only pull top three artists?
+        </td>
+        <td>{% for g in genre.related_genres%}
+            <a href="/genres/{{ g.name }}">{{ g.name }}</a>,
+          {% endfor %}
+        </td>
       </tr>
-      <tr>
-        <td><a href="genre1">Rap</td>
-        <td>2002</td>
-        <td>Rap consists of a stylized rhythmic music that commonly accompanies rapping, a rhythmic and rhyming speech that is chanted.</td>
-        <td><a href="artist1">Drake</a></td>
-        <td>R&B</td>
-      </tr>
-      <tr>
-        <td><a href="genre2">Alternative Rock</td>
-        <td>2010</td>
-        <td>A genre of rock music that refers specifically to the punk/new wave-rooted style that emerged in the 1980s and became widely popular in the early-mid 1990s.</td>
-        <td><a href="artist2">Florence + The Machine</td>
-        <td>Indie</td>
-      </tr>
+      {% endfor %}
     </tbody>
   </table>
 </div>

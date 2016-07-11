@@ -72,27 +72,15 @@
       </tr>
     </thead>
       <tbody>
+        {% for year in years %}
         <tr>
-        <td><a href="year3">2013</a></td>
-        <td>Thrift Shop</td>
-        <td><a href="genre1">Rap</a></td>
-        <td>Macklemore</td>
-        <td>The 20/20 Experience</td>
-      </tr>
-      <tr>
-        <td><a href="year2">2014</a></td>
-        <td>Happy</td>
-        <td>Pop</td>
-        <td>Pharrell</td>
-        <td>Frozen soundtrack</td>
-      </tr>
-      <tr>
-        <td><a href="year1">2015</a></td>
-        <td>Uptown Funk</td>
-        <td>Funk</td>
-        <td>Bruno Mars</td>
-        <td>1989</td>
-      </tr>
+        <td><a href="/years/{{ year.year }}">{{ year.year }}</a></td>
+        <td>Top Song</td>
+        <td><a href="/genres/{{ year.top_genre.name }}">{{ year.top_genre.name}}</a></td>
+        <td>Top Artist - top song's artist or top album artist?</td>
+        <td>{{ year.top_album_name }}</td>
+        </tr>
+        {% endfor %}
     </tbody>
   </table>
 </div>
