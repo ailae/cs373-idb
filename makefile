@@ -22,7 +22,7 @@ models.log:
 	git log > IDB1.log
 
 TestModels.tmp:
-	$(COVERAGE) run --branch app/tests.py > TestModels.tmp 2>&1
+	$(COVERAGE) run --omit='*sqlalchemy*' --branch app/tests.py > TestModels.tmp 2>&1
 	$(COVERAGE) report -m                 >> TestModels.tmp
 	cat TestModels.tmp
 

@@ -843,13 +843,13 @@ class ModelUnitTests(unittest.TestCase):
 
         actual_dict = returned_song.dictify()
 
-        self.assertEqual(actual_dict['song_id'], 'abcd')
-        self.assertEqual(actual_dict['song_name'], 'A Song Name')
-        self.assertEqual(actual_dict['artist_name'], 'Artist Name')
-        self.assertEqual(actual_dict['artist_id'], 'efgh')
-        self.assertEqual(actual_dict['album_name'], 'The Album Name')
-        self.assertEqual(actual_dict['explicit'], True)
-        self.assertEqual(actual_dict['popularity'], 20)
+        self.assertEqual(actual_dict['song_id'], expected['song_id'])
+        self.assertEqual(actual_dict['song_name'], expected['song_name'])
+        self.assertEqual(actual_dict['artist_name'], expected['artist_name'])
+        self.assertEqual(actual_dict['artist_id'], expected['artist_id'])
+        self.assertEqual(actual_dict['album_name'], expected['album_name'])
+        self.assertEqual(actual_dict['explicit'], expected['explicit'])
+        self.assertEqual(actual_dict['popularity'], expected['popularity'])
 
         self.assertTrue(1990 in actual_dict['years_charted'])
         self.assertTrue(1991 in actual_dict['years_charted'])
@@ -890,11 +890,11 @@ class ModelUnitTests(unittest.TestCase):
 
         actual_dict = returned_year.dictify()
 
-        self.assertEqual(actual_dict['year'], 2000)
-        self.assertEqual(actual_dict['top_album_name'], 'Top Album')
-        self.assertEqual(actual_dict['top_album_id'], 'tgvjs')
-        self.assertEqual(actual_dict['top_genre_name'], 'Top Genre')
-        self.assertEqual(actual_dict['top_album_artist_id'], 'sadsd')
+        self.assertEqual(actual_dict['year'], expected['year'])
+        self.assertEqual(actual_dict['top_album_name'], expected['top_album_name'])
+        self.assertEqual(actual_dict['top_album_id'], expected['top_album_id'])
+        self.assertEqual(actual_dict['top_genre_name'], expected['top_genre_name'])
+        self.assertEqual(actual_dict['top_album_artist_id'], expected['top_album_artist_id'])
 
         self.assertTrue('Top Song 1' in actual_dict['top_songs'])
         self.assertTrue('Top Song 2' in actual_dict['top_songs'])
