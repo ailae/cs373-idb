@@ -9,13 +9,13 @@ install:
     - pip install --upgrade pip
     - pip --version
     - pip install coverage
-    - pip install numpy
     - pip install pylint
     - pip install requests
     - pip install flask
     - pip install sqlalchemy
     - pip install psycopg2
     - pip install Flask-SQLAlchemy
+    - pip install autopep8
 
 before_script:
     - uname -a
@@ -27,4 +27,4 @@ before_script:
 script:
     - date
     - ls -al
-- make test
+    - make test

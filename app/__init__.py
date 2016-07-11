@@ -94,6 +94,23 @@ def artists_and_songs(session):
 							if result:
 								genre.related_genres.append(result)
 
+		# Year song association
+		# for ys in year_song:
+		# 	# Get the year
+		# 	year = session.query(Year).filter_by(year = ys['year']).first()
+		# 	if not year.top_songs:
+		# 		# Loop through the list of songs
+		# 		for s in ys['songs']:
+		# 			song = s.query(Songs).filter_by(song_id = s['song_id']).first()
+		# 			# Do we have this song in the DB?
+		# 			if song:
+		# 				assoc = YearsSongsAssociation(year_num = year.year, 
+		# 					song_id = s['song_id'], rank= s['rank'])
+		# 				assoc.song = song
+		# 				assoc.year = year
+		# 				year.top_songs.append(assoc)
+		# 				song.years_charted.append(assoc) # Do we need this?
+
 	except:
 		session.rollback()
 		raise
