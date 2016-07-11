@@ -28,6 +28,9 @@ with open('all_billboard_charts.txt', 'r') as f:
             if file_song:
                 song['song_id'] = str(file_song[0]['song_id'])
                 song['artist_id'] = str(file_song[0]['artist_id'])
+            else:
+                song['song_id'] = ""
+                song['artist_id'] = ""    
             year_dict['song_list'] += [song]
 
 f = open('all_songs_association.txt', 'w')
