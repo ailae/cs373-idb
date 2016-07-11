@@ -9,7 +9,6 @@ install:
     - pip install --upgrade pip
     - pip --version
     - pip install coverage
-    - pip install numpy
     - pip install pylint
     - pip install requests
     - pip install flask
