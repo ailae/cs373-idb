@@ -75,16 +75,17 @@
       {% for genre in genres %}
       <tr>
         <td><a href="/genres/{{ genre.name }}">{{ genre.name }}</td>
-        <td>Years on top: 
+        <td>
           {% for y in genre.years_on_top %}
-            {{ y.year }},
+            {{ y.year }}
           {% endfor %}
         </td>
         <td>{{ genre.description }}</td>
         <td>Only pull top three artists?
         </td>
         <td>{% for g in genre.related_genres%}
-            <a href="/genres/{{ g.name }}">{{ g.name }}</a>,
+            <a href="/genres/{{ g.name }}">{{ g.name }}</a>{% if not loop.last %},
+            {% endif %}
           {% endfor %}
         </td>
       </tr>

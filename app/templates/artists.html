@@ -76,10 +76,15 @@
         <tr>
         <td><a href="/artists/{{ artist.artist_id }}">{{ artist.name }}</a></td>
         <td><img class="img-circle" src="{{ artist.image_url }}" alt="Generic placeholder image" width="75" height="75"></td>
-        <td>Genre here</td>
+        <td>{% for g in artist.genres %}
+            <a href="/genres/{{ g.name }}">{{ g.name }}</a>{% if not loop.last %},
+            {% endif %}
+            {% endfor %}
+        </td>
         <td>{{ artist.popularity }}</td>
         <td>{% for song in artist.charted_songs %}      
-            <a href="/songs/{{ song.song_id }}">{{ song.song_name }}</a>,
+            <a href="/songs/{{ song.song_id }}">{{ song.song_name }}</a>{% if not loop.last %},
+            {% endif %}
             {% endfor %}</td>
       </tr>
       {% endfor %}

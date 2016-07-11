@@ -55,14 +55,19 @@
         </nav>
 
     <div class="padding">
-      <h2 class="featurette-heading">{{ genre.name }}<span class="text-muted"></h2><h3>Years top genre: </span></h3>
+      <h2 class="featurette-heading">{{ genre.name }}<span class="text-muted"></h2><h3>Years top genre:
+      {% for y in genre.years_on_top %}
+            {{ y.year }}
+          {% endfor %} </span></h3>
         <p class="lead">{{ genre.description }}
           <h4><u>Artists in this genre:</h4></u>
             {% for a in genre.artists %}
-            <a href="/artists/{{ a.artist_id }}">{{ a.name }}</a>,
+            <a href="/artists/{{ a.artist_id }}">{{ a.name }}</a>{% if not loop.last %},
+            {% endif %}
           {% endfor %}
           <h4><u>Related genres:</u></h4>{% for g in genre.related_genres%}
-            <a href="/genres/{{ g.name }}">{{ g.name }}</a>,
+            <a href="/genres/{{ g.name }}">{{ g.name }}</a>{% if not loop.last %},
+            {% endif %}
           {% endfor %}
         </p>
 </div>
