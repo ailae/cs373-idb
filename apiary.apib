@@ -27,7 +27,7 @@ sweetify is an API designed on top of Spotify to return information on the top h
 ### Get information on a song by name [GET]
 
 + Parameters
-    + name (string) - The song name you want information on; if none provided, returns a list of all songs
+    + name (string) - The song name you want information on
 
 + Response 200 (application/json)
 
@@ -148,10 +148,19 @@ sweetify is an API designed on top of Spotify to return information on the top h
         {
             "result": {
                 "genre": "Electro house",
-                "years_top_song": [2012, 2000],
-                "artists": ["Benny Benassi", "Skrillex"],
+                "years_top_song": [
+                        2012,
+                        2000
+                ],
+                "artists": [
+                        "Benny Benassi",
+                        "Skrillex"
+                ],
                 "description": "Electro house is a form of hous music characterized by a prominent bassline and/or kick drum.",
-                "related_genres": ["House", "Electro"]
+                "related_genres": [
+                        "House",
+                        "Electro"
+                ]
             }
             "success": true
         }
