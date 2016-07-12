@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Tests.py - Contains unit tests to check the validity of all of our
 database's models: Artist, Year, Song, and Genre.
