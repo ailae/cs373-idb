@@ -78,11 +78,13 @@ def artists_and_songs(session):
 			if not artist.genres:
 				for g in ag['genres']:
 					artist.genres.append(session.query(Genre).filter_by(name=g).first())
+					session.commit()
 
 		# Year top genre relation
 		for y in session.query(Year).all():
 			if not y.top_genre:
 				y.top_genre = session.query(Genre).filter_by(name=y.top_genre_name).first()
+				session.commit()
 
 		# Related genres relation
 		for g in related_genres:
@@ -94,6 +96,7 @@ def artists_and_songs(session):
 							result = session.query(Genre).filter_by(name=relations).first()
 							if result:
 								genre.related_genres.append(result)
+								session.commit()
 
 		# Year song association
 		for ys in year_song:
@@ -111,6 +114,8 @@ def artists_and_songs(session):
 							assoc.song = song
 							assoc.year = year
 							year.top_songs.append(assoc)
+							session.add(assoc)
+							session.commit()
 							#song.years_charted.append(assoc) # Do we need this?
 
 	except:
@@ -123,70 +128,6 @@ create_all_tables(engine)
 session_maker = sessionmaker(bind=engine)
 session = session_maker()
 artists_and_songs(session)
-
-#json3 = open('JSON/years.txt', 'r').read()
-#years = ast.literal_eval(json3)
-#json4 = open('JSON/genres.txt', 'r').read()
-#genres = ast.literal.eval(json4)
-# Note: genres should contain all genres, meaning the genres of each artist
-# AND the genre of all #1 songs of each year.
-
-	# try:
-	# 	for g in genres:
-	# 		genre = Genre(name=g['name'], description=g['description'])
-	# 		session.add(genre)
-	# 	# Commit after adding genres so we can query for them later.
-	# 	session.commit()
-	# except:
-	# 	session.rollback()
-	# 	raise
-
-	# try:
-	# 	# Now that we have added all of our genres, we make associations 
-	# 	# between related genres.
-	# 	for g in genres:
-	# 		this_genre = session.query(Genre).filter_by(name=g['name']).first()
-	# 		related_genres = g['related_genres']
-	# 		for related_genre in related_genres:
-	# 			# Get the object of the related genre.
-	# 			rg_object = session.query(Genre).filter_by(name=related_genre)
-	# 			# Append that genre to this genre's related genres column.
-	# 			this_genre.related_genres.append(rg_object)
-	# 	session.commit()
-	# except:
-	# 	session.rollback()
-	# 	raise
-
-	# try:
-	# 	for y in years:
-	# 		year = Year(year=y['year'], top_album_name=y['top_album_name'], 
-	# 					top_album_id=y['top_album_id'], top_genre_name=y['top_genre_name'],
-	# 					top_album_artist_id=y['top_album_artist_id'])
-
-			
-			# Now we will add this year to the its top genre's years_on_top column.
-			# This code assumes the top genre for each year was also added to the
-			# genres file--therefore it thinks all genres exist in the database at this
-			# point, so it can query for them.
-	# 		top_genre_object = session.query(Genre).filter_by(name=y['top_genre_name'])
-	# 		top_genre_object.years_on_top.append(year)
-	# 		session.add(year)
-	# 	session.commit()
-	# except:
-	# 	session.rollback()
-	# 	raise
-
-	## Once all songs and years have been added, it's time to add the top songs to each year
-		# make a file that looks just like merged_charts.txt but has removed all of the
-		# songs that we didn't add to our database...and has each song's id
-
-		# for each year:
-			# for each song in the current_year:
-				# current_song_object = session.query(Song).filter_by(song_id=current_song_id).first()
-				# current_year.top_songs.append(current_song_object)
-
-		# The above code will append the song object to the year's top songs, and then 
-		# by association add that year to the song's years_charted column
 
 @app.route('/')
 def homepage():

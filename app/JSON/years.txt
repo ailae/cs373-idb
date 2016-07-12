@@ -17,7 +17,7 @@
         'top_album_artist_id': '4BclNkZtAUq1YrYNzye3N7',
         'top_genre_name': 'Country',
         'top_album_name': "Ropin' the Wind",
-        'top_album_id': 'NO_ALBUM_ID',
+        'top_album_id': '',
         'year': '1992'
     },
     {
@@ -112,7 +112,7 @@
         'year': '2005'
     },
     {
-        'top_album_artist_id': 'NO_ARTIST_ID',
+        'top_album_artist_id': '',
         'top_genre_name': 'Soundtrack',
         'top_album_name': 'High School Musical',
         'top_album_id': '4dOvFkIgrb6b9zCcGfCcci',
@@ -168,7 +168,7 @@
         'year': '2013'
     },
     {
-        'top_album_artist_id': 'NO_ARTIST_ID',
+        'top_album_artist_id': '',
         'top_genre_name': 'Soundtrack',
         'top_album_name': 'Frozen',
         'top_album_id': '7lZs5r4oQV2nutddffLrg0',

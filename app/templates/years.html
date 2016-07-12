@@ -77,8 +77,8 @@
         <td><a href="/years/{{ year.year }}">{{ year.year }}</a></td>
         {% for a in year.top_songs %}
           {% if loop.first %}
-            <td>{{ a.song.song_name }}</td>
-            <td>{{ a.song.artist_name }}</td>
+            <td><a href="/songs/{{ a.song.song_id }}">{{ a.song.song_name }}</a></td>
+            <td><a href="/artists/{{ a.song.artist_id }}">{{ a.song.artist_name }}</a></td>
           {% endif %}
           {% endfor %}
         <td><a href="/genres/{{ year.top_genre.name }}">{{ year.top_genre.name}}</a></td>

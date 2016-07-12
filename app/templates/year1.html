@@ -58,21 +58,30 @@
           <h2 class="featurette-heading">{{ year.year }}<span class="text-muted"><br /><a href="/genres/{{ year.top_genre.name }}">{{ year.top_genre.name}}</a></span></h2>
     
 <div class="container marketing">
-<h3>Top Song and Top Album</h3>
       <!-- Three columns of text below the carousel -->
         <div class="col-lg-6">
-          <img class="img-circle" src="static/markronson.jpg" alt="Generic placeholder image" width="140" height="140">
+          <h3>Top Song</h3>
           {% for a in year.top_songs %}
-          {% if a.rank == 1 %}
-          <h3><a href="/songs/{{ a.song.song_id }}">{{ a.song.song_name }}</a></h3>
-          <h2><a href="/artists/{{ a.song.artist_id }}">{{ a.song.artist_name }}</a></h2>
-          <iframe src="https://embed.spotify.com/?uri=spotify:track:{{ a.song.song_id }}" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+          {% if loop.first %}
+            {% if a.rank == 1 %}
+            <img class="img-circle" src="{{ a.song.artist.image_url }}" alt="Generic placeholder image" width="140" height="140">
+            <h3><a href="/songs/{{ a.song.song_id }}">{{ a.song.song_name }}</a></h3>
+            <h2><a href="/artists/{{ a.song.artist_id }}">{{ a.song.artist_name }}</a></h2>
+            <iframe src="https://embed.spotify.com/?uri=spotify:track:{{ a.song.song_id }}" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+            {% else %}
+            <img class="img-circle" src="{{ url_for('static', filename='no_img.png') }}" alt="Generic placeholder image" width="140" height="140">
+            <br>
+            <h4>We're sorry, the top song is not on Spotify.</h4>
+            {% endif %}
           {% endif %}
           {% endfor %}
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-6">
+          <h3>Top Album</h3>
           {% if artist %}
           <img class="img-circle" src="{{ artist.image_url }}" alt="Generic placeholder image" width="140" height="140">
+          {% else %}
+            <img class="img-circle" src="{{ url_for('static', filename='no_img.png') }}" alt="Generic placeholder image" width="140" height="140">
           {% endif %}
           <h3>{{ year.top_album_name }} </h3>
           <h2>{% if artist %}
@@ -81,22 +90,27 @@
           </h2>
           {% if year.top_album_id %}
           <iframe src="https://embed.spotify.com/?uri=spotify:album:{{ year.top_album_id }}" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+          {% else %}
+          <br>
+          <h4>We're sorry, this album is not on Spotify.</h4>
           {% endif %}
+
         </div><!-- /.col-lg-4 -->
+        <div class='col-lg-12'>
           <h3>Top Songs</h3>
           <div class="table-responsive">
           <table id="year_songs" class="display table" width="100%">
           <thead>
             <tr>
-            <th>Song</th>
             <th>Rank</th>
+            <th>Song</th>
             </tr>
           </thead>
           <tbody>
             {% for a in year.top_songs %}
             <tr>
-            <td><a href="/genres/{{ a.song_id }}">{{ a.song.song_name}}</a></td>
             <td>{{ a.rank }}</td>
+            <td><a href="/songs/{{ a.song_id }}">{{ a.song.song_name}}</a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -126,7 +140,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <link rel="stylesheet" 
     href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
     <link rel="stylesheet" 
