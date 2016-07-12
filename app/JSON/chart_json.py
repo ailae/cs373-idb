@@ -23,8 +23,8 @@ with open('all_billboard_charts.txt', 'r') as f:
             song = dict()
             song['rank'] = line_array[0]
             song['song_name'] = line_array[1]
-            song['song_artist'] = line_array[2].strip()
-            file_song = filter(lambda s: s['song_name'] == unicode(line_array[1], 'utf-8') and s['artist_name'] == unicode(line_array[2].strip(), 'utf-8') , song_ids)
+            song['song_artist'] = line_array[2].strip().split(" featuring")[0]
+            file_song = filter(lambda s: s['song_name'].lower() == unicode(song['song_name'].lower(), 'utf-8') and s['artist_name'].lower() == unicode(song['song_artist'].lower(), 'utf-8'), song_ids)
             if file_song:
                 song['song_id'] = str(file_song[0]['song_id'])
                 song['artist_id'] = str(file_song[0]['artist_id'])

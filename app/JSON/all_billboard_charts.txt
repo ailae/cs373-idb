@@ -503,7 +503,7 @@
 99	Bop Gun (One Nation)	Ice Cube featuring George Clinton
 100	I Wanna Be Down	Brandy
 1995
-1	Gangsta's Paradise	Coolio featuring L.V.
+1	Gangsta's Paradise (feat. L.V.)	Coolio
 2	Waterfalls	TLC
 3	Creep	TLC
 4	Kiss from a Rose	Seal
@@ -604,7 +604,7 @@
 99	Misery	Soul Asylum
 100	Can't Stop Lovin' You	Van Halen
 1996
-1	Macarena (Bayside Boys Mix)	Los del Río
+1	Macarena - Bayside Boys Remix	Los del Río
 2	One Sweet Day	Mariah Carey and Boyz II Men
 3	Because You Loved Me	Celine Dion
 4	Nobody Knows	The Tony Rich Project
@@ -636,7 +636,7 @@
 30	One of Us	Joan Osborne
 31	Wonder	Natalie Merchant
 32	Not Gon' Cry	Mary J. Blige
-33	Gangsta's Paradise	Coolio featuring L.V.
+33	Gangsta's Paradise (feat. L.V.)	Coolio
 34	Only You	112 featuring The Notorious B.I.G. and Mase
 35	Down Low (Nobody Has to Know)	R. Kelly featuring The Isley Brothers
 36	You're the One	SWV
@@ -705,7 +705,7 @@
 99	Only Wanna Be with You	Hootie & the Blowfish
 100	Don't Cry	Seal
 1997
-1	Something About the Way You Look Tonight / Candle in the Wind 1997	Elton John
+1	Something About the Way You Look Tonight - Edit Version	Elton John
 2	Foolish Games / You Were Meant for Me	Jewel
 3	I'll Be Missing You	Puff Daddy featuring Faith Evans and 112
 4	Un-Break My Heart	Toni Braxton
@@ -1210,7 +1210,7 @@
 99	Hero	Enrique Iglesias
 100	Hemorrhage (In My Hands)	Fuel
 2002
-1	How You Remind Me	Nickelback
+1	How You Remind Me - LP Mix	Nickelback
 2	Foolish	Ashanti
 3	Hot in Herre	Nelly
 4	Dilemma	Nelly featuring Kelly Rowland
@@ -1816,7 +1816,7 @@
 99	That's That	Snoop Dogg featuring R. Kelly
 100	Same Girl	R. Kelly featuring Usher
 2008
-1	Low	Flo Rida featuring T-Pain
+1	Low	Flo Rida (feat T-Pain)
 2	Bleeding Love	Leona Lewis
 3	No One	Alicia Keys
 4	Lollipop	Lil Wayne featuring Static Major
