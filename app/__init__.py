@@ -49,8 +49,7 @@ def artists_and_songs(session):
 			if not a.charted_songs:
 				for s in session.query(Song).filter_by(artist_id = a.artist_id).all():
 					a.charted_songs.append(s)
-				# print a.artist_id
-				# print s.artist.artist_id
+
 				# s.artist = a
 		
 		if not session.query(Genre).first():
