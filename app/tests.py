@@ -891,10 +891,13 @@ class ModelUnitTests(unittest.TestCase):
         actual_dict = returned_year.dictify()
 
         self.assertEqual(actual_dict['year'], expected['year'])
-        self.assertEqual(actual_dict['top_album_name'], expected['top_album_name'])
+        self.assertEqual(
+            actual_dict['top_album_name'], expected['top_album_name'])
         self.assertEqual(actual_dict['top_album_id'], expected['top_album_id'])
-        self.assertEqual(actual_dict['top_genre_name'], expected['top_genre_name'])
-        self.assertEqual(actual_dict['top_album_artist_id'], expected['top_album_artist_id'])
+        self.assertEqual(
+            actual_dict['top_genre_name'], expected['top_genre_name'])
+        self.assertEqual(
+            actual_dict['top_album_artist_id'], expected['top_album_artist_id'])
 
         self.assertTrue('Top Song 1' in actual_dict['top_songs'])
         self.assertTrue('Top Song 2' in actual_dict['top_songs'])

@@ -1,3 +1,216 @@
+commit da348f4eca14ef69b1615f32d0b83441cac21d7d
+Merge: f6acecc fa72d8e
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Tue Jul 12 16:02:05 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit f6aceccc716c89e3f3f04d83bb6b57120df06577
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Tue Jul 12 16:01:57 2016 -0500
+
+    Year song table and association is added
+
+commit fa72d8e77edd6d86ffcf39de5ccb7b77250bd659
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Tue Jul 12 15:47:27 2016 -0500
+
+    Updated UML diagram again, fixed multiplicity arrows
+
+commit da749a3ae23d98324ebfba511dd027d4104d742a
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Tue Jul 12 15:34:15 2016 -0500
+
+    Fixed UML diagram to match new models (Fixes #22)
+
+commit b0c9cda0a10d335c0e9853a326c16d8c0f5143bb
+Merge: 41c273c 4d665a8
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Tue Jul 12 15:08:57 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 41c273c20b682ff9e56048b4e860b04941107562
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Tue Jul 12 15:08:48 2016 -0500
+
+    do the macarena
+
+commit 4d665a826f10afea903f22dc094d8d9f0ce687a8
+Merge: 5d843d4 e012045
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Tue Jul 12 14:49:03 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 5d843d45f19ec382943a8c6aac961e796cb60796
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Tue Jul 12 14:48:59 2016 -0500
+
+    Messing with year song association
+
+commit e0120452a4debad2653a81898ab04d6b12d2f4d3
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Tue Jul 12 14:47:26 2016 -0500
+
+    320 mismatches lefT
+
+commit 0973a57c071a3a7e6f7e65e36be94483a8d0a855
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Tue Jul 12 14:26:00 2016 -0500
+
+    added rest of number 1s
+
+commit b867baf32d0826b32c40182d4aa3a932ae45369c
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Tue Jul 12 14:23:19 2016 -0500
+
+    more number 1s
+
+commit e2b958839b1fd9b87309eeb59fd575061556fc78
+Merge: d2d16cb f17daa4
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Tue Jul 12 13:54:42 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit d2d16cba323ca3af8299073dc28f22c712ce9dfd
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Tue Jul 12 13:54:34 2016 -0500
+
+    added 2015
+
+commit f17daa49c8679c01ca573c9507471e46f08210d3
+Merge: 80a8a1e 4188846
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Tue Jul 12 13:27:14 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 80a8a1edf6a7c6bc80db0af680929f2bccd7f5a0
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Tue Jul 12 13:26:52 2016 -0500
+
+    Changed files to work with python3, hopefully travis works now
+
+commit 418884690c1eb453b021fa5ce776d37e104272b7
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Tue Jul 12 13:19:55 2016 -0500
+
+    filtered all songs association by artist as well
+
+commit 7b41a0fb56f9d992450d057d457caa2480d89200
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Mon Jul 11 18:26:38 2016 -0500
+
+    added empty song and artist IDs
+
+commit 0f80519787e165bf5c3140d1ad5a8319c98973f0
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Mon Jul 11 18:04:59 2016 -0500
+
+    all billboard charts
+
+commit 1a1593ff3325d18f166d5af8fc2472a94f74eec8
+Merge: 927d1b0 56220a3
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Mon Jul 11 18:04:00 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 927d1b028ba44f93ffc0e085e1579fe3489f10ac
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Mon Jul 11 18:03:50 2016 -0500
+
+    all_songs_association.txt
+
+commit 56220a333308cd6c1e2e2e167c65eafc40f5edd6
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Mon Jul 11 17:47:40 2016 -0500
+
+    Only pulls top 3 artists in genre main page, closes #31
+
+commit 639434bd2f43124eab0d57241a389ccfd19da314
+Author: Samarth Dhruva <samarthdhruva@live.com>
+Date:   Mon Jul 11 17:43:45 2016 -0500
+
+    Updated travis yml to include installing autopep8
+
+commit 31e26318d18019e899c3ee4eb33d55fe193615ad
+Author: Samarth Dhruva <samarthdhruva@live.com>
+Date:   Mon Jul 11 17:41:26 2016 -0500
+
+    Updated travis yml again
+
+commit 8d406502177f17d7e51e89ef34edcc272a74230a
+Author: Samarth Dhruva <samarthdhruva@live.com>
+Date:   Mon Jul 11 17:35:27 2016 -0500
+
+    Changed travis yml
+
+commit f675a3eec5d0e4d9e55858142de7acb98863c419
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Mon Jul 11 17:27:25 2016 -0500
+
+    renamed travis.yml
+
+commit e35968469d53a9ea1771120027e10d1896433b98
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Mon Jul 11 17:21:55 2016 -0500
+
+    added travis-yml and updated makefile
+
+commit 49a12589b1a25beceec7b8a6aee0ffd5ddb721fb
+Merge: 0c61437 f28c539
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Mon Jul 11 16:54:19 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 0c61437c172009a7380f86f001d9c620d50fb127
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Mon Jul 11 16:54:03 2016 -0500
+
+    Added unit tests for dictify
+
+commit f28c539e5b14c72712ca514ced6e68f4ab913286
+Merge: e2bbd31 eecb75c
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Mon Jul 11 15:49:55 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit e2bbd31169f14ade31a4e508c1d70a384348a7e2
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Mon Jul 11 15:49:48 2016 -0500
+
+    Add a lot of the linking, only thing left is to add the year-song chart information. Also removed Jessie, closing #28
+
+commit eecb75c35dedf65e1e6f98b2c98e23242d5a07e9
+Author: Alex Cheng <akc2267@users.noreply.github.com>
+Date:   Mon Jul 11 15:27:16 2016 -0500
+
+    Update models.py
+
+commit 8c7c7690c1c64847478132f4b842fe729487ad8f
+Merge: abc11e1 864a486
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Mon Jul 11 15:23:55 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit abc11e10096b132cdc6cf61a8dc09f85320045a1
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Mon Jul 11 15:23:48 2016 -0500
+
+    Fixed fencepost comma problem, closes #27
+
+commit 864a48688387242d6f3b0a0ae981cf254ee9e3d8
+Author: Alex Cheng <akc2267@users.noreply.github.com>
+Date:   Mon Jul 11 15:23:04 2016 -0500
+
+    updated the comments
+
 commit 04b60513328c67861baa03ccc8c08fd1bff8c83e
 Author: Samarth Dhruva <samarthdhruva@live.com>
 Date:   Mon Jul 11 00:16:08 2016 -0500

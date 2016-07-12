@@ -1,6 +1,3 @@
-"""
-This module demonstrates a model of our datebase used by sweetify.me
-"""
 
 from sqlalchemy import create_engine, Table, Column, ForeignKey, Integer, \
     String, Boolean
@@ -45,11 +42,13 @@ RELATED_GENRES_ASSOCIATION = Table(
     Column('genre2', String(100), ForeignKey('Genre.name'))
 )
 
-# A many to many association between Years and Songs. Contains the rank
-# that song held in that year.
-
 
 class YearsSongsAssociation(BASE):
+
+    """
+    Holds associations between a Year and a Song, and stores
+    the rank that song had in that year.
+    """
     __tablename__ = 'yearssongsassociation'
 
     year_num = Column(

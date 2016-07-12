@@ -13,7 +13,7 @@ else
 endif
 
 .pylintrc:
-	$(PYLINT) --disable=bad-whitespace,missing-docstring,pointless-string-statement --reports=n --generate-rcfile > $@
+	$(PYLINT) --disable=bad-whitespace,missing-docstring,pointless-string-statement,too-few-public-methods,too-many-locals,too-many-statements,import-error --reports=n --generate-rcfile > $@
 
 models.html: app/models.py
 	pydoc3 -w app/models.py
@@ -70,7 +70,7 @@ status:
 	git remote -v
 	git status
 
-test: models.html models.log format pylint_models_tests check TestModels.tmp
+test: models.log format pylint_models_tests check TestModels.tmp models.html
 
 
 
