@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>app.models</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;app ::
+        Module&nbsp;models
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="app.models-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="app.models-module.html">Module app.models</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">sqlalchemy</tt> <tt class="py-keyword">import</tt> <tt class="py-name">create_engine</tt><tt class="py-op">,</tt> <tt class="py-name">Table</tt><tt class="py-op">,</tt> <tt class="py-name">Column</tt><tt class="py-op">,</tt> <tt class="py-name">ForeignKey</tt><tt class="py-op">,</tt> <tt class="py-name">Integer</tt><tt class="py-op">,</tt> \ </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line">    <tt class="py-name">String</tt><tt class="py-op">,</tt> <tt class="py-name">Boolean</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">sqlalchemy</tt><tt class="py-op">.</tt><tt class="py-name">ext</tt><tt class="py-op">.</tt><tt class="py-name">declarative</tt> <tt class="py-keyword">import</tt> <tt class="py-name">declarative_base</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">sqlalchemy</tt><tt class="py-op">.</tt><tt class="py-name">orm</tt> <tt class="py-keyword">import</tt> <tt class="py-name">relationship</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">sqlalchemy</tt><tt class="py-op">.</tt><tt class="py-name">engine</tt><tt class="py-op">.</tt><tt class="py-name">url</tt> <tt class="py-keyword">import</tt> <tt class="py-name">URL</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">settings</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable app.models.BASE=app.models-module.html#BASE"><a title="app.models.BASE" class="py-name" href="#" onclick="return doclink('link-0', 'BASE', 'link-0');">BASE</a></tt> <tt class="py-op">=</tt> <tt class="py-name">declarative_base</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="db_connect"></a><div id="db_connect-def"><a name="L13"></a><tt class="py-lineno"> 13</tt> <a class="py-toggle" href="#" id="db_connect-toggle" onclick="return toggle('db_connect');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="app.models-module.html#db_connect">db_connect</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="db_connect-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="db_connect-expanded"><a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">    Function used to connect to the database specified in the settings file.</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">create_engine</tt><tt class="py-op">(</tt><tt class="py-name">URL</tt><tt class="py-op">(</tt><tt class="py-op">**</tt><tt class="py-name">settings</tt><tt class="py-op">.</tt><tt class="py-name">DATABASE</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"> </tt>
+<a name="create_all_tables"></a><div id="create_all_tables-def"><a name="L20"></a><tt class="py-lineno"> 20</tt> <a class="py-toggle" href="#" id="create_all_tables-toggle" onclick="return toggle('create_all_tables');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="app.models-module.html#create_all_tables">create_all_tables</a><tt class="py-op">(</tt><tt class="py-param">engine</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="create_all_tables-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="create_all_tables-expanded"><a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">    Given an engine, creates all tables for these models.</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt id="link-1" class="py-name"><a title="app.models.BASE" class="py-name" href="#" onclick="return doclink('link-1', 'BASE', 'link-0');">BASE</a></tt><tt class="py-op">.</tt><tt class="py-name">metadata</tt><tt class="py-op">.</tt><tt class="py-name">create_all</tt><tt class="py-op">(</tt><tt class="py-name">engine</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-comment"># A many to many association between Artists and Genres.</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-comment"># artists_genres_association = Table(</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Variable app.models.ARTISTS_GENRES_ASSOCIATION=app.models-module.html#ARTISTS_GENRES_ASSOCIATION"><a title="app.models.ARTISTS_GENRES_ASSOCIATION" class="py-name" href="#" onclick="return doclink('link-2', 'ARTISTS_GENRES_ASSOCIATION', 'link-2');">ARTISTS_GENRES_ASSOCIATION</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Table</tt><tt class="py-op">(</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-string">'artists_genres'</tt><tt class="py-op">,</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt id="link-3" class="py-name"><a title="app.models.BASE" class="py-name" href="#" onclick="return doclink('link-3', 'BASE', 'link-0');">BASE</a></tt><tt class="py-op">.</tt><tt class="py-name">metadata</tt><tt class="py-op">,</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-string">'genre_name'</tt><tt class="py-op">,</tt> <tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">100</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">ForeignKey</tt><tt class="py-op">(</tt><tt class="py-string">'Genre.name'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-string">'artist_id'</tt><tt class="py-op">,</tt> <tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">150</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">ForeignKey</tt><tt class="py-op">(</tt><tt class="py-string">'Artist.artist_id'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-comment"># A many to many association between Genres and their Related Genres</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-comment"># related_genres_association = Table(</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable app.models.RELATED_GENRES_ASSOCIATION=app.models-module.html#RELATED_GENRES_ASSOCIATION"><a title="app.models.RELATED_GENRES_ASSOCIATION" class="py-name" href="#" onclick="return doclink('link-4', 'RELATED_GENRES_ASSOCIATION', 'link-4');">RELATED_GENRES_ASSOCIATION</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Table</tt><tt class="py-op">(</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">    <tt class="py-string">'genres_to_genres'</tt><tt class="py-op">,</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt id="link-5" class="py-name"><a title="app.models.BASE" class="py-name" href="#" onclick="return doclink('link-5', 'BASE', 'link-0');">BASE</a></tt><tt class="py-op">.</tt><tt class="py-name">metadata</tt><tt class="py-op">,</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-string">'genre1'</tt><tt class="py-op">,</tt> <tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">100</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">ForeignKey</tt><tt class="py-op">(</tt><tt class="py-string">'Genre.name'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-string">'genre2'</tt><tt class="py-op">,</tt> <tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">100</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">ForeignKey</tt><tt class="py-op">(</tt><tt class="py-string">'Genre.name'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="YearsSongsAssociation"></a><div id="YearsSongsAssociation-def"><a name="L46"></a><tt class="py-lineno"> 46</tt> <a class="py-toggle" href="#" id="YearsSongsAssociation-toggle" onclick="return toggle('YearsSongsAssociation');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="app.models.YearsSongsAssociation-class.html">YearsSongsAssociation</a><tt class="py-op">(</tt><tt class="py-base-class">BASE</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="YearsSongsAssociation-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="YearsSongsAssociation-expanded"><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">    Holds associations between a Year and a Song, and stores</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">    the rank that song had in that year.</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt id="link-6" class="py-name" targets="Variable app.models.Artist.__tablename__=app.models.Artist-class.html#__tablename__,Variable app.models.Genre.__tablename__=app.models.Genre-class.html#__tablename__,Variable app.models.Song.__tablename__=app.models.Song-class.html#__tablename__,Variable app.models.Year.__tablename__=app.models.Year-class.html#__tablename__,Variable app.models.YearsSongsAssociation.__tablename__=app.models.YearsSongsAssociation-class.html#__tablename__"><a title="app.models.Artist.__tablename__
+app.models.Genre.__tablename__
+app.models.Song.__tablename__
+app.models.Year.__tablename__
+app.models.YearsSongsAssociation.__tablename__" class="py-name" href="#" onclick="return doclink('link-6', '__tablename__', 'link-6');">__tablename__</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'yearssongsassociation'</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt id="link-7" class="py-name" targets="Variable app.models.YearsSongsAssociation.year_num=app.models.YearsSongsAssociation-class.html#year_num"><a title="app.models.YearsSongsAssociation.year_num" class="py-name" href="#" onclick="return doclink('link-7', 'year_num', 'link-7');">year_num</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-string">'year'</tt><tt class="py-op">,</tt> <tt class="py-name">Integer</tt><tt class="py-op">,</tt> <tt class="py-name">ForeignKey</tt><tt class="py-op">(</tt><tt class="py-string">'Year.year'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">primary_key</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt id="link-8" class="py-name" targets="Variable app.models.Song.song_id=app.models.Song-class.html#song_id,Variable app.models.YearsSongsAssociation.song_id=app.models.YearsSongsAssociation-class.html#song_id"><a title="app.models.Song.song_id
+app.models.YearsSongsAssociation.song_id" class="py-name" href="#" onclick="return doclink('link-8', 'song_id', 'link-8');">song_id</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">        <tt class="py-string">'song'</tt><tt class="py-op">,</tt> <tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">150</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">ForeignKey</tt><tt class="py-op">(</tt><tt class="py-string">'Song.song_id'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">primary_key</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt id="link-9" class="py-name" targets="Variable app.models.YearsSongsAssociation.rank=app.models.YearsSongsAssociation-class.html#rank"><a title="app.models.YearsSongsAssociation.rank" class="py-name" href="#" onclick="return doclink('link-9', 'rank', 'link-9');">rank</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-string">'rank'</tt><tt class="py-op">,</tt> <tt class="py-name">Integer</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">    <tt id="link-10" class="py-name" targets="Variable app.models.Year.year=app.models.Year-class.html#year,Variable app.models.YearsSongsAssociation.year=app.models.YearsSongsAssociation-class.html#year"><a title="app.models.Year.year
+app.models.YearsSongsAssociation.year" class="py-name" href="#" onclick="return doclink('link-10', 'year', 'link-10');">year</a></tt> <tt class="py-op">=</tt> <tt class="py-name">relationship</tt><tt class="py-op">(</tt><tt class="py-string">"Year"</tt><tt class="py-op">,</tt> <tt class="py-name">back_populates</tt><tt class="py-op">=</tt><tt class="py-string">"top_songs"</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt id="link-11" class="py-name" targets="Variable app.models.YearsSongsAssociation.song=app.models.YearsSongsAssociation-class.html#song"><a title="app.models.YearsSongsAssociation.song" class="py-name" href="#" onclick="return doclink('link-11', 'song', 'link-11');">song</a></tt> <tt class="py-op">=</tt> <tt class="py-name">relationship</tt><tt class="py-op">(</tt><tt class="py-string">"Song"</tt><tt class="py-op">,</tt> <tt class="py-name">back_populates</tt><tt class="py-op">=</tt><tt class="py-string">"years_charted"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="Artist"></a><div id="Artist-def"><a name="L63"></a><tt class="py-lineno"> 63</tt> <a class="py-toggle" href="#" id="Artist-toggle" onclick="return toggle('Artist');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="app.models.Artist-class.html">Artist</a><tt class="py-op">(</tt><tt class="py-base-class">BASE</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Artist-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Artist-expanded"><a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">    Database model of table 'Artist', which stores:</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">        name: the name of the artist</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">        num_followers: the number of followers this artist has on Spotify</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">        artist_id: Spotify ID of the artist</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        image_url: a link to the artist's picture on Spotify</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">        popularity: the popularity of the artist (as measured by Spotify)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">        charted_songs: all of the artist's songs we have in our database</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">        genres: all of the genres the artist is associated with</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">    <tt id="link-12" class="py-name"><a title="app.models.Artist.__tablename__
+app.models.Genre.__tablename__
+app.models.Song.__tablename__
+app.models.Year.__tablename__
+app.models.YearsSongsAssociation.__tablename__" class="py-name" href="#" onclick="return doclink('link-12', '__tablename__', 'link-6');">__tablename__</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'Artist'</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt id="link-13" class="py-name" targets="Variable app.models.Artist.artist_id=app.models.Artist-class.html#artist_id,Variable app.models.Song.artist_id=app.models.Song-class.html#artist_id"><a title="app.models.Artist.artist_id
+app.models.Song.artist_id" class="py-name" href="#" onclick="return doclink('link-13', 'artist_id', 'link-13');">artist_id</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">150</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">primary_key</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">    <tt id="link-14" class="py-name" targets="Variable app.models.Artist.name=app.models.Artist-class.html#name,Variable app.models.Genre.name=app.models.Genre-class.html#name"><a title="app.models.Artist.name
+app.models.Genre.name" class="py-name" href="#" onclick="return doclink('link-14', 'name', 'link-14');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">150</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt id="link-15" class="py-name" targets="Variable app.models.Artist.num_followers=app.models.Artist-class.html#num_followers"><a title="app.models.Artist.num_followers" class="py-name" href="#" onclick="return doclink('link-15', 'num_followers', 'link-15');">num_followers</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">Integer</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt id="link-16" class="py-name" targets="Variable app.models.Artist.image_url=app.models.Artist-class.html#image_url"><a title="app.models.Artist.image_url" class="py-name" href="#" onclick="return doclink('link-16', 'image_url', 'link-16');">image_url</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">350</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt id="link-17" class="py-name" targets="Variable app.models.Artist.popularity=app.models.Artist-class.html#popularity,Variable app.models.Song.popularity=app.models.Song-class.html#popularity"><a title="app.models.Artist.popularity
+app.models.Song.popularity" class="py-name" href="#" onclick="return doclink('link-17', 'popularity', 'link-17');">popularity</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">Integer</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">    <tt class="py-comment"># Bidirectional one to many relationship between artists and songs.</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt id="link-18" class="py-name" targets="Variable app.models.Artist.charted_songs=app.models.Artist-class.html#charted_songs"><a title="app.models.Artist.charted_songs" class="py-name" href="#" onclick="return doclink('link-18', 'charted_songs', 'link-18');">charted_songs</a></tt> <tt class="py-op">=</tt> <tt class="py-name">relationship</tt><tt class="py-op">(</tt><tt class="py-string">"Song"</tt><tt class="py-op">,</tt> <tt class="py-name">back_populates</tt><tt class="py-op">=</tt><tt class="py-string">"artist"</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">    <tt class="py-comment"># Many to many relationship.</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt id="link-19" class="py-name" targets="Variable app.models.Artist.genres=app.models.Artist-class.html#genres"><a title="app.models.Artist.genres" class="py-name" href="#" onclick="return doclink('link-19', 'genres', 'link-19');">genres</a></tt> <tt class="py-op">=</tt> <tt class="py-name">relationship</tt><tt class="py-op">(</tt><tt class="py-string">'Genre'</tt><tt class="py-op">,</tt> <tt class="py-name">secondary</tt><tt class="py-op">=</tt><tt id="link-20" class="py-name"><a title="app.models.ARTISTS_GENRES_ASSOCIATION" class="py-name" href="#" onclick="return doclink('link-20', 'ARTISTS_GENRES_ASSOCIATION', 'link-2');">ARTISTS_GENRES_ASSOCIATION</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">                          <tt class="py-name">back_populates</tt><tt class="py-op">=</tt><tt class="py-string">"artists"</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="Artist.dictify"></a><div id="Artist.dictify-def"><a name="L91"></a><tt class="py-lineno"> 91</tt> <a class="py-toggle" href="#" id="Artist.dictify-toggle" onclick="return toggle('Artist.dictify');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="app.models.Artist-class.html#dictify">dictify</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Artist.dictify-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Artist.dictify-expanded"><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-name">artist_dict</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-name">artist_dict</tt><tt class="py-op">[</tt><tt class="py-string">'artist_id'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="app.models.Artist.artist_id
+app.models.Song.artist_id" class="py-name" href="#" onclick="return doclink('link-21', 'artist_id', 'link-13');">artist_id</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-name">artist_dict</tt><tt class="py-op">[</tt><tt class="py-string">'name'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="app.models.Artist.name
+app.models.Genre.name" class="py-name" href="#" onclick="return doclink('link-22', 'name', 'link-14');">name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-name">artist_dict</tt><tt class="py-op">[</tt><tt class="py-string">'num_followers'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="app.models.Artist.num_followers" class="py-name" href="#" onclick="return doclink('link-23', 'num_followers', 'link-15');">num_followers</a></tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-name">artist_dict</tt><tt class="py-op">[</tt><tt class="py-string">'image_url'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="app.models.Artist.image_url" class="py-name" href="#" onclick="return doclink('link-24', 'image_url', 'link-16');">image_url</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt class="py-name">artist_dict</tt><tt class="py-op">[</tt><tt class="py-string">'popularity'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="app.models.Artist.popularity
+app.models.Song.popularity" class="py-name" href="#" onclick="return doclink('link-25', 'popularity', 'link-17');">popularity</a></tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-name">artist_dict</tt><tt class="py-op">[</tt><tt class="py-string">'charted_songs'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">            <tt class="py-name">str</tt><tt class="py-op">(</tt><tt id="link-26" class="py-name"><a title="app.models.YearsSongsAssociation.song" class="py-name" href="#" onclick="return doclink('link-26', 'song', 'link-11');">song</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Variable app.models.Song.song_name=app.models.Song-class.html#song_name"><a title="app.models.Song.song_name" class="py-name" href="#" onclick="return doclink('link-27', 'song_name', 'link-27');">song_name</a></tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt id="link-28" class="py-name"><a title="app.models.YearsSongsAssociation.song" class="py-name" href="#" onclick="return doclink('link-28', 'song', 'link-11');">song</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="app.models.Artist.charted_songs" class="py-name" href="#" onclick="return doclink('link-29', 'charted_songs', 'link-18');">charted_songs</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-name">artist_dict</tt><tt class="py-op">[</tt><tt class="py-string">'genres'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">genre</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="app.models.Artist.name
+app.models.Genre.name" class="py-name" href="#" onclick="return doclink('link-30', 'name', 'link-14');">name</a></tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">genre</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="app.models.Artist.genres" class="py-name" href="#" onclick="return doclink('link-31', 'genres', 'link-19');">genres</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">artist_dict</tt> </tt>
+</div></div><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"> </tt>
+<a name="Year"></a><div id="Year-def"><a name="L104"></a><tt class="py-lineno">104</tt> <a class="py-toggle" href="#" id="Year-toggle" onclick="return toggle('Year');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="app.models.Year-class.html">Year</a><tt class="py-op">(</tt><tt class="py-base-class">BASE</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Year-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Year-expanded"><a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">    Database model of table 'Year', which stores:</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">        year: the year's number</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">        top_album_name: the name of the top album</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">        top_album_id: the Spotify id of the top album</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">        top_genre_name: the name of the genre of the year's top album</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">        top_album_artist_id: the id of the artist who made the top album</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">        top_genre: the genre of the year's top album</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">        top_songs: The top 100 songs of that year</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">    <tt id="link-32" class="py-name"><a title="app.models.Artist.__tablename__
+app.models.Genre.__tablename__
+app.models.Song.__tablename__
+app.models.Year.__tablename__
+app.models.YearsSongsAssociation.__tablename__" class="py-name" href="#" onclick="return doclink('link-32', '__tablename__', 'link-6');">__tablename__</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'Year'</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt id="link-33" class="py-name"><a title="app.models.Year.year
+app.models.YearsSongsAssociation.year" class="py-name" href="#" onclick="return doclink('link-33', 'year', 'link-10');">year</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">Integer</tt><tt class="py-op">,</tt> <tt class="py-name">primary_key</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt id="link-34" class="py-name" targets="Variable app.models.Year.top_album_name=app.models.Year-class.html#top_album_name"><a title="app.models.Year.top_album_name" class="py-name" href="#" onclick="return doclink('link-34', 'top_album_name', 'link-34');">top_album_name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">250</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt id="link-35" class="py-name" targets="Variable app.models.Year.top_album_id=app.models.Year-class.html#top_album_id"><a title="app.models.Year.top_album_id" class="py-name" href="#" onclick="return doclink('link-35', 'top_album_id', 'link-35');">top_album_id</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">150</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">    <tt id="link-36" class="py-name" targets="Variable app.models.Year.top_genre_name=app.models.Year-class.html#top_genre_name"><a title="app.models.Year.top_genre_name" class="py-name" href="#" onclick="return doclink('link-36', 'top_genre_name', 'link-36');">top_genre_name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">100</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">ForeignKey</tt><tt class="py-op">(</tt><tt class="py-string">'Genre.name'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-comment"># One to one relationship between year and</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">    <tt class="py-comment"># top_album_artist's name</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt id="link-37" class="py-name" targets="Variable app.models.Year.top_album_artist_id=app.models.Year-class.html#top_album_artist_id"><a title="app.models.Year.top_album_artist_id" class="py-name" href="#" onclick="return doclink('link-37', 'top_album_artist_id', 'link-37');">top_album_artist_id</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">100</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">ForeignKey</tt><tt class="py-op">(</tt><tt class="py-string">'Artist.artist_id'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">    <tt class="py-comment"># Many to one relationship between Years and Genre.</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">    <tt id="link-38" class="py-name" targets="Variable app.models.Year.top_genre=app.models.Year-class.html#top_genre"><a title="app.models.Year.top_genre" class="py-name" href="#" onclick="return doclink('link-38', 'top_genre', 'link-38');">top_genre</a></tt> <tt class="py-op">=</tt> <tt class="py-name">relationship</tt><tt class="py-op">(</tt><tt class="py-string">"Genre"</tt><tt class="py-op">,</tt> <tt class="py-name">back_populates</tt><tt class="py-op">=</tt><tt class="py-string">"years_on_top"</tt><tt class="py-op">)</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">    <tt class="py-comment"># A many to many relationship between Songs and Years</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">    <tt id="link-39" class="py-name" targets="Variable app.models.Year.top_songs=app.models.Year-class.html#top_songs"><a title="app.models.Year.top_songs" class="py-name" href="#" onclick="return doclink('link-39', 'top_songs', 'link-39');">top_songs</a></tt> <tt class="py-op">=</tt> <tt class="py-name">relationship</tt><tt class="py-op">(</tt><tt class="py-string">"YearsSongsAssociation"</tt><tt class="py-op">,</tt> <tt class="py-name">back_populates</tt><tt class="py-op">=</tt><tt class="py-string">"year"</tt><tt class="py-op">)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"> </tt>
+<a name="Year.dictify"></a><div id="Year.dictify-def"><a name="L133"></a><tt class="py-lineno">133</tt> <a class="py-toggle" href="#" id="Year.dictify-toggle" onclick="return toggle('Year.dictify');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="app.models.Year-class.html#dictify">dictify</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Year.dictify-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Year.dictify-expanded"><a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-name">year_dict</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">        <tt class="py-name">year_dict</tt><tt class="py-op">[</tt><tt class="py-string">'year'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="app.models.Year.year
+app.models.YearsSongsAssociation.year" class="py-name" href="#" onclick="return doclink('link-40', 'year', 'link-10');">year</a></tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">        <tt class="py-name">year_dict</tt><tt class="py-op">[</tt><tt class="py-string">'top_album_name'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="app.models.Year.top_album_name" class="py-name" href="#" onclick="return doclink('link-41', 'top_album_name', 'link-34');">top_album_name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-name">year_dict</tt><tt class="py-op">[</tt><tt class="py-string">'top_album_id'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name"><a title="app.models.Year.top_album_id" class="py-name" href="#" onclick="return doclink('link-42', 'top_album_id', 'link-35');">top_album_id</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-name">year_dict</tt><tt class="py-op">[</tt><tt class="py-string">'top_genre_name'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="app.models.Year.top_genre_name" class="py-name" href="#" onclick="return doclink('link-43', 'top_genre_name', 'link-36');">top_genre_name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">        <tt class="py-name">year_dict</tt><tt class="py-op">[</tt><tt class="py-string">'top_album_artist_id'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="app.models.Year.top_album_artist_id" class="py-name" href="#" onclick="return doclink('link-44', 'top_album_artist_id', 'link-37');">top_album_artist_id</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">        <tt class="py-name">year_dict</tt><tt class="py-op">[</tt><tt class="py-string">'top_songs'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">            <tt class="py-name">assoc</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="app.models.YearsSongsAssociation.song" class="py-name" href="#" onclick="return doclink('link-45', 'song', 'link-11');">song</a></tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="app.models.Song.song_name" class="py-name" href="#" onclick="return doclink('link-46', 'song_name', 'link-27');">song_name</a></tt> <tt class="py-keyword">for</tt> <tt class="py-name">assoc</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name"><a title="app.models.Year.top_songs" class="py-name" href="#" onclick="return doclink('link-47', 'top_songs', 'link-39');">top_songs</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">year_dict</tt> </tt>
+</div></div><a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"> </tt>
+<a name="Song"></a><div id="Song-def"><a name="L145"></a><tt class="py-lineno">145</tt> <a class="py-toggle" href="#" id="Song-toggle" onclick="return toggle('Song');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="app.models.Song-class.html">Song</a><tt class="py-op">(</tt><tt class="py-base-class">BASE</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Song-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Song-expanded"><a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring">    Database model of table 'Song' which stores each song's:</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring">        song_id: a string containing the song's Spotify ID</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring">        song_name: the name of the song</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">        artist_name: artist who made the song</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring">        artist_id: the id of the artist who made the song</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring">        album_name: album the song comes from</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring">        explict: true if the song is explicit, false if it is not</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-docstring">        popularity: the popularity of the song (from Spotify)</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-docstring">        years_charted: years in which this song was in the top chart</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-docstring">        artist: the object of the artist who made the song</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">    <tt id="link-48" class="py-name"><a title="app.models.Artist.__tablename__
+app.models.Genre.__tablename__
+app.models.Song.__tablename__
+app.models.Year.__tablename__
+app.models.YearsSongsAssociation.__tablename__" class="py-name" href="#" onclick="return doclink('link-48', '__tablename__', 'link-6');">__tablename__</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'Song'</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">    <tt id="link-49" class="py-name"><a title="app.models.Song.song_id
+app.models.YearsSongsAssociation.song_id" class="py-name" href="#" onclick="return doclink('link-49', 'song_id', 'link-8');">song_id</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">150</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">primary_key</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">    <tt id="link-50" class="py-name"><a title="app.models.Song.song_name" class="py-name" href="#" onclick="return doclink('link-50', 'song_name', 'link-27');">song_name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">250</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">    <tt id="link-51" class="py-name" targets="Variable app.models.Song.artist_name=app.models.Song-class.html#artist_name"><a title="app.models.Song.artist_name" class="py-name" href="#" onclick="return doclink('link-51', 'artist_name', 'link-51');">artist_name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">150</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">    <tt id="link-52" class="py-name"><a title="app.models.Artist.artist_id
+app.models.Song.artist_id" class="py-name" href="#" onclick="return doclink('link-52', 'artist_id', 'link-13');">artist_id</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">150</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">ForeignKey</tt><tt class="py-op">(</tt><tt class="py-string">'Artist.artist_id'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">    <tt id="link-53" class="py-name" targets="Variable app.models.Song.album_name=app.models.Song-class.html#album_name"><a title="app.models.Song.album_name" class="py-name" href="#" onclick="return doclink('link-53', 'album_name', 'link-53');">album_name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">250</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">    <tt id="link-54" class="py-name" targets="Variable app.models.Song.explicit=app.models.Song-class.html#explicit"><a title="app.models.Song.explicit" class="py-name" href="#" onclick="return doclink('link-54', 'explicit', 'link-54');">explicit</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">Boolean</tt><tt class="py-op">)</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">    <tt id="link-55" class="py-name"><a title="app.models.Artist.popularity
+app.models.Song.popularity" class="py-name" href="#" onclick="return doclink('link-55', 'popularity', 'link-17');">popularity</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">Integer</tt><tt class="py-op">)</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">    <tt class="py-comment"># A many to many relationship between years and songs. Songs uses this</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">    <tt class="py-comment"># to find all of the years it charted, and its rank in each of those</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">    <tt class="py-comment"># years.</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">    <tt id="link-56" class="py-name" targets="Variable app.models.Song.years_charted=app.models.Song-class.html#years_charted"><a title="app.models.Song.years_charted" class="py-name" href="#" onclick="return doclink('link-56', 'years_charted', 'link-56');">years_charted</a></tt> <tt class="py-op">=</tt> <tt class="py-name">relationship</tt><tt class="py-op">(</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">        <tt class="py-string">"YearsSongsAssociation"</tt><tt class="py-op">,</tt> <tt class="py-name">back_populates</tt><tt class="py-op">=</tt><tt class="py-string">"song"</tt><tt class="py-op">)</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">    <tt class="py-comment"># A many to one relationship between Songs and Artist.</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">    <tt id="link-57" class="py-name" targets="Variable app.models.Song.artist=app.models.Song-class.html#artist"><a title="app.models.Song.artist" class="py-name" href="#" onclick="return doclink('link-57', 'artist', 'link-57');">artist</a></tt> <tt class="py-op">=</tt> <tt class="py-name">relationship</tt><tt class="py-op">(</tt><tt class="py-string">"Artist"</tt><tt class="py-op">,</tt> <tt class="py-name">back_populates</tt><tt class="py-op">=</tt><tt class="py-string">"charted_songs"</tt><tt class="py-op">)</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"> </tt>
+<a name="Song.dictify"></a><div id="Song.dictify-def"><a name="L179"></a><tt class="py-lineno">179</tt> <a class="py-toggle" href="#" id="Song.dictify-toggle" onclick="return toggle('Song.dictify');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="app.models.Song-class.html#dictify">dictify</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Song.dictify-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Song.dictify-expanded"><a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">        <tt class="py-name">song_dict</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">        <tt class="py-name">song_dict</tt><tt class="py-op">[</tt><tt class="py-string">'song_id'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-58" class="py-name"><a title="app.models.Song.song_id
+app.models.YearsSongsAssociation.song_id" class="py-name" href="#" onclick="return doclink('link-58', 'song_id', 'link-8');">song_id</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">        <tt class="py-name">song_dict</tt><tt class="py-op">[</tt><tt class="py-string">'song_name'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name"><a title="app.models.Song.song_name" class="py-name" href="#" onclick="return doclink('link-59', 'song_name', 'link-27');">song_name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">        <tt class="py-name">song_dict</tt><tt class="py-op">[</tt><tt class="py-string">'artist_name'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-60" class="py-name"><a title="app.models.Song.artist_name" class="py-name" href="#" onclick="return doclink('link-60', 'artist_name', 'link-51');">artist_name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">        <tt class="py-name">song_dict</tt><tt class="py-op">[</tt><tt class="py-string">'artist_id'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-61" class="py-name"><a title="app.models.Artist.artist_id
+app.models.Song.artist_id" class="py-name" href="#" onclick="return doclink('link-61', 'artist_id', 'link-13');">artist_id</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">        <tt class="py-name">song_dict</tt><tt class="py-op">[</tt><tt class="py-string">'album_name'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name"><a title="app.models.Song.album_name" class="py-name" href="#" onclick="return doclink('link-62', 'album_name', 'link-53');">album_name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">        <tt class="py-name">song_dict</tt><tt class="py-op">[</tt><tt class="py-string">'explicit'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-63" class="py-name"><a title="app.models.Song.explicit" class="py-name" href="#" onclick="return doclink('link-63', 'explicit', 'link-54');">explicit</a></tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">        <tt class="py-name">song_dict</tt><tt class="py-op">[</tt><tt class="py-string">'popularity'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-64" class="py-name"><a title="app.models.Artist.popularity
+app.models.Song.popularity" class="py-name" href="#" onclick="return doclink('link-64', 'popularity', 'link-17');">popularity</a></tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">        <tt class="py-name">song_dict</tt><tt class="py-op">[</tt><tt class="py-string">'years_charted'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">assoc</tt><tt class="py-op">.</tt><tt id="link-65" class="py-name"><a title="app.models.YearsSongsAssociation.year_num" class="py-name" href="#" onclick="return doclink('link-65', 'year_num', 'link-7');">year_num</a></tt> <tt class="py-keyword">for</tt> <tt class="py-name">assoc</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">                                      <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-66" class="py-name"><a title="app.models.Song.years_charted" class="py-name" href="#" onclick="return doclink('link-66', 'years_charted', 'link-56');">years_charted</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">song_dict</tt> </tt>
+</div></div><a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"> </tt>
+<a name="Genre"></a><div id="Genre-def"><a name="L193"></a><tt class="py-lineno">193</tt> <a class="py-toggle" href="#" id="Genre-toggle" onclick="return toggle('Genre');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="app.models.Genre-class.html">Genre</a><tt class="py-op">(</tt><tt class="py-base-class">BASE</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Genre-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Genre-expanded"><a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"><tt class="py-docstring">    Database model of table 'Genre' which has:</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"><tt class="py-docstring">        name: genre's name</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"><tt class="py-docstring">        description: genre's description</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"><tt class="py-docstring">        years_on_top: all of the years in which this genre was the top genre</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"><tt class="py-docstring">        artists: all of the artists who have been associated with this genre</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"><tt class="py-docstring">        related_genres: all of the genres that have been associated with this genre</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">    <tt id="link-67" class="py-name"><a title="app.models.Artist.__tablename__
+app.models.Genre.__tablename__
+app.models.Song.__tablename__
+app.models.Year.__tablename__
+app.models.YearsSongsAssociation.__tablename__" class="py-name" href="#" onclick="return doclink('link-67', '__tablename__', 'link-6');">__tablename__</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'Genre'</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">    <tt id="link-68" class="py-name"><a title="app.models.Artist.name
+app.models.Genre.name" class="py-name" href="#" onclick="return doclink('link-68', 'name', 'link-14');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">100</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">primary_key</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">    <tt id="link-69" class="py-name" targets="Variable app.models.Genre.description=app.models.Genre-class.html#description"><a title="app.models.Genre.description" class="py-name" href="#" onclick="return doclink('link-69', 'description', 'link-69');">description</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Column</tt><tt class="py-op">(</tt><tt class="py-name">String</tt><tt class="py-op">(</tt><tt class="py-number">1500</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line"> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">    <tt class="py-comment"># One to many relationship between Genre and Years.</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">    <tt id="link-70" class="py-name" targets="Variable app.models.Genre.years_on_top=app.models.Genre-class.html#years_on_top"><a title="app.models.Genre.years_on_top" class="py-name" href="#" onclick="return doclink('link-70', 'years_on_top', 'link-70');">years_on_top</a></tt> <tt class="py-op">=</tt> <tt class="py-name">relationship</tt><tt class="py-op">(</tt><tt class="py-string">"Year"</tt><tt class="py-op">,</tt> <tt class="py-name">back_populates</tt><tt class="py-op">=</tt><tt class="py-string">"top_genre"</tt><tt class="py-op">)</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line"> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">    <tt class="py-comment"># Many to many relationship between Artists and Genres.</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">    <tt id="link-71" class="py-name" targets="Variable app.models.Genre.artists=app.models.Genre-class.html#artists"><a title="app.models.Genre.artists" class="py-name" href="#" onclick="return doclink('link-71', 'artists', 'link-71');">artists</a></tt> <tt class="py-op">=</tt> <tt class="py-name">relationship</tt><tt class="py-op">(</tt><tt class="py-string">'Artist'</tt><tt class="py-op">,</tt> <tt class="py-name">secondary</tt><tt class="py-op">=</tt><tt id="link-72" class="py-name"><a title="app.models.ARTISTS_GENRES_ASSOCIATION" class="py-name" href="#" onclick="return doclink('link-72', 'ARTISTS_GENRES_ASSOCIATION', 'link-2');">ARTISTS_GENRES_ASSOCIATION</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">                           <tt class="py-name">back_populates</tt><tt class="py-op">=</tt><tt class="py-string">"genres"</tt><tt class="py-op">)</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line"> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">    <tt class="py-comment"># Many to many relationship between this Genre and other Genres.</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">    <tt id="link-73" class="py-name" targets="Variable app.models.Genre.related_genres=app.models.Genre-class.html#related_genres"><a title="app.models.Genre.related_genres" class="py-name" href="#" onclick="return doclink('link-73', 'related_genres', 'link-73');">related_genres</a></tt> <tt class="py-op">=</tt> <tt class="py-name">relationship</tt><tt class="py-op">(</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">        <tt class="py-string">'Genre'</tt><tt class="py-op">,</tt> <tt class="py-name">secondary</tt><tt class="py-op">=</tt><tt id="link-74" class="py-name"><a title="app.models.RELATED_GENRES_ASSOCIATION" class="py-name" href="#" onclick="return doclink('link-74', 'RELATED_GENRES_ASSOCIATION', 'link-4');">RELATED_GENRES_ASSOCIATION</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">        <tt class="py-name">back_populates</tt><tt class="py-op">=</tt><tt class="py-string">"related_genres"</tt><tt class="py-op">,</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">        <tt class="py-name">primaryjoin</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt id="link-75" class="py-name"><a title="app.models.RELATED_GENRES_ASSOCIATION" class="py-name" href="#" onclick="return doclink('link-75', 'RELATED_GENRES_ASSOCIATION', 'link-4');">RELATED_GENRES_ASSOCIATION</a></tt><tt class="py-op">.</tt><tt class="py-name">c</tt><tt class="py-op">.</tt><tt class="py-name">genre1</tt> <tt class="py-op">==</tt> <tt id="link-76" class="py-name"><a title="app.models.Artist.name
+app.models.Genre.name" class="py-name" href="#" onclick="return doclink('link-76', 'name', 'link-14');">name</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">        <tt class="py-name">secondaryjoin</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt id="link-77" class="py-name"><a title="app.models.RELATED_GENRES_ASSOCIATION" class="py-name" href="#" onclick="return doclink('link-77', 'RELATED_GENRES_ASSOCIATION', 'link-4');">RELATED_GENRES_ASSOCIATION</a></tt><tt class="py-op">.</tt><tt class="py-name">c</tt><tt class="py-op">.</tt><tt class="py-name">genre2</tt> <tt class="py-op">==</tt> <tt id="link-78" class="py-name"><a title="app.models.Artist.name
+app.models.Genre.name" class="py-name" href="#" onclick="return doclink('link-78', 'name', 'link-14');">name</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line"> </tt>
+<a name="Genre.dictify"></a><div id="Genre.dictify-def"><a name="L223"></a><tt class="py-lineno">223</tt> <a class="py-toggle" href="#" id="Genre.dictify-toggle" onclick="return toggle('Genre.dictify');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="app.models.Genre-class.html#dictify">dictify</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Genre.dictify-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Genre.dictify-expanded"><a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">        <tt class="py-name">genre_dict</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">        <tt class="py-name">genre_dict</tt><tt class="py-op">[</tt><tt class="py-string">'name'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-79" class="py-name"><a title="app.models.Artist.name
+app.models.Genre.name" class="py-name" href="#" onclick="return doclink('link-79', 'name', 'link-14');">name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">        <tt class="py-name">genre_dict</tt><tt class="py-op">[</tt><tt class="py-string">'description'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-80" class="py-name"><a title="app.models.Genre.description" class="py-name" href="#" onclick="return doclink('link-80', 'description', 'link-69');">description</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">        <tt class="py-name">genre_dict</tt><tt class="py-op">[</tt><tt class="py-string">'years_on_top'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-81" class="py-name"><a title="app.models.Year.year
+app.models.YearsSongsAssociation.year" class="py-name" href="#" onclick="return doclink('link-81', 'year', 'link-10');">year</a></tt><tt class="py-op">.</tt><tt id="link-82" class="py-name"><a title="app.models.Year.year
+app.models.YearsSongsAssociation.year" class="py-name" href="#" onclick="return doclink('link-82', 'year', 'link-10');">year</a></tt> <tt class="py-keyword">for</tt> <tt id="link-83" class="py-name"><a title="app.models.Year.year
+app.models.YearsSongsAssociation.year" class="py-name" href="#" onclick="return doclink('link-83', 'year', 'link-10');">year</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-84" class="py-name"><a title="app.models.Genre.years_on_top" class="py-name" href="#" onclick="return doclink('link-84', 'years_on_top', 'link-70');">years_on_top</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">        <tt class="py-name">genre_dict</tt><tt class="py-op">[</tt><tt class="py-string">'artists'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt id="link-85" class="py-name"><a title="app.models.Song.artist" class="py-name" href="#" onclick="return doclink('link-85', 'artist', 'link-57');">artist</a></tt><tt class="py-op">.</tt><tt id="link-86" class="py-name"><a title="app.models.Artist.name
+app.models.Genre.name" class="py-name" href="#" onclick="return doclink('link-86', 'name', 'link-14');">name</a></tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt id="link-87" class="py-name"><a title="app.models.Song.artist" class="py-name" href="#" onclick="return doclink('link-87', 'artist', 'link-57');">artist</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-88" class="py-name"><a title="app.models.Genre.artists" class="py-name" href="#" onclick="return doclink('link-88', 'artists', 'link-71');">artists</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">        <tt class="py-name">genre_dict</tt><tt class="py-op">[</tt><tt class="py-string">'related_genres'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">            <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">genre</tt><tt class="py-op">.</tt><tt id="link-89" class="py-name"><a title="app.models.Artist.name
+app.models.Genre.name" class="py-name" href="#" onclick="return doclink('link-89', 'name', 'link-14');">name</a></tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">genre</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-90" class="py-name"><a title="app.models.Genre.related_genres" class="py-name" href="#" onclick="return doclink('link-90', 'related_genres', 'link-73');">related_genres</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">genre_dict</tt> </tt>
+</div></div><a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Jul 12 18:12:29 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

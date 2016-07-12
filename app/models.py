@@ -120,7 +120,7 @@ class Year(BASE):
     top_album_id = Column(String(150))
     top_genre_name = Column(String(100), ForeignKey('Genre.name'))
 
-    # Unidirectional one to one relationship between year and
+    # One to one relationship between year and
     # top_album_artist's name
     top_album_artist_id = Column(String(100), ForeignKey('Artist.artist_id'))
 
