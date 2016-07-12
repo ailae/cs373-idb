@@ -604,7 +604,7 @@
 99	Misery	Soul Asylum
 100	Can't Stop Lovin' You	Van Halen
 1996
-1	Macarena - Bayside Boys Remix	Los del Río
+1	Macarena - Bayside Boys Remix	Los Del Rio
 2	One Sweet Day	Mariah Carey and Boyz II Men
 3	Because You Loved Me	Celine Dion
 4	Nobody Knows	The Tony Rich Project
@@ -1816,7 +1816,7 @@
 99	That's That	Snoop Dogg featuring R. Kelly
 100	Same Girl	R. Kelly featuring Usher
 2008
-1	Low	(feat T-Pain) Flo Rida
+1	Low (feat T-Pain)	Flo Rida
 2	Bleeding Love	Leona Lewis
 3	No One	Alicia Keys
 4	Lollipop	Lil Wayne featuring Static Major
