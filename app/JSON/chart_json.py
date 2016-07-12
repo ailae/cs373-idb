@@ -33,6 +33,7 @@ with open('all_billboard_charts.txt', 'r') as f:
                 song['artist_id'] = ""    
             year_dict['song_list'] += [song]
 
+years += [copy.deepcopy(year_dict)]
 f = open('all_songs_association.txt', 'w')
 f.write(str(years))
 f.close()
