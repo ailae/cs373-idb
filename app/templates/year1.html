@@ -62,9 +62,13 @@
       <!-- Three columns of text below the carousel -->
         <div class="col-lg-6">
           <img class="img-circle" src="static/markronson.jpg" alt="Generic placeholder image" width="140" height="140">
-          <h3>Top Song</h3>
-          <h2>Top Song Artist</h2>
-          <iframe src="https://embed.spotify.com/?uri=spotify:track:32OlwWuMpZ6b0aN2RZOeMS" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+          {% for a in year.top_songs %}
+          {% if a.rank == 1 %}
+          <h3><a href="/songs/{{ a.song.song_id }}">{{ a.song.song_name }}</a></h3>
+          <h2><a href="/artists/{{ a.song.artist_id }}">{{ a.song.artist_name }}</a></h2>
+          <iframe src="https://embed.spotify.com/?uri=spotify:track:{{ a.song.song_id }}" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+          {% endif %}
+          {% endfor %}
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-6">
           {% if artist %}
@@ -79,6 +83,25 @@
           <iframe src="https://embed.spotify.com/?uri=spotify:album:{{ year.top_album_id }}" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
           {% endif %}
         </div><!-- /.col-lg-4 -->
+          <h3>Top Songs</h3>
+          <div class="table-responsive">
+          <table id="year_songs" class="display table" width="100%">
+          <thead>
+            <tr>
+            <th>Song</th>
+            <th>Rank</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for a in year.top_songs %}
+            <tr>
+            <td><a href="/genres/{{ a.song_id }}">{{ a.song.song_name}}</a></td>
+            <td>{{ a.rank }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+        </div>
     </div>  
   </div>
 
@@ -102,5 +125,31 @@
     <script src="../../assets/js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" 
+    href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
+    <link rel="stylesheet" 
+    href="http://cdn.datatables.net/rowreorder/1.1.2/css/rowReorder.dataTables.min.css"></style>
+    <link rel="stylesheet" 
+    href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css"></style>
+    <script type="text/javascript" 
+    src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" 
+    src="https://cdn.datatables.net/rowreorder/1.1.2/js/dataTables.rowReorder.min.js"></script>
+    <script type="text/javascript" 
+    src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" 
+    src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <script>
+    $(document).ready(function(){
+        $('#year_songs').dataTable();
+    });
+    </script> 
+
+
+
+
   </body>
 </html>

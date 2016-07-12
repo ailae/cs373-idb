@@ -16,6 +16,8 @@ def artists_and_songs(session):
 	artist_genres = ast.literal_eval(json5)
 	json6 = open('JSON/related_genres.txt', 'r').read()
 	related_genres = ast.literal_eval(json6)
+	json7 = open('JSON/all_songs_association.txt', 'r').read()
+	year_song = ast.literal_eval(json7)
 
 	try:
 		if not session.query(Artist).first():
@@ -95,21 +97,22 @@ def artists_and_songs(session):
 								genre.related_genres.append(result)
 
 		# Year song association
-		# for ys in year_song:
-		# 	# Get the year
-		# 	year = session.query(Year).filter_by(year = ys['year']).first()
-		# 	if not year.top_songs:
-		# 		# Loop through the list of songs
-		# 		for s in ys['songs']:
-		# 			song = s.query(Songs).filter_by(song_id = s['song_id']).first()
-		# 			# Do we have this song in the DB?
-		# 			if song:
-		# 				assoc = YearsSongsAssociation(year_num = year.year, 
-		# 					song_id = s['song_id'], rank= s['rank'])
-		# 				assoc.song = song
-		# 				assoc.year = year
-		# 				year.top_songs.append(assoc)
-		# 				song.years_charted.append(assoc) # Do we need this?
+		for ys in year_song:
+			# Get the year
+			year = session.query(Year).filter_by(year = ys['year']).first()
+			if not year.top_songs:
+				# Loop through the list of songs
+				for s in ys['song_list']:
+					if s['song_id']:
+						song = session.query(Song).filter_by(song_id = s['song_id']).first()
+						# Do we have this song in the DB?
+						if song:
+							assoc = YearsSongsAssociation(year_num = year.year, 
+								song_id = s['song_id'], rank= s['rank'])
+							assoc.song = song
+							assoc.year = year
+							year.top_songs.append(assoc)
+							#song.years_charted.append(assoc) # Do we need this?
 
 	except:
 		session.rollback()
