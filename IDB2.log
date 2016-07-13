@@ -1,3 +1,21 @@
+commit 24583d769849436cf5c617b9a98916f0ecd95c25
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Tue Jul 12 20:35:08 2016 -0500
+
+    Code should now match the server/website code
+
+commit c2e223ca107384ff8172f602df81c860ba236e55
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Tue Jul 12 18:45:50 2016 -0500
+
+    Documentation is now provided by epydoc, disabled pylint warning
+
+commit 4203c217335d8396614a370e5a7f18ee7348cbe8
+Author: Brady Miller <bratxdy@utexas.edu>
+Date:   Tue Jul 12 18:21:08 2016 -0500
+
+    Update apiary.apib
+
 commit 593f6a229f337f312f00733f46364e1421593c95
 Author: Samarth Dhruva <samarthdhruva@utexas.edu>
 Date:   Tue Jul 12 17:22:22 2016 -0500

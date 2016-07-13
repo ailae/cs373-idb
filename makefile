@@ -51,6 +51,8 @@ clean:
 	rm -f  *.pyc
 	rm -f  models.log
 	rm -rf __pycache__
+	rm -f TestModels.tmp
+	rm -f IDB2.log
 
 config:
 	git config -l
