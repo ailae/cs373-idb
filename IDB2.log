@@ -1,3 +1,28 @@
+commit 7af4f1c5ebb8db44df5e4445f769ae1cb225fa87
+Merge: 11ae559 0dc1156
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Tue Jul 12 20:59:59 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 11ae5599b94cf2e74551fd6fbe593bc4d335cf5d
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Tue Jul 12 20:59:45 2016 -0500
+
+    Added dictify to UML diagram
+
+commit 0dc11561288cdb18d6d44c9d603dd7199c88cfc3
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Tue Jul 12 20:59:34 2016 -0500
+
+    Dictify methods now fixed to reflect actual server
+
+commit 3b60810ac7396fe8a9e8880569d85ab7915594bf
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Tue Jul 12 20:53:24 2016 -0500
+
+    Roughly the final commit
+
 commit 24583d769849436cf5c617b9a98916f0ecd95c25
 Author: Aila Enos <ailaenos@utexas.edu>
 Date:   Tue Jul 12 20:35:08 2016 -0500
