@@ -63,7 +63,7 @@
         <div class="col-md-8">
           <h2 class="featurette-heading">{{ song.song_name }}
             <span class="text-muted"><br><a href="/artists/{{ song.artist_id}}">{{ song.artist_name }}</a></span></h2>
-          <h4>Popularity: {{ song.popularity }}<br>{{ song.explicit }}</h4>
+          <h4>Popularity: {{ song.popularity }}<br>Explicit: {{ song.explicit }}</h4>
             <iframe src="https://embed.spotify.com/?uri=spotify:track:{{ song.song_id }}" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
         </div>
         <div class="col-md-1">

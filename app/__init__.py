@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, abort
 from models import *
 from sqlalchemy.orm import sessionmaker
 import ast
+import subprocess
 
 def artists_and_songs(session):
 	json = open('JSON/songs.txt', 'r').read()
@@ -236,6 +237,14 @@ def get_year_by_name(year) :
 		abort(400)
 	
 	return jsonify({'result' : year_obj.dictify(), 'success' : True})
+
+@app.route('/api/run_tests', methods=['GET'])
+def run_tests():
+	try:
+		result = subprocess.check_output("python3 tests.py", stderr=subprocess.STDOUT, shell=True)
+		return result
+	except Exception as e:
+		return str(e)
 
 if __name__ == "__main__":
 	app.run()

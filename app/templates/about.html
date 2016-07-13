@@ -136,6 +136,12 @@
           <h3>Tools:</h3>
           <p><b>What did we use?</b> We used Flask to deploy the webpages we wrote, Bootstrap to stylize the webpages, SQLAlchemy to build the database, and Digital Ocean to host the website.</p>
         </div>  
+        <div class="row">
+        <div class="col-lg-12">
+        <button id="test-button" type="button" class="btn btn-lg btn-default">Run the tests</button>
+        </div>
+        </div>
+      </div>
 
     </div>  
   </div>
@@ -149,5 +155,12 @@
     <script src="../../assets/js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <script>
+        document.getElementById("test-button").onclick = function () {
+          window.open('/api/run_tests', '_self', false)
+         };
+     </script>
+
   </body>
 </html>
