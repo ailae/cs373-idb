@@ -3,6 +3,7 @@ from sqlalchemy import create_engine, Table, Column, ForeignKey, Integer, \
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.engine.url import URL
+from sqlalchemy.types import UserDefinedType
 
 import settings
 
@@ -42,6 +43,23 @@ RELATED_GENRES_ASSOCIATION = Table(
 )
 
 
+class TsVector(UserDefinedType):
+    """
+    This class represents a TsVector, and it will be
+    the data type of the column in each model that will
+    be dedicated to search.
+    This design is based on Noufal Ibrahim's guide, found
+    here: http://nibrahim.net.in/2013/11/29/sqlalchemy_and_full_text_searching_in_postgresql.html
+    """
+    name = "TSVECTOR"
+
+    def get_col_spec(self):
+        """
+        This method defines what the name of the TsVector will
+        be in DDL. We are simply returning "TSVECTOR."
+        """
+        return self.name
+
 class YearsSongsAssociation(BASE):
 
     """
@@ -74,6 +92,9 @@ class Artist(BASE):
 
     __tablename__ = 'Artist'
 
+    # Create an index for the tsvector column
+    __table_args__ = (Index('artist_tsvector_idx', 'artist_tsvector', postgresql_using='gin'),)
+
     artist_id = Column(String(150), primary_key=True)
     name = Column(String(150))
     num_followers = Column(Integer)
@@ -87,6 +108,9 @@ class Artist(BASE):
     genres = relationship('Genre', secondary=ARTISTS_GENRES_ASSOCIATION,
                           back_populates="artists")
 
+    # TsVector column used for searching.
+    tsvector_col = Column(TsVector)
+
     def dictify(self):
         artist_dict = dict()
         artist_dict['artist_id'] = (self.artist_id)
@@ -99,6 +123,15 @@ class Artist(BASE):
         artist_dict['genres'] = [(genre.name) for genre in self.genres]
         return artist_dict
 
+# Create a trigger to check for updates to Artist and update the TsVector
+# accordingly.
+artist_vector_trigger = DDL("""
+    CREATE TRIGGER artist_tsvector_update BEFORE INSERT OR UPDATE
+    ON Artist
+    FOR EACH ROW EXECUTE PROCEDURE
+    tsvector_update_trigger(tsvector_col, 'pg_catalog.english', 'name')
+    """)
+event.listen(Artist.__table__, 'after_create', artist_vector_trigger.execute_if(dialect='postgresql'))
 
 class Year(BASE):
 
