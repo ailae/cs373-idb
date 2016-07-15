@@ -92,9 +92,6 @@ class Artist(BASE):
 
     __tablename__ = 'Artist'
 
-    # Create an index for the tsvector column
-    __table_args__ = (Index('artist_tsvector_idx', 'tsvector_col', postgresql_using='gin'),)
-
     artist_id = Column(String(150), primary_key=True)
     name = Column(String(150))
     num_followers = Column(Integer)
@@ -110,6 +107,9 @@ class Artist(BASE):
 
     # TsVector column used for searching.
     tsvector_col = Column(TsVector)
+    
+    # Create an index for the tsvector column
+    __table_args__ = (Index('artist_tsvector_idx', 'tsvector_col', postgresql_using='gin'),)
 
     def dictify(self):
         artist_dict = dict()
