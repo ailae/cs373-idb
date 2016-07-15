@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine, Table, Column, ForeignKey, Integer, \
-    String, Boolean
+    String, Boolean, Index, DDL, event
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.engine.url import URL
@@ -93,7 +93,7 @@ class Artist(BASE):
     __tablename__ = 'Artist'
 
     # Create an index for the tsvector column
-    __table_args__ = (Index('artist_tsvector_idx', 'artist_tsvector', postgresql_using='gin'),)
+    __table_args__ = (Index('artist_tsvector_idx', 'tsvector_col', postgresql_using='gin'),)
 
     artist_id = Column(String(150), primary_key=True)
     name = Column(String(150))
