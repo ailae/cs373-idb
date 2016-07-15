@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify, abort
 from models import *
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import and_, or_
 import ast
 import subprocess
 
@@ -169,6 +170,16 @@ def year(year):
 def genre(name):
 	g = session.query(Genre).filter_by(name = name).first()
 	return render_template('genre1.html', genre=g)
+@app.route('/search/<term>')
+def search(term):
+	# Parse it
+	term = term.lower()
+	terms = term.split()
+	# Query
+	queryAnd = session.query(Artist).filter(Artist.tsvector_col.match(terms[0] + " & " + terms[1])).all()
+	queryOr = session.query(Artist).filter(Artist.tsvector_col.match(terms[0] + " | " + terms[1])).all()
+	print("This did something: " + term)
+	return render_template('search.html', resAnd = queryAnd, resOr = queryOr)
 
 @app.route('/api/songs', methods=['GET'])
 def get_songs() :

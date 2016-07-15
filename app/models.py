@@ -126,9 +126,7 @@ class Artist(BASE):
 # Create a trigger to check for updates to Artist and update the TsVector
 # accordingly.
 artist_vector_trigger = DDL("""
-    CREATE TRIGGER artist_tsvector_update BEFORE INSERT OR UPDATE
-    ON Artist
-    FOR EACH ROW EXECUTE PROCEDURE
+    CREATE TRIGGER artist_tsvector_update BEFORE INSERT OR UPDATE ON "Artist" FOR EACH ROW EXECUTE PROCEDURE
     tsvector_update_trigger(tsvector_col, 'pg_catalog.english', 'name')
     """)
 event.listen(Artist.__table__, 'after_create', artist_vector_trigger.execute_if(dialect='postgresql'))
