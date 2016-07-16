@@ -176,11 +176,23 @@ def search(term):
 	term = term.lower()
 	terms = term.split()
 	# Query
-	queryAnd = session.query(Artist).filter(Artist.tsvector_col.match(terms[0] + " & " + terms[1])).all()
-	queryOr = session.query(Artist).filter(Artist.tsvector_col.match(terms[0] + " | " + terms[1])).all()
+	queryAndArtist = session.query(Artist).filter(Artist.tsvector_col.match(terms[0] + " & " + terms[1])).all()
+	queryOrArtist = session.query(Artist).filter(Artist.tsvector_col.match(terms[0] + " | " + terms[1])).all()
+	queryAndSong = session.query(Song).filter(Song.tsvector_col.match(terms[0] + " & " + terms[1])).all()
+	queryOrSong = session.query(Song).filter(Song.tsvector_col.match(terms[0] + " | " + terms[1])).all()
+	queryAndYear = session.query(Year).filter(Year.tsvector_col.match(terms[0] + " & " + terms[1])).all()
+	queryOrYear = session.query(Year).filter(Year.tsvector_col.match(terms[0] + " | " + terms[1])).all()
+	queryAndGenre = session.query(Genre).filter(Genre.tsvector_col.match(terms[0] + " & " + terms[1])).all()
+	queryOrGenre = session.query(Genre).filter(Genre.tsvector_col.match(terms[0] + " | " + terms[1])).all()
 	print("This did something: " + term)
-	return render_template('search.html', resAnd = queryAnd, resOr = queryOr)
+	return render_template('search.html', andArtist = queryAndArtist, orArtist = queryOrArtist,
+		andSong = queryAndSong, orSong = queryOrSong,
+		andYear = queryAndYear, orYear = queryOrYear,
+		andGenre = queryAndGenre, orGenre = queryOrGenre)
 
+
+
+# API CALLS #
 @app.route('/api/songs', methods=['GET'])
 def get_songs() :
 	songs = session.query(Song).all()
