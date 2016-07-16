@@ -16,12 +16,12 @@ body {
 h1, h2, h3, h4, h5, h6 {
   color: #E91E63;
   font-weight: bold;
-  font-family: Trebuchet MS, Helvetica, Verdana;
+  font-family: "Trebuchet MS", Helvetica, Verdana;
 }
 
 b {
   color: #E91E63;
-  font-family: Trebuchet MS, Helvetica, Verdana;
+  font-family: "Trebuchet MS", Helvetica, Verdana;
 }
 
 /* CUSTOMIZE THE CAROUSEL
