@@ -10,7 +10,7 @@
 }
 
 .row {
-  margin-bottom: 20px;
+/*  margin-bottom: 20px;*/
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -22,7 +22,6 @@
   padding-top: 15px;
   padding-bottom: 15px;
   text-align: center;
-  left: 9%;
   background-color: #eee;
   background-color: rgba(86,61,124,.15);
   border: 1px solid #ddd;

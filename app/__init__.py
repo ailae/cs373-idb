@@ -4,6 +4,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import and_, or_
 import ast
 import subprocess
+import operator
+from functools import reduce
 
 def artists_and_songs(session):
 	json = open('JSON/songs.txt', 'r').read()
@@ -63,11 +65,11 @@ def artists_and_songs(session):
 		if not session.query(Year).first():
 			for y in years:
 				if not session.query(Artist).filter_by(artist_id=y['top_album_artist_id']).first():
-					year = Year(year=y['year'], top_album_name=y['top_album_name'], 
+					year = Year(year=str(y['year']), top_album_name=y['top_album_name'], 
 						top_album_id=y['top_album_id'],
 						top_genre_name=y['top_genre_name'])
 				else:
-					year = Year(year=y['year'], top_album_name=y['top_album_name'], 
+					year = Year(year=str(y['year']), top_album_name=y['top_album_name'], 
 						top_album_id=y['top_album_id'],
 						top_genre_name=y['top_genre_name'], 
 						top_album_artist_id=y['top_album_artist_id'])
@@ -103,7 +105,7 @@ def artists_and_songs(session):
 		# Year song association
 		for ys in year_song:
 			# Get the year
-			year = session.query(Year).filter_by(year = ys['year']).first()
+			year = session.query(Year).filter_by(year = str(ys['year']).strip()).first()
 			if not year.top_songs:
 				# Loop through the list of songs
 				for s in ys['song_list']:
@@ -175,15 +177,16 @@ def search(term):
 	# Parse it
 	term = term.lower()
 	terms = term.split()
+
 	# Query
-	queryAndArtist = session.query(Artist).filter(Artist.tsvector_col.match(terms[0] + " & " + terms[1])).all()
-	queryOrArtist = session.query(Artist).filter(Artist.tsvector_col.match(terms[0] + " | " + terms[1])).all()
-	queryAndSong = session.query(Song).filter(Song.tsvector_col.match(terms[0] + " & " + terms[1])).all()
-	queryOrSong = session.query(Song).filter(Song.tsvector_col.match(terms[0] + " | " + terms[1])).all()
-	queryAndYear = session.query(Year).filter(Year.tsvector_col.match(terms[0] + " & " + terms[1])).all()
-	queryOrYear = session.query(Year).filter(Year.tsvector_col.match(terms[0] + " | " + terms[1])).all()
-	queryAndGenre = session.query(Genre).filter(Genre.tsvector_col.match(terms[0] + " & " + terms[1])).all()
-	queryOrGenre = session.query(Genre).filter(Genre.tsvector_col.match(terms[0] + " | " + terms[1])).all()
+	queryAndArtist = session.query(Artist).filter(and_(Artist.tsvector_col.match(s) for s in terms)).all()
+	queryOrArtist = session.query(Artist).filter(or_(Artist.tsvector_col.match(s) for s in terms)).all()
+	queryAndSong = session.query(Song).filter(and_(Song.tsvector_col.match(s) for s in terms)).all()
+	queryOrSong = session.query(Song).filter(or_(Song.tsvector_col.match(s) for s in terms)).all()
+	queryAndYear = session.query(Year).filter(and_(Year.tsvector_col.match(s) for s in terms)).all()
+	queryOrYear = session.query(Year).filter(or_(Year.tsvector_col.match(s) for s in terms)).all()
+	queryAndGenre = session.query(Genre).filter(and_(Genre.tsvector_col.match(s) for s in terms)).all()
+	queryOrGenre = session.query(Genre).filter(or_(Genre.tsvector_col.match(s) for s in terms)).all()
 	print("This did something: " + term)
 	return render_template('search.html', andArtist = queryAndArtist, orArtist = queryOrArtist,
 		andSong = queryAndSong, orSong = queryOrSong,
