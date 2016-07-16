@@ -1,9 +1,7 @@
 FILES :=                       \
     IDB3.log                   \
     app/models.py              \
-    app/tests.py               \
-    html            
-
+    app/tests.py
 ifeq ($(CI), true)
     COVERAGE := coverage
     PYLINT   := pylint
@@ -27,9 +25,6 @@ TestModels.tmp:
 pylint_models_tests: .pylintrc 
 	-$(PYLINT) app/models.py
 	-$(PYLINT) app/tests.py
-
-html_doc:
-	epydoc --html app/models.py
 
 check:
 	@not_found=0;                                 \
@@ -72,7 +67,7 @@ status:
 	git remote -v
 	git status
 
-test: models.log format pylint_models_tests html_doc TestModels.tmp check
+test: models.log format pylint_models_tests TestModels.tmp check
 
 
 
