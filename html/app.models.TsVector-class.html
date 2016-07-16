@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>app.models.Year</title>
+  <title>app.models.TsVector</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -39,7 +39,7 @@
       <span class="breadcrumbs">
         Package&nbsp;app ::
         <a href="app.models-module.html">Module&nbsp;models</a> ::
-        Class&nbsp;Year
+        Class&nbsp;TsVector
       </span>
     </td>
     <td>
@@ -49,33 +49,25 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="app.models.Year-class.html"
+            >]&nbsp;|&nbsp;<a href="app.models.TsVector-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class Year</h1><p class="nomargin-top"><span class="codelink"><a href="app.models-pysrc.html#Year">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class TsVector</h1><p class="nomargin-top"><span class="codelink"><a href="app.models-pysrc.html#TsVector">source&nbsp;code</a></span></p>
 <pre class="base-tree">
-declarative_base() --+
-                     |
-                    <strong class="uidshort">Year</strong>
+sqlalchemy.types.UserDefinedType --+
+                                   |
+                                  <strong class="uidshort">TsVector</strong>
 </pre>
 
 <hr />
-<pre class="literalblock">
-
-Database model of table 'Year', which stores:
-    year: the year's number
-    top_album_name: the name of the top album
-    top_album_id: the Spotify id of the top album
-    top_genre_name: the name of the genre of the year's top album
-    top_album_artist_id: the id of the artist who made the top album
-    top_genre: the genre of the year's top album
-    top_songs: The top 100 songs of that year
-
-</pre>
+<p>This class represents a TsVector, and it will be the data type of the 
+  column in each model that will be dedicated to search. This design is 
+  based on Noufal Ibrahim's guide, found here: 
+  http://nibrahim.net.in/2013/11/29/sqlalchemy_and_full_text_searching_in_postgresql.html</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -100,9 +92,10 @@ Database model of table 'Year', which stores:
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="dictify"></a><span class="summary-sig-name">dictify</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td><span class="summary-sig"><a href="app.models.TsVector-class.html#get_col_spec" class="summary-sig-name">get_col_spec</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      This method defines what the name of the TsVector will be in DDL.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="app.models-pysrc.html#Year.dictify">source&nbsp;code</a></span>
+            <span class="codelink"><a href="app.models-pysrc.html#TsVector.get_col_spec">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -132,84 +125,21 @@ Database model of table 'Year', which stores:
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="__tablename__"></a><span class="summary-name">__tablename__</span> = <code title="'Year'">'Year'</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="year"></a><span class="summary-name">year</span> = <code title="Column(Integer, primary_key= True)">Column(Integer, primary_key= True)</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="top_album_name"></a><span class="summary-name">top_album_name</span> = <code title="Column(String(250))">Column(String(250))</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="top_album_id"></a><span class="summary-name">top_album_id</span> = <code title="Column(String(150))">Column(String(150))</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="top_genre_name"></a><span class="summary-name">top_genre_name</span> = <code title="Column(String(100), ForeignKey('Genre.name'))">Column(String(100), ForeignKey('Genre.name'))</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="app.models.Year-class.html#top_album_artist_id" class="summary-name">top_album_artist_id</a> = <code title="Column(String(100), ForeignKey('Artist.artist_id'))">Column(String(100), ForeignKey('Artist.a<code class="variable-ellipsis">...</code></code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="top_genre"></a><span class="summary-name">top_genre</span> = <code title="relationship(&quot;Genre&quot;, back_populates= &quot;years_on_top&quot;)">relationship(&quot;Genre&quot;, back_populates= &quot;years_on_top&quot;)</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="app.models.Year-class.html#top_songs" class="summary-name">top_songs</a> = <code title="relationship(&quot;YearsSongsAssociation&quot;, back_populates= &quot;year&quot;)">relationship(&quot;YearsSongsAssociation&quot;, back_populat<code class="variable-ellipsis">...</code></code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="tsvector_col"></a><span class="summary-name">tsvector_col</span> = <code title="Column(TsVector)">Column(TsVector)</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="app.models.Year-class.html#__table_args__" class="summary-name">__table_args__</a> = <code title="Index('year_tsvector_idx', 'tsvector_col', postgresql_using= 'gin'),">Index('year_tsvector_idx', 'tsvector_col', po<code class="variable-ellipsis">...</code></code>
+        <a name="name"></a><span class="summary-name">name</span> = <code title="&quot;TSVECTOR&quot;">&quot;TSVECTOR&quot;</code>
     </td>
   </tr>
 </table>
-<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
-<a name="section-ClassVariableDetails"></a>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr bgcolor="#70b0f0" class="table-header">
   <td colspan="2" class="table-header">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr valign="top">
-        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="left"><span class="table-header">Method Details</span></td>
         <td align="right" valign="top"
-         ><span class="options">[<a href="#section-ClassVariableDetails"
+         ><span class="options">[<a href="#section-MethodDetails"
          class="privatelink" onclick="toggle_private();"
          >hide private</a>]</span></td>
       </tr>
@@ -217,57 +147,23 @@ Database model of table 'Year', which stores:
   </td>
 </tr>
 </table>
-<a name="top_album_artist_id"></a>
+<a name="get_col_spec"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
-  <h3 class="epydoc">top_album_artist_id</h3>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_col_spec</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="app.models-pysrc.html#TsVector.get_col_spec">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
   
+  <p>This method defines what the name of the TsVector will be in DDL. We 
+  are simply returning &quot;TSVECTOR.&quot;</p>
   <dl class="fields">
-  </dl>
-  <dl class="fields">
-    <dt>Value:</dt>
-      <dd><table><tr><td><pre class="variable">
-Column(String(100), ForeignKey('Artist.artist_id'))
-</pre></td></tr></table>
-</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="top_songs"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <h3 class="epydoc">top_songs</h3>
-  
-  <dl class="fields">
-  </dl>
-  <dl class="fields">
-    <dt>Value:</dt>
-      <dd><table><tr><td><pre class="variable">
-relationship(&quot;YearsSongsAssociation&quot;, back_populates= &quot;year&quot;)
-</pre></td></tr></table>
-</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="__table_args__"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <h3 class="epydoc">__table_args__</h3>
-  
-  <dl class="fields">
-  </dl>
-  <dl class="fields">
-    <dt>Value:</dt>
-      <dd><table><tr><td><pre class="variable">
-Index('year_tsvector_idx', 'tsvector_col', postgresql_using= 'gin'),
-</pre></td></tr></table>
-</dd>
   </dl>
 </td></tr></table>
 </div>
