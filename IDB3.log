@@ -1,3 +1,9 @@
+commit 9d6fe236f7d8c1cf5102e645f75cd1c512b7de5e
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sat Jul 16 14:09:59 2016 -0500
+
+    Added tsvector columns to every model, and changed makefile to write IDB3.log (Fixes #36)
+
 commit c9fd0904caf63d99a4431aa732f835b6d1d3ce95
 Author: Aila Enos <ailaenos@utexas.edu>
 Date:   Fri Jul 15 19:01:01 2016 -0500
