@@ -29,7 +29,7 @@ pylint_models_tests: .pylintrc
 	-$(PYLINT) app/tests.py
 
 html_doc:
-	epydoc --html -v app/models.py
+	epydoc --html app/models.py
 
 check:
 	@not_found=0;                                 \
