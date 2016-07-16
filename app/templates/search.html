@@ -60,13 +60,47 @@
 <div class="table-positioning">
 <h3>SEARCH</h3>
       <!-- Three columns of text below the carousel -->
+    <h3>And results</h3>
 
-        {% for a in resAnd %}
+        {% for a in andArtist %}
         {{ a.name }}
         {% endfor %}
 
-        {% for o in resOr %}
+        {% for a in andSong %}
+        {{ a.song_name }}
+        {{ a.artist_name }}
+        {% endfor %}
+
+        {% for a in andYear %}
+        {{ a.year }}
+        {{ a.top_album_name }}
+        {{ a.top_genre_name }}
+        {% endfor %}
+
+        {% for a in andGenre %}
+        {{ a.name }}
+        {{ a.description }}
+        {% endfor %}
+
+    <h3>Or results</h3>
+        {% for o in orArtist %}
         {{ o.name }}
+        {% endfor %}
+
+        {% for o in orSong %}
+        {{ o.song_name }}
+        {{ o.artist_name }}
+        {% endfor %}
+
+        {% for a in orYear %}
+        {{ o.year }}
+        {{ o.top_album_name }}
+        {{ o.top_genre_name }}
+        {% endfor %}
+
+        {% for a in orGenre %}
+        {{ o.name }}
+        {{ o.description }}
         {% endfor %}
 
 
