@@ -29,6 +29,7 @@
     <!-- Custom styles for this template -->
 <!--     <link href="static/css/carousel.css" rel="stylesheet"> -->
     <link href="{{ url_for('static', filename='css/carousel.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/grid.css') }}" rel="stylesheet">
   </head>
 <!-- NAVBAR
 ================================================== -->
@@ -47,11 +48,11 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="/">HOME</a></li>
-                <li><a href="about">ABOUT</a></li>
-                <li><a href="years">YEARS</a></li>
-                <li class="active"><a href="songs">SONGS</a></li>
-                <li><a href="artists">ARTISTS</a></li>
-                <li><a href="genres">GENRES</a></li>
+                <li><a href="/about">ABOUT</a></li>
+                <li><a href="/years">YEARS</a></li>
+                <li><a href="/songs">SONGS</a></li>
+                <li><a href="/artists">ARTISTS</a></li>
+                <li><a href="/genres">GENRES</a></li>
               </ul>
             </div>
           </div>
@@ -62,46 +63,94 @@
       <!-- Three columns of text below the carousel -->
     <h3>And results</h3>
 
-        {% for a in andArtist %}
+    {% for a in andArtist %}
+    <div class='row'>
+        <div class='col-md-12'>
         {{ a.name }}
-        {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
 
-        {% for a in andSong %}
-        {{ a.song_name }}
-        {{ a.artist_name }}
-        {% endfor %}
+    {% for a in andSong %}
+    <div class='row'>
+        <div class='col-md-6'>
+            {{ a.song_name }}
+        </div>
+        <div class='col-md-6'>
+            {{ a.artist_name }}
+        </div>
+    </div>
+    {% endfor %}
 
-        {% for a in andYear %}
+    {% for a in andYear %}
+    <div class='row'>
+        <div class='col-md-4'>
         {{ a.year }}
+        </div>
+        <div class='col-md-4'>
         {{ a.top_album_name }}
+        </div>
+        <div class='col-md-4'>
         {{ a.top_genre_name }}
-        {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
 
-        {% for a in andGenre %}
+    {% for a in andGenre %}
+    <div class='row'>
+        <div class='col-md-6'>
         {{ a.name }}
+        </div>
+        <div class='col-md-6'>
         {{ a.description }}
-        {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
 
     <h3>Or results</h3>
-        {% for o in orArtist %}
+    {% for o in orArtist %}
+    <div class='row'>
+        <div class='col-md-12'>
         {{ o.name }}
-        {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
 
-        {% for o in orSong %}
+    {% for o in orSong %}
+    <div class='row'>
+        <div class='col-md-6'>
         {{ o.song_name }}
+        </div>
+        <div class='col-md-6'>
         {{ o.artist_name }}
-        {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
 
-        {% for a in orYear %}
+    {% for a in orYear %}
+    <div class='row'>
+        <div class='col-md-4'>
         {{ o.year }}
+        </div>
+        <div class='col-md-4'>
         {{ o.top_album_name }}
+        </div>  
+        <div class='col-md-4'>
         {{ o.top_genre_name }}
-        {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
 
-        {% for a in orGenre %}
+    {% for a in orGenre %}
+    <div class='row'>
+        <div class='col-md-6'>
         {{ o.name }}
+        </div>
+        <div class='col-md-6'>
         {{ o.description }}
-        {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
 
 
       <!-- FOOTER -->
