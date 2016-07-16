@@ -71,7 +71,7 @@ class YearsSongsAssociation(BASE):
     __tablename__ = 'yearssongsassociation'
 
     year_num = Column(
-        'year', Integer, ForeignKey('Year.year'), primary_key=True)
+        'year', String(4), ForeignKey('Year.year'), primary_key=True)
     song_id = Column(
         'song', String(150), ForeignKey('Song.song_id'), primary_key=True)
     rank = Column('rank', Integer)
@@ -150,7 +150,7 @@ class Year(BASE):
     """
     __tablename__ = 'Year'
 
-    year = Column(Integer, primary_key=True)
+    year = Column(String(4), primary_key=True)
     top_album_name = Column(String(250))
     top_album_id = Column(String(150))
     top_genre_name = Column(String(100), ForeignKey('Genre.name'))

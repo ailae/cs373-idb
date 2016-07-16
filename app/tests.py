@@ -203,7 +203,7 @@ class ModelUnitTests(unittest.TestCase):
     # The following tests check the Year model
 
     def test_year_1(self):
-        year = 2001
+        year = "2001"
         top_album_name = "Some Album"
         top_album_id = "1234"
         top_genre_name = "Top Genre Name"
@@ -232,7 +232,7 @@ class ModelUnitTests(unittest.TestCase):
         self.session.add(test_year)
         self.session.commit()
         self.assertTrue(test_year in self.session)
-        actual_year = self.session.query(Year).filter_by(year=2001).first()
+        actual_year = self.session.query(Year).filter_by(year="2001").first()
         actual_top_genre = actual_year.top_genre
         self.assertEqual("Top Genre Name", actual_top_genre.name)
         self.assertEqual("Generic genre.", actual_top_genre.description)
@@ -242,7 +242,7 @@ class ModelUnitTests(unittest.TestCase):
         self.assertEqual(len(all_songs), 2)
 
     def test_year_2(self):
-        year = 2015
+        year = "2015"
         top_album_name = "The Biggest Album of 2015"
         top_album_id = "2193810"
         top_genre_name = "Pop"
@@ -271,7 +271,7 @@ class ModelUnitTests(unittest.TestCase):
         self.session.add(test_year)
         self.session.commit()
 
-        year_2 = 2014
+        year_2 = "2014"
         top_album_name_2 = "The Biggest Album of 2014"
         top_album_id_2 = "999999"
         top_genre_name_2 = "Pop"
@@ -299,8 +299,8 @@ class ModelUnitTests(unittest.TestCase):
         self.session.add(test_year_2)
         self.session.commit()
 
-        fifteen = self.session.query(Year).filter_by(year=2015).first()
-        fourteen = self.session.query(Year).filter_by(year=2014).first()
+        fifteen = self.session.query(Year).filter_by(year="2015").first()
+        fourteen = self.session.query(Year).filter_by(year="2014").first()
         self.assertTrue(fifteen is not None)
         self.assertTrue(fourteen is not None)
 
@@ -321,7 +321,7 @@ class ModelUnitTests(unittest.TestCase):
 
     def test_year_3(self):
 
-        year = 2015
+        year = "2015"
         top_album_name = "The Biggest Album of 2015"
         top_album_id = "2193810"
         top_genre_name = "Rap"
@@ -350,7 +350,7 @@ class ModelUnitTests(unittest.TestCase):
         self.session.add(test_year)
         self.session.commit()
 
-        year_2 = 2014
+        year_2 = "2014"
         top_album_name_2 = "The Biggest Album of 2014"
         top_album_id_2 = "999999"
         top_genre_name_2 = "Rap"
@@ -378,7 +378,7 @@ class ModelUnitTests(unittest.TestCase):
         self.session.add(test_year_2)
         self.session.commit()
 
-        year_3 = 2013
+        year_3 = "2013"
         top_album_name_3 = "The Biggest Album of 2013"
         top_album_id_3 = "3333333333"
         top_genre_name_3 = "Not Rap"
@@ -422,7 +422,7 @@ class ModelUnitTests(unittest.TestCase):
                         test_year_2 not in not_rap_list and
                         test_year_3 in not_rap_list)
         self.assertEqual(not_rap_list[0], test_year_3)
-        self.assertEqual(not_rap_list[0].year, 2013)
+        self.assertEqual(not_rap_list[0].year, "2013")
 
     # The following tests will check the Song model
 
@@ -441,9 +441,9 @@ class ModelUnitTests(unittest.TestCase):
             artist_id=artist_id, album_name=album_name, explicit=explicit,
             popularity=popularity)
 
-        year_charted_1 = Year(year=1990)
+        year_charted_1 = Year(year="1990")
         assoc_1 = YearsSongsAssociation(
-            year_num=1990, rank=20, song_id=song_id)
+            year_num="1990", rank=20, song_id=song_id)
         assoc_1.song = test_song
         assoc_1.year = year_charted_1
         year_charted_1.top_songs.append(assoc_1)
@@ -459,7 +459,7 @@ class ModelUnitTests(unittest.TestCase):
             Song).filter_by(song_id="99999").first()
 
         self.assertTrue(this_song.explicit)
-        self.assertEqual(this_song.years_charted[0].year.year, 1990)
+        self.assertEqual(this_song.years_charted[0].year.year, "1990")
         self.assertEqual(year_charted_1.top_songs[0].song.song_name, "A Song")
 
     def test_song_2(self):
@@ -569,7 +569,7 @@ class ModelUnitTests(unittest.TestCase):
         artist_1 = Artist(artist_id="FirstArtist", name="The First Artist")
         test_genre.artists.append(artist_1)
 
-        year_1 = Year(year=2015)
+        year_1 = Year(year="2015")
         test_genre.years_on_top.append(year_1)
 
         genre_1 = Genre(name="Related 1", description="Related 1 description")
@@ -596,7 +596,7 @@ class ModelUnitTests(unittest.TestCase):
         self.assertEqual(len(genre_years), 1)
         self.assertTrue(year_1 in genre_years)
 
-        actual_year = self.session.query(Year).filter_by(year=2015).first()
+        actual_year = self.session.query(Year).filter_by(year="2015").first()
         year_genre = actual_year.top_genre
         self.assertEqual(test_genre, year_genre)
 
@@ -800,7 +800,7 @@ class ModelUnitTests(unittest.TestCase):
             'album_name': 'The Album Name',
             'explicit': True,
             'popularity': 20,
-            'years_charted': [1990, 1991, 1992, 2015]
+            'years_charted': ["1990", "1991", "1992", "2015"]
         }
 
         some_song = Song(song_id="abcd", song_name="A Song Name",
@@ -810,22 +810,22 @@ class ModelUnitTests(unittest.TestCase):
 
         artist = Artist(name="Artist Name", artist_id="efgh")
 
-        year1 = Year(year=1990)
-        year2 = Year(year=1991)
-        year3 = Year(year=1992)
-        year4 = Year(year=2015)
+        year1 = Year(year="1990")
+        year2 = Year(year="1991")
+        year3 = Year(year="1992")
+        year4 = Year(year="2015")
 
-        assoc_y1 = YearsSongsAssociation(year_num=1990, rank=1,
+        assoc_y1 = YearsSongsAssociation(year_num="1990", rank=1,
                                          song_id="abcd")
         assoc_y1.year = year1
-        assoc_y2 = YearsSongsAssociation(year_num=1991, rank=1,
+        assoc_y2 = YearsSongsAssociation(year_num="1991", rank=1,
                                          song_id="abcd")
         assoc_y2.year = year2
-        assoc_y3 = YearsSongsAssociation(year_num=1992, rank=1,
+        assoc_y3 = YearsSongsAssociation(year_num="1992", rank=1,
                                          song_id="abcd")
         assoc_y3.year = year3
 
-        assoc_y4 = YearsSongsAssociation(year_num=2015, rank=1,
+        assoc_y4 = YearsSongsAssociation(year_num="2015", rank=1,
                                          song_id="abcd")
         assoc_y4.year = year4
 
@@ -851,14 +851,14 @@ class ModelUnitTests(unittest.TestCase):
         self.assertEqual(actual_dict['explicit'], expected['explicit'])
         self.assertEqual(actual_dict['popularity'], expected['popularity'])
 
-        self.assertTrue(1990 in actual_dict['years_charted'])
-        self.assertTrue(1991 in actual_dict['years_charted'])
-        self.assertTrue(1992 in actual_dict['years_charted'])
-        self.assertTrue(2015 in actual_dict['years_charted'])
+        self.assertTrue("1990" in actual_dict['years_charted'])
+        self.assertTrue("1991" in actual_dict['years_charted'])
+        self.assertTrue("1992" in actual_dict['years_charted'])
+        self.assertTrue("2015" in actual_dict['years_charted'])
 
     def test_dictify_year(self):
         expected = {
-            'year': 2000,
+            'year': "2000",
             'top_album_name': 'Top Album',
             'top_album_id': 'tgvjs',
             'top_genre_name': 'Top Genre',
@@ -866,16 +866,16 @@ class ModelUnitTests(unittest.TestCase):
             'top_songs': ['Top Song 1', 'Top Song 2']
         }
 
-        year = Year(year=2000, top_album_name='Top Album',
+        year = Year(year="2000", top_album_name='Top Album',
                     top_album_id='tgvjs', top_genre_name='Top Genre',
                     top_album_artist_id='sadsd')
 
         song1 = Song(song_id='abcd', song_name='Top Song 1')
-        assoc_s1 = YearsSongsAssociation(year_num=2000, rank=2,
+        assoc_s1 = YearsSongsAssociation(year_num="2000", rank=2,
                                          song_id="abcd")
         assoc_s1.song = song1
         song2 = Song(song_id='efgh', song_name='Top Song 2')
-        assoc_s2 = YearsSongsAssociation(year_num=2000, rank=1,
+        assoc_s2 = YearsSongsAssociation(year_num="2000", rank=1,
                                          song_id="efgh")
         assoc_s2.song = song2
 
@@ -886,7 +886,7 @@ class ModelUnitTests(unittest.TestCase):
         self.session.commit()
 
         returned_year = self.session.query(Year) \
-            .filter_by(year=2000).first()
+            .filter_by(year="2000").first()
 
         actual_dict = returned_year.dictify()
 

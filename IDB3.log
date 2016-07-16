@@ -1,3 +1,60 @@
+commit c66b9749201e8b5236ac8fb1bb6d2075223bb0d5
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sat Jul 16 14:38:10 2016 -0500
+
+    Epydoc apparently can't be run through python3 so we'll just run it locally. Removed it from travis yml and makefile.
+
+commit fc5bacc16718f0f678ef6714381ea132b1ad3aec
+Merge: 99aca5f a96ea7a
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sat Jul 16 14:32:43 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 99aca5ffb4cedefe59403af97f1867e3adb268f9
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sat Jul 16 14:32:34 2016 -0500
+
+    Removed verbose flag from epydoc
+
+commit a96ea7a06cd6786473955d33bb37831266fd0e60
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sat Jul 16 14:32:32 2016 -0500
+
+    Oops needed quotes
+
+commit b6ff6b09a306d48e9b9ca1992d021858bf4dcea1
+Merge: 966ae76 3dd3ecb
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sat Jul 16 14:30:18 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 966ae7686294f7f042b104af1c6f3acbfe74bdf7
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sat Jul 16 14:30:09 2016 -0500
+
+    Changed headings to have backup fonts, added rest of search queries
+
+commit 3dd3ecbe010cde44b94354ac587c94b15f9f3bdf
+Merge: e87226e 1f6f8b3
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sat Jul 16 14:28:43 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit e87226e7d88824e8a96a2d1e331e7634f90b87c0
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sat Jul 16 14:28:41 2016 -0500
+
+    Updated travis yml and makefile to use epydoc and output data
+
+commit 1f6f8b3629012c9fd5ae93d7e5f1cdc1a40ad1fa
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sat Jul 16 14:11:58 2016 -0500
+
+    Added search bar to index page, working on JS to submit the form. Changed default fonts
+
 commit 9d6fe236f7d8c1cf5102e645f75cd1c512b7de5e
 Author: Samarth Dhruva <samarthdhruva@utexas.edu>
 Date:   Sat Jul 16 14:09:59 2016 -0500
