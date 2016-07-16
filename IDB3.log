@@ -1,3 +1,83 @@
+commit c9fd0904caf63d99a4431aa732f835b6d1d3ce95
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Fri Jul 15 19:01:01 2016 -0500
+
+    Had to make the CSS url_for, now it looks decent
+
+commit 73de72d2c480f3a2848a32fb0b0b1ee00599b573
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Fri Jul 15 18:54:33 2016 -0500
+
+    Search kind of works
+
+commit c528a631e5ffee74235afa221778032c0ffc997e
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Fri Jul 15 18:47:30 2016 -0500
+
+    test
+
+commit 0425f9d210b2d6ad5c31f785340e1a7093d1c59a
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Fri Jul 15 18:46:15 2016 -0500
+
+    forever
+
+commit 324dbf0ea90b1413bbefd03d5960be932220d003
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Fri Jul 15 18:43:03 2016 -0500
+
+    removed another song id
+
+commit 8f977b479615b0ed5aa5bc192dbe50c1159a0c58
+Merge: 17ba1b5 07a7a78
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Fri Jul 15 18:40:43 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 17ba1b523170f1be39c9826e9dd43c9adf856703
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Fri Jul 15 18:40:35 2016 -0500
+
+    macarena
+
+commit 07a7a786f9e0a891b5c5b6d5073ec987b036f495
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Fri Jul 15 17:56:29 2016 -0500
+
+    Re-ordered table args to see if it'll fix it
+
+commit 9d5380d46b4c3d751f47b9a8ff7108e6f02c39a5
+Merge: 9e4c3ae 1ce92d2
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Fri Jul 15 17:20:44 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 9e4c3ae00ba68a563089fdbb267957449653e893
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Fri Jul 15 17:20:40 2016 -0500
+
+    added fuzzy stirng matching
+
+commit 1ce92d2510d76c66fcd8e86c5d6ca6195c97aa6c
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Fri Jul 15 17:08:45 2016 -0500
+
+    Fixed broken nature of Artist tsvector syntax, should work now.
+
+commit a309b766025e4237599e7cb4a210d9921148fb58
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Fri Jul 15 16:59:50 2016 -0500
+
+    Implemented the tsvector for Artist, hasn't been tested or verified yet.
+
+commit 86d55cc3623e3222eb59107d4376d71c403445ac
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Tue Jul 12 21:10:45 2016 -0500
+
+    Final Commit
+
 commit 7af4f1c5ebb8db44df5e4445f769ae1cb225fa87
 Merge: 11ae559 0dc1156
 Author: Samarth Dhruva <samarthdhruva@utexas.edu>

@@ -1,5 +1,5 @@
 FILES :=                       \
-    IDB2.log                   \
+    IDB3.log                   \
     app/models.py              \
     app/tests.py                   
 
@@ -12,11 +12,11 @@ else
 endif
 
 .pylintrc:
-	$(PYLINT) --disable=bad-whitespace,missing-docstring,pointless-string-statement,too-few-public-methods,too-many-locals,too-many-statements,import-error,no-member --reports=n --generate-rcfile > $@
+	$(PYLINT) --disable=bad-whitespace,missing-docstring,pointless-string-statement,too-few-public-methods,too-many-locals,too-many-statements,import-error,no-member,abstract-method --reports=n --generate-rcfile > $@
 
 
 models.log:
-	git log > IDB2.log
+	git log > IDB3.log
 
 TestModels.tmp:
 	$(COVERAGE) run --omit='*sqlalchemy*' --branch app/tests.py > TestModels.tmp 2>&1
@@ -52,7 +52,7 @@ clean:
 	rm -f  models.log
 	rm -rf __pycache__
 	rm -f TestModels.tmp
-	rm -f IDB2.log
+	rm -f IDB3.log
 
 config:
 	git config -l

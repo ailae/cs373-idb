@@ -44,6 +44,7 @@ RELATED_GENRES_ASSOCIATION = Table(
 
 
 class TsVector(UserDefinedType):
+
     """
     This class represents a TsVector, and it will be
     the data type of the column in each model that will
@@ -59,6 +60,7 @@ class TsVector(UserDefinedType):
         be in DDL. We are simply returning "TSVECTOR."
         """
         return self.name
+
 
 class YearsSongsAssociation(BASE):
 
@@ -107,9 +109,10 @@ class Artist(BASE):
 
     # TsVector column used for searching.
     tsvector_col = Column(TsVector)
-    
+
     # Create an index for the tsvector column
-    __table_args__ = (Index('artist_tsvector_idx', 'tsvector_col', postgresql_using='gin'),)
+    __table_args__ = (
+        Index('artist_tsvector_idx', 'tsvector_col', postgresql_using='gin'),)
 
     def dictify(self):
         artist_dict = dict()
@@ -125,11 +128,13 @@ class Artist(BASE):
 
 # Create a trigger to check for updates to Artist and update the TsVector
 # accordingly.
-artist_vector_trigger = DDL("""
+ARTIST_VECTOR_TRIGGER = DDL("""
     CREATE TRIGGER artist_tsvector_update BEFORE INSERT OR UPDATE ON "Artist" FOR EACH ROW EXECUTE PROCEDURE
     tsvector_update_trigger(tsvector_col, 'pg_catalog.english', 'name')
     """)
-event.listen(Artist.__table__, 'after_create', artist_vector_trigger.execute_if(dialect='postgresql'))
+event.listen(Artist.__table__, 'after_create',
+             ARTIST_VECTOR_TRIGGER.execute_if(dialect='postgresql'))
+
 
 class Year(BASE):
 
@@ -160,6 +165,13 @@ class Year(BASE):
     # A many to many relationship between Songs and Years
     top_songs = relationship("YearsSongsAssociation", back_populates="year")
 
+    # TsVector column used for searching.
+    tsvector_col = Column(TsVector)
+
+    # Create an index for the tsvector column
+    __table_args__ = (
+        Index('year_tsvector_idx', 'tsvector_col', postgresql_using='gin'),)
+
     def dictify(self):
         year_dict = dict()
         year_dict['year'] = self.year
@@ -170,6 +182,15 @@ class Year(BASE):
         year_dict['top_songs'] = [
             assoc.song.song_name for assoc in self.top_songs]
         return year_dict
+
+# Create a trigger to check for updates to Year and update the TsVector
+# accordingly.
+YEAR_VECTOR_TRIGGER = DDL("""
+    CREATE TRIGGER year_tsvector_update BEFORE INSERT OR UPDATE ON "Year" FOR EACH ROW EXECUTE PROCEDURE
+    tsvector_update_trigger(tsvector_col, 'pg_catalog.english', 'year', 'top_album_name', 'top_genre_name')
+    """)
+event.listen(Year.__table__, 'after_create',
+             YEAR_VECTOR_TRIGGER.execute_if(dialect='postgresql'))
 
 
 class Song(BASE):
@@ -206,6 +227,13 @@ class Song(BASE):
     # A many to one relationship between Songs and Artist.
     artist = relationship("Artist", back_populates="charted_songs")
 
+    # TsVector column used for searching.
+    tsvector_col = Column(TsVector)
+
+    # Create an index for the tsvector column
+    __table_args__ = (
+        Index('song_tsvector_idx', 'tsvector_col', postgresql_using='gin'),)
+
     def dictify(self):
         song_dict = dict()
         song_dict['song_id'] = (self.song_id)
@@ -218,6 +246,15 @@ class Song(BASE):
         song_dict['years_charted'] = [assoc.year_num for assoc
                                       in self.years_charted]
         return song_dict
+
+# Create a trigger to check for updates to Song and update the TsVector
+# accordingly.
+SONG_VECTOR_TRIGGER = DDL("""
+    CREATE TRIGGER song_tsvector_update BEFORE INSERT OR UPDATE ON "Song" FOR EACH ROW EXECUTE PROCEDURE
+    tsvector_update_trigger(tsvector_col, 'pg_catalog.english', 'song_name', 'artist_name', 'album_name')
+    """)
+event.listen(Song.__table__, 'after_create',
+             SONG_VECTOR_TRIGGER.execute_if(dialect='postgresql'))
 
 
 class Genre(BASE):
@@ -250,6 +287,13 @@ class Genre(BASE):
         primaryjoin=(RELATED_GENRES_ASSOCIATION.c.genre1 == name),
         secondaryjoin=(RELATED_GENRES_ASSOCIATION.c.genre2 == name))
 
+    # TsVector column used for searching.
+    tsvector_col = Column(TsVector)
+
+    # Create an index for the tsvector column
+    __table_args__ = (
+        Index('genre_tsvector_idx', 'tsvector_col', postgresql_using='gin'),)
+
     def dictify(self):
         genre_dict = dict()
         genre_dict['name'] = (self.name)
@@ -259,3 +303,12 @@ class Genre(BASE):
         genre_dict['related_genres'] = [
             (genre.name) for genre in self.related_genres]
         return genre_dict
+
+# Create a trigger to check for updates to Genre and update the TsVector
+# accordingly.
+GENRE_VECTOR_TRIGGER = DDL("""
+    CREATE TRIGGER genre_tsvector_update BEFORE INSERT OR UPDATE ON "Genre" FOR EACH ROW EXECUTE PROCEDURE
+    tsvector_update_trigger(tsvector_col, 'pg_catalog.english', 'name', 'description')
+    """)
+event.listen(Genre.__table__, 'after_create',
+             GENRE_VECTOR_TRIGGER.execute_if(dialect='postgresql'))
