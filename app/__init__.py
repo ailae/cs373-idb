@@ -4,7 +4,6 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import and_, or_
 import ast
 import subprocess
-import requests
 
 def artists_and_songs(session):
 	json = open('JSON/songs.txt', 'r').read()
@@ -193,19 +192,63 @@ def search(term):
 	term = term.lower()
 	terms = term.split()
 	# Query
-	queryAndArtist = session.query(Artist).filter(Artist.tsvector_col.match(terms[0] + " & " + terms[1])).all()
-	queryOrArtist = session.query(Artist).filter(Artist.tsvector_col.match(terms[0] + " | " + terms[1])).all()
-	queryAndSong = session.query(Song).filter(Song.tsvector_col.match(terms[0] + " & " + terms[1])).all()
-	queryOrSong = session.query(Song).filter(Song.tsvector_col.match(terms[0] + " | " + terms[1])).all()
-	queryAndYear = session.query(Year).filter(Year.tsvector_col.match(terms[0] + " & " + terms[1])).all()
-	queryOrYear = session.query(Year).filter(Year.tsvector_col.match(terms[0] + " | " + terms[1])).all()
-	queryAndGenre = session.query(Genre).filter(Genre.tsvector_col.match(terms[0] + " & " + terms[1])).all()
-	queryOrGenre = session.query(Genre).filter(Genre.tsvector_col.match(terms[0] + " | " + terms[1])).all()
-	print("This did something: " + term)
+	# queryAndArtist =
+	# session.query(Artist).filter(and_(Artist.tsvector_col.match(s) for s in
+	# terms))
+
+	queryAndArtist = session.query(Artist, func.ts_headline('english', Artist.name, func.plainto_tsquery(term)).label('h_name')) \
+					.filter(and_(Artist.tsvector_col.match(s) for s in terms)).all()
+
+	queryOrArtist = session.query(Artist, func.ts_headline('english', Artist.name, func.plainto_tsquery(term)).label('h_name')) \
+					.filter(or_(Artist.tsvector_col.match(s) for s in terms)).all()
+
+	# queryAndSong =
+	# session.query(Song).filter(and_(Song.tsvector_col.match(s) for s in
+	# terms)).all()
+	# queryOrSong = session.query(Song).filter(or_(Song.tsvector_col.match(s)
+	# for s in terms)).all()
+	queryAndSong = session.query(Song,
+								 func.ts_headline('english', Song.song_name,
+								                  func.plainto_tsquery(term)).label('h_song_name'),
+								 func.ts_headline('english', Song.album_name, func.plainto_tsquery(term)).label('h_album_name')) \
+								 .filter(and_(Song.tsvector_col.match(s) for s in terms)).all()
+
+
+	queryOrSong = session.query(Song, \
+								func.ts_headline('english', Song.song_name, func.plainto_tsquery(term)).label('h_song_name'), \
+								func.ts_headline('english', Song.album_name, func.plainto_tsquery(term)).label('h_album_name')) \
+								.filter(or_(Song.tsvector_col.match(s) for s in terms)).all()
+
+	# queryAndYear = session.query(Year).filter(and_(Year.tsvector_col.match(s) for s in terms)).all()
+
+	# queryOrYear = session.query(Year).filter(or_(Year.tsvector_col.match(s) for s in terms)).all()
+
+	queryAndYear = session.query(Year, \
+								 func.ts_headline('english', Year.year, func.plainto_tsquery(term)).label('h_year'), \
+								 func.ts_headline('english', Year.top_album_name, func.plainto_tsquery(term)).label('h_top_album_name')) \
+								 .filter(and_(Year.tsvector_col.match(s) for s in terms)).all()
+
+	queryOrYear = session.query(Year, \
+								 func.ts_headline('english', Year.year, func.plainto_tsquery(term)).label('h_year'), \
+								 func.ts_headline('english', Year.top_album_name, func.plainto_tsquery(term)).label('h_top_album_name')) \
+								 .filter(or_(Year.tsvector_col.match(s) for s in terms)).all()
+
+	queryAndGenre = session.query(Genre, \
+								  func.ts_headline('english', Genre.name, func.plainto_tsquery(term)).label('h_name'), \
+								  func.ts_headline('english', Genre.description, func.plainto_tsquery(term)).label('h_description')) \
+								  .filter(and_(Genre.tsvector_col.match(s) for s in terms)).all()
+
+	queryOrGenre = session.query(Genre, \
+								 func.ts_headline('english', Genre.name, func.plainto_tsquery(term)).label('h_name'), \
+								 func.ts_headline('english', Genre.description, func.plainto_tsquery(term)).label('h_description')) \
+							     .filter(or_(Genre.tsvector_col.match(s) for s in terms)).all()
+
 	return render_template('search.html', andArtist = queryAndArtist, orArtist = queryOrArtist,
 		andSong = queryAndSong, orSong = queryOrSong,
 		andYear = queryAndYear, orYear = queryOrYear,
 		andGenre = queryAndGenre, orGenre = queryOrGenre)
+
+
 
 # API CALLS #
 @app.route('/api/songs', methods=['GET'])
