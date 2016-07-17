@@ -4,6 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import and_, or_
 import ast
 import subprocess
+import requests
 
 def artists_and_songs(session):
 	json = open('JSON/songs.txt', 'r').read()
@@ -172,7 +173,20 @@ def genre(name):
 	return render_template('genre1.html', genre=g)
 @app.route('/visualization')
 def visualization():
-	return render_template('visualization.html')
+	response = requests.get('http://sweetify.me/api/artists')
+	authors = response.json()['result']
+	character_counts = dict()
+	for author in authors :
+		c = author.upper()[0]
+		if c in character_counts :
+			character_counts[c] += 1
+		else :
+			character_counts[c] = 1
+
+	character_counts = [{'text':key,'count':character_counts[key]} for key in character_counts]
+	
+	return render_template('visualization.html', character_counts=character_counts)
+
 @app.route('/search/<term>')
 def search(term):
 	# Parse it
@@ -192,8 +206,6 @@ def search(term):
 		andSong = queryAndSong, orSong = queryOrSong,
 		andYear = queryAndYear, orYear = queryOrYear,
 		andGenre = queryAndGenre, orGenre = queryOrGenre)
-
-
 
 # API CALLS #
 @app.route('/api/songs', methods=['GET'])
