@@ -4,132 +4,133 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import and_, or_
 import ast
 import subprocess
+import requests
 
-def artists_and_songs(session):
-	json = open('JSON/songs.txt', 'r').read()
-	songs = ast.literal_eval(json)
-	json2 = open('JSON/artists.txt', 'r').read()
-	artists = ast.literal_eval(json2)
-	json3 = open('JSON/genre_descriptions.txt', 'r').read()
-	genres = ast.literal_eval(json3)
-	json4 = open('JSON/years.txt', 'r').read()
-	years = ast.literal_eval(json4)
-	json5 = open('JSON/artist_genres.txt', 'r').read()
-	artist_genres = ast.literal_eval(json5)
-	json6 = open('JSON/related_genres.txt', 'r').read()
-	related_genres = ast.literal_eval(json6)
-	json7 = open('JSON/all_songs_association.txt', 'r').read()
-	year_song = ast.literal_eval(json7)
+# def artists_and_songs(session):
+# 	json = open('JSON/songs.txt', 'r').read()
+# 	songs = ast.literal_eval(json)
+# 	json2 = open('JSON/artists.txt', 'r').read()
+# 	artists = ast.literal_eval(json2)
+# 	json3 = open('JSON/genre_descriptions.txt', 'r').read()
+# 	genres = ast.literal_eval(json3)
+# 	json4 = open('JSON/years.txt', 'r').read()
+# 	years = ast.literal_eval(json4)
+# 	json5 = open('JSON/artist_genres.txt', 'r').read()
+# 	artist_genres = ast.literal_eval(json5)
+# 	json6 = open('JSON/related_genres.txt', 'r').read()
+# 	related_genres = ast.literal_eval(json6)
+# 	json7 = open('JSON/all_songs_association.txt', 'r').read()
+# 	year_song = ast.literal_eval(json7)
 
-	try:
-		if not session.query(Artist).first():
-			for a in artists:
-				artist = Artist(name=a['name'], num_followers=a['num_followers'], 
-				artist_id=a['artist_id'], image_url=a['image_url'], 
-				popularity=a['popularity'])
-				session.add(artist)
-				session.commit()
+# 	try:
+# 		if not session.query(Artist).first():
+# 			for a in artists:
+# 				artist = Artist(name=a['name'], num_followers=a['num_followers'], 
+# 				artist_id=a['artist_id'], image_url=a['image_url'], 
+# 				popularity=a['popularity'])
+# 				session.add(artist)
+# 				session.commit()
 
-		# Now, make an association between the artist and their genres.
-		# artist_genres = a['genres']
-		# for a_genre in artist_genres:
-		# 	genre_to_add = session.query(Genre).filter_by(name=a_genre).first()
-		# 	artist.genres.append(genre_to_add)
+# 		# Now, make an association between the artist and their genres.
+# 		# artist_genres = a['genres']
+# 		# for a_genre in artist_genres:
+# 		# 	genre_to_add = session.query(Genre).filter_by(name=a_genre).first()
+# 		# 	artist.genres.append(genre_to_add)
 
-		for s in songs:  
-			test_song = session.query(Song).filter_by(song_id=s['song_id']).first()
-			if not test_song:
-				song = Song(song_id = s['song_id'], song_name = s['song_name'],
-					artist_id = s['artist_id'], artist_name = s['artist_name'], 
-					album_name = s['album_name'], explicit = s['explicit'], 
-					popularity = s['popularity'])
-				session.add(song)
-				session.commit()
+# 		for s in songs:  
+# 			test_song = session.query(Song).filter_by(song_id=s['song_id']).first()
+# 			if not test_song:
+# 				song = Song(song_id = s['song_id'], song_name = s['song_name'],
+# 					artist_id = s['artist_id'], artist_name = s['artist_name'], 
+# 					album_name = s['album_name'], explicit = s['explicit'], 
+# 					popularity = s['popularity'])
+# 				session.add(song)
+# 				session.commit()
 
-		# Make the charted_songs and artist relationship
-		for a in session.query(Artist).all():
-			if not a.charted_songs:
-				for s in session.query(Song).filter_by(artist_id = a.artist_id).all():
-					a.charted_songs.append(s)
+# 		# Make the charted_songs and artist relationship
+# 		for a in session.query(Artist).all():
+# 			if not a.charted_songs:
+# 				for s in session.query(Song).filter_by(artist_id = a.artist_id).all():
+# 					a.charted_songs.append(s)
 
-				# s.artist = a
+# 				# s.artist = a
 		
-		if not session.query(Genre).first():
-			for g in genres:
-				genre = Genre(name=g['name'], description=g['summary'])
-				session.add(genre)
-				session.commit()
+# 		if not session.query(Genre).first():
+# 			for g in genres:
+# 				genre = Genre(name=g['name'], description=g['summary'])
+# 				session.add(genre)
+# 				session.commit()
 
-		if not session.query(Year).first():
-			for y in years:
-				if not session.query(Artist).filter_by(artist_id=y['top_album_artist_id']).first():
-					year = Year(year=y['year'], top_album_name=y['top_album_name'], 
-						top_album_id=y['top_album_id'],
-						top_genre_name=y['top_genre_name'])
-				else:
-					year = Year(year=y['year'], top_album_name=y['top_album_name'], 
-						top_album_id=y['top_album_id'],
-						top_genre_name=y['top_genre_name'], 
-						top_album_artist_id=y['top_album_artist_id'])
-				session.add(year)
-				session.commit()
+# 		if not session.query(Year).first():
+# 			for y in years:
+# 				if not session.query(Artist).filter_by(artist_id=y['top_album_artist_id']).first():
+# 					year = Year(year=y['year'], top_album_name=y['top_album_name'], 
+# 						top_album_id=y['top_album_id'],
+# 						top_genre_name=y['top_genre_name'])
+# 				else:
+# 					year = Year(year=y['year'], top_album_name=y['top_album_name'], 
+# 						top_album_id=y['top_album_id'],
+# 						top_genre_name=y['top_genre_name'], 
+# 						top_album_artist_id=y['top_album_artist_id'])
+# 				session.add(year)
+# 				session.commit()
 
-		# Artist genres relation
-		for ag in artist_genres:
-			artist = session.query(Artist).filter_by(artist_id=ag['artist_id']).first()
-			if not artist.genres:
-				for g in ag['genres']:
-					artist.genres.append(session.query(Genre).filter_by(name=g).first())
-					session.commit()
+# 		# Artist genres relation
+# 		for ag in artist_genres:
+# 			artist = session.query(Artist).filter_by(artist_id=ag['artist_id']).first()
+# 			if not artist.genres:
+# 				for g in ag['genres']:
+# 					artist.genres.append(session.query(Genre).filter_by(name=g).first())
+# 					session.commit()
 
-		# Year top genre relation
-		for y in session.query(Year).all():
-			if not y.top_genre:
-				y.top_genre = session.query(Genre).filter_by(name=y.top_genre_name).first()
-				session.commit()
+# 		# Year top genre relation
+# 		for y in session.query(Year).all():
+# 			if not y.top_genre:
+# 				y.top_genre = session.query(Genre).filter_by(name=y.top_genre_name).first()
+# 				session.commit()
 
-		# Related genres relation
-		for g in related_genres:
-			genre = session.query(Genre).filter_by(name=g['name']).first()
-			if genre:
-				if not genre.related_genres:
-					if g['related']:
-						for relations in g['related']:
-							result = session.query(Genre).filter_by(name=relations).first()
-							if result:
-								genre.related_genres.append(result)
-								session.commit()
+# 		# Related genres relation
+# 		for g in related_genres:
+# 			genre = session.query(Genre).filter_by(name=g['name']).first()
+# 			if genre:
+# 				if not genre.related_genres:
+# 					if g['related']:
+# 						for relations in g['related']:
+# 							result = session.query(Genre).filter_by(name=relations).first()
+# 							if result:
+# 								genre.related_genres.append(result)
+# 								session.commit()
 
-		# Year song association
-		for ys in year_song:
-			# Get the year
-			year = session.query(Year).filter_by(year = ys['year']).first()
-			if not year.top_songs:
-				# Loop through the list of songs
-				for s in ys['song_list']:
-					if s['song_id']:
-						song = session.query(Song).filter_by(song_id = s['song_id']).first()
-						# Do we have this song in the DB?
-						if song:
-							assoc = YearsSongsAssociation(year_num = year.year, 
-								song_id = s['song_id'], rank= s['rank'])
-							assoc.song = song
-							assoc.year = year
-							year.top_songs.append(assoc)
-							session.add(assoc)
-							session.commit()
-							#song.years_charted.append(assoc) # Do we need this?
+# 		# Year song association
+# 		for ys in year_song:
+# 			# Get the year
+# 			year = session.query(Year).filter_by(year = ys['year']).first()
+# 			if not year.top_songs:
+# 				# Loop through the list of songs
+# 				for s in ys['song_list']:
+# 					if s['song_id']:
+# 						song = session.query(Song).filter_by(song_id = s['song_id']).first()
+# 						# Do we have this song in the DB?
+# 						if song:
+# 							assoc = YearsSongsAssociation(year_num = year.year, 
+# 								song_id = s['song_id'], rank= s['rank'])
+# 							assoc.song = song
+# 							assoc.year = year
+# 							year.top_songs.append(assoc)
+# 							session.add(assoc)
+# 							session.commit()
+# 							#song.years_charted.append(assoc) # Do we need this?
 
-	except:
-		session.rollback()
-		raise
+# 	except:
+# 		session.rollback()
+# 		raise
 
 app = Flask(__name__)
-engine = db_connect()
-create_all_tables(engine)
-session_maker = sessionmaker(bind=engine)
-session = session_maker()
-artists_and_songs(session)
+# engine = db_connect()
+# create_all_tables(engine)
+# session_maker = sessionmaker(bind=engine)
+# session = session_maker()
+# artists_and_songs(session)
 
 @app.route('/')
 def homepage():
@@ -182,7 +183,7 @@ def visualization():
 		else :
 			character_counts[c] = 1
 
-	character_counts = [{'text':key,'count':character_counts[key]} for key in character_counts]
+	character_counts = [{'text':key,'count':str(character_counts[key])} for key in character_counts]
 	
 	return render_template('visualization.html', character_counts=character_counts)
 
