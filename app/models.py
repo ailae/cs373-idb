@@ -187,7 +187,7 @@ class Year(BASE):
 # accordingly.
 YEAR_VECTOR_TRIGGER = DDL("""
     CREATE TRIGGER year_tsvector_update BEFORE INSERT OR UPDATE ON "Year" FOR EACH ROW EXECUTE PROCEDURE
-    tsvector_update_trigger(tsvector_col, 'pg_catalog.english', 'year', 'top_album_name', 'top_genre_name')
+    tsvector_update_trigger(tsvector_col, 'pg_catalog.english', 'year', 'top_album_name')
     """)
 event.listen(Year.__table__, 'after_create',
              YEAR_VECTOR_TRIGGER.execute_if(dialect='postgresql'))
@@ -251,7 +251,7 @@ class Song(BASE):
 # accordingly.
 SONG_VECTOR_TRIGGER = DDL("""
     CREATE TRIGGER song_tsvector_update BEFORE INSERT OR UPDATE ON "Song" FOR EACH ROW EXECUTE PROCEDURE
-    tsvector_update_trigger(tsvector_col, 'pg_catalog.english', 'song_name', 'artist_name', 'album_name')
+    tsvector_update_trigger(tsvector_col, 'pg_catalog.english', 'song_name', 'album_name')
     """)
 event.listen(Song.__table__, 'after_create',
              SONG_VECTOR_TRIGGER.execute_if(dialect='postgresql'))
