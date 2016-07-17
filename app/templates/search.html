@@ -66,7 +66,7 @@
     {% for a in andArtist %}
     <div class='row'>
         <div class='col-md-12'>
-        {{ a.name }}
+        {{ a.headline }}
         </div>
     </div>
     {% endfor %}
@@ -99,10 +99,10 @@
     {% for a in andGenre %}
     <div class='row'>
         <div class='col-md-6'>
-        {{ a.name }}
+        {{ a.Genre.name }}
         </div>
         <div class='col-md-6'>
-        {{ a.description }}
+        {{ a.headline|safe }}
         </div>
     </div>
     {% endfor %}
@@ -111,7 +111,7 @@
     {% for o in orArtist %}
     <div class='row'>
         <div class='col-md-12'>
-        {{ o.name }}
+        {{ o.headline }}
         </div>
     </div>
     {% endfor %}
@@ -127,7 +127,7 @@
     </div>
     {% endfor %}
 
-    {% for a in orYear %}
+    {% for o in orYear %}
     <div class='row'>
         <div class='col-md-4'>
         {{ o.year }}
@@ -141,13 +141,13 @@
     </div>
     {% endfor %}
 
-    {% for a in orGenre %}
+    {% for o in orGenre %}
     <div class='row'>
         <div class='col-md-6'>
-        {{ o.name }}
+        {{ o.Genre.name }}
         </div>
         <div class='col-md-6'>
-        {{ o.description }}
+        {{ o.headline|safe }}
         </div>
     </div>
     {% endfor %}
