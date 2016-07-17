@@ -74,7 +74,7 @@
     {% for a in andArtist %}
     <div class='row'>
         <div class='col-md-12'>
-        {{ a.headline }}
+        <a href="/artists/{{ a.Artist.artist_id }}">{{ a.h_name|safe }}</a>
         </div>
     </div>
     {% endfor %}
@@ -82,44 +82,45 @@
     {% for a in andSong %}
     <div class='row'>
         <div class='col-md-6'>
-            {{ a.song_name }}
+            <a href="/songs/{{ a.Song.song_id }}">{{ a.h_song_name|safe }}</a>
         </div>
         <div class='col-md-6'>
-            {{ a.artist_name }}
+            {{ a.h_album_name|safe }}
         </div>
     </div>
     {% endfor %}
 
     {% for a in andYear %}
     <div class='row'>
-        <div class='col-md-4'>
-        {{ a.year }}
+        <div class='col-md-6'>
+        <a href="/years/{{ a.Year.year }}">{{ a.h_year|safe }}</a>
         </div>
-        <div class='col-md-4'>
-        {{ a.top_album_name }}
+        <div class='col-md-6'>
+        {{ a.h_top_album_name|safe }}
         </div>
-        <div class='col-md-4'>
+        <!-- <div class='col-md-4'>
         {{ a.top_genre_name }}
-        </div>
+        </div> -->
     </div>
     {% endfor %}
 
     {% for a in andGenre %}
     <div class='row'>
         <div class='col-md-6'>
-        {{ a.Genre.name }}
+        <a href="/genres/{{ a.Genre.name }}">{{ a.h_name|safe }}</a>
         </div>
         <div class='col-md-6'>
-        {{ a.headline|safe }}
+        {{ a.h_description|safe }}
         </div>
     </div>
     {% endfor %}
 
     <h3>Or results</h3>
+
     {% for o in orArtist %}
     <div class='row'>
         <div class='col-md-12'>
-        {{ o.headline }}
+        <a href="/artists/{{ o.Artist.artist_id }}">{{ o.h_name|safe }}</a>
         </div>
     </div>
     {% endfor %}
@@ -127,35 +128,35 @@
     {% for o in orSong %}
     <div class='row'>
         <div class='col-md-6'>
-        {{ o.song_name }}
+        <a href="/songs/{{ o.Song.song_id }}">{{ o.h_song_name|safe }}</a>
         </div>
         <div class='col-md-6'>
-        {{ o.artist_name }}
+        {{ o.h_album_name|safe }}
         </div>
     </div>
     {% endfor %}
 
     {% for o in orYear %}
     <div class='row'>
-        <div class='col-md-4'>
-        {{ o.year }}
+        <div class='col-md-6'>
+        <a href="/years/{{ o.Year.year }}">{{ o.h_year|safe }}</a>
         </div>
-        <div class='col-md-4'>
-        {{ o.top_album_name }}
+        <div class='col-md-6'>
+        {{ o.h_top_album_name|safe }}
         </div>  
-        <div class='col-md-4'>
+<!--         <div class='col-md-4'>
         {{ o.top_genre_name }}
-        </div>
+        </div> -->
     </div>
     {% endfor %}
 
     {% for o in orGenre %}
     <div class='row'>
         <div class='col-md-6'>
-        {{ o.Genre.name }}
+        <a href="/genres/{{ o.Genre.name }}">{{ o.h_name|safe }}</a>
         </div>
         <div class='col-md-6'>
-        {{ o.headline|safe }}
+        {{ o.h_description|safe }}
         </div>
     </div>
     {% endfor %}

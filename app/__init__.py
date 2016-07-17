@@ -203,17 +203,17 @@ def visualization():
 @app.route('/search/<term>')
 def search(term):
 	# Parse it
-	term = term.lower()
+	term = term.lower().replace("%20", " ")
 	terms = term.split()
 	# Query
 	# queryAndArtist =
 	# session.query(Artist).filter(and_(Artist.tsvector_col.match(s) for s in
 	# terms))
 
-	queryAndArtist = session.query(Artist, func.ts_headline('english', Artist.name, func.to_tsquery(term)).label('h_name')) \
+	queryAndArtist = session.query(Artist, func.ts_headline('english', Artist.name, func.plainto_tsquery(term)).label('h_name')) \
 					.filter(and_(Artist.tsvector_col.match(s) for s in terms)).all()
 
-	queryOrArtist = session.query(Artist, func.ts_headline('english', Artist.name, func.to_tsquery(term)).label('h_name')) \
+	queryOrArtist = session.query(Artist, func.ts_headline('english', Artist.name, func.plainto_tsquery(term)).label('h_name')) \
 					.filter(or_(Artist.tsvector_col.match(s) for s in terms)).all()
 
 	# queryAndSong =
@@ -223,14 +223,14 @@ def search(term):
 	# for s in terms)).all()
 	queryAndSong = session.query(Song,
 								 func.ts_headline('english', Song.song_name,
-								                  func.to_tsquery(term)).label('h_song_name'),
-								 func.ts_headline('english', Song.album_name, func.to_tsquery(term)).label('h_album_name')) \
+								                  func.plainto_tsquery(term)).label('h_song_name'),
+								 func.ts_headline('english', Song.album_name, func.plainto_tsquery(term)).label('h_album_name')) \
 								 .filter(and_(Song.tsvector_col.match(s) for s in terms)).all()
 
 
 	queryOrSong = session.query(Song, \
-								func.ts_headline('english', Song.song_name, func.to_tsquery(term)).label('h_song_name'), \
-								func.ts_headline('english', Song.album_name, func.to_tsquery(term)).label('h_album_name')) \
+								func.ts_headline('english', Song.song_name, func.plainto_tsquery(term)).label('h_song_name'), \
+								func.ts_headline('english', Song.album_name, func.plainto_tsquery(term)).label('h_album_name')) \
 								.filter(or_(Song.tsvector_col.match(s) for s in terms)).all()
 
 	# queryAndYear = session.query(Year).filter(and_(Year.tsvector_col.match(s) for s in terms)).all()
@@ -238,23 +238,23 @@ def search(term):
 	# queryOrYear = session.query(Year).filter(or_(Year.tsvector_col.match(s) for s in terms)).all()
 
 	queryAndYear = session.query(Year, \
-								 func.ts_headline('english', Year.year, func.to_tsquery(term)).label('h_year'), \
-								 func.ts_headline('english', Year.top_album_name, func.to_tsquery(term)).label('h_top_album_name')) \
+								 func.ts_headline('english', Year.year, func.plainto_tsquery(term)).label('h_year'), \
+								 func.ts_headline('english', Year.top_album_name, func.plainto_tsquery(term)).label('h_top_album_name')) \
 								 .filter(and_(Year.tsvector_col.match(s) for s in terms)).all()
 
 	queryOrYear = session.query(Year, \
-								 func.ts_headline('english', Year.year, func.to_tsquery(term)).label('h_year'), \
-								 func.ts_headline('english', Year.top_album_name, func.to_tsquery(term)).label('h_top_album_name')) \
+								 func.ts_headline('english', Year.year, func.plainto_tsquery(term)).label('h_year'), \
+								 func.ts_headline('english', Year.top_album_name, func.plainto_tsquery(term)).label('h_top_album_name')) \
 								 .filter(or_(Year.tsvector_col.match(s) for s in terms)).all()
 
 	queryAndGenre = session.query(Genre, \
-								  func.ts_headline('english', Genre.name, func.to_tsquery(term)).label('h_name'), \
-								  func.ts_headline('english', Genre.description, func.to_tsquery(term)).label('h_description')) \
+								  func.ts_headline('english', Genre.name, func.plainto_tsquery(term)).label('h_name'), \
+								  func.ts_headline('english', Genre.description, func.plainto_tsquery(term)).label('h_description')) \
 								  .filter(and_(Genre.tsvector_col.match(s) for s in terms)).all()
 
 	queryOrGenre = session.query(Genre, \
-								 func.ts_headline('english', Genre.name, func.to_tsquery(term)).label('h_name'), \
-								 func.ts_headline('english', Genre.description, func.to_tsquery(term)).label('h_description')) \
+								 func.ts_headline('english', Genre.name, func.plainto_tsquery(term)).label('h_name'), \
+								 func.ts_headline('english', Genre.description, func.plainto_tsquery(term)).label('h_description')) \
 							     .filter(or_(Genre.tsvector_col.match(s) for s in terms)).all()
 
 	return render_template('search.html', andArtist = queryAndArtist, orArtist = queryOrArtist,
