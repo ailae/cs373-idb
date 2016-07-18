@@ -11,12 +11,13 @@
 
     <title>Songs</title>
 
+    <style>
+    .table thead,
+.table th {text-align: center;}
+    </style>
+
     <!-- Bootstrap core CSS -->
 <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-
-<link rel="stylesheet" href="{{ url_for('static', filename='css/row-equal-height.css') }}" >
-
-
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -69,100 +70,124 @@
         </nav>
 
 <div class="table-positioning">
-<h3>SEARCH</h3>
-      <!-- Three columns of text below the carousel -->
-    <h3>And results</h3>
+    <h2>You searched for "<u>{{ term }}</u>"</h2>
+    <div class="table-responsive">
 
-    {% for a in andArtist %}
-    <div class='row row-eq-height'>
-        <div class='col-md-12'>
-        <a href="/artists/{{ a.Artist.artist_id }}">{{ a.h_name|safe }}</a>
-        </div>
-    </div>
-    {% endfor %}
+    {% if andArtist|length or orArtist|length > 0 %}
+        <table id="artists" class="display table" width="100%"> 
+        <h3 align="left"><i>ARTISTS</i></h3>
+        <thead> 
+        <tr>
+          <th>Artist Name</th>      
+        </tr>
+        </thead>  
+        <tbody>
+        <tr><td><h4>AND results</h4></td></tr>
+        {% for a in andArtist %}
+        <tr>
+          <td><a href="/artists/{{ a.Artist.artist_id }}">
+                {{ a.h_name|safe }}
+            </a></td>
+        </tr>
+        {% endfor %}
+        <tr><td><h4>OR results</h4></td></tr>
+        {% for o in orArtist %}
+        <tr>
+          <td><a href="/artists/{{ o.Artist.artist_id }}">
+                {{ o.h_name|safe }}
+            </a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% endif %}
 
-    {% for a in andSong %}
-    <div class='row row-eq-height'>
-        <div class='col-md-6'>
-            <a href="/songs/{{ a.Song.song_id }}">{{ a.h_song_name|safe }}</a>
-        </div>
-        <div class='col-md-6'>
-            {{ a.h_album_name|safe }}
-        </div>
-    </div>
-    {% endfor %}
+    {% if andSong|length or orSong|length > 0 %}
+        <table id="songs" class="display table" width="100%"> 
+            <h3 align="left"><i>SONGS</i></h3>
+        <thead> 
+        <tr>
+          <th>Song Name</th>
+          <th>Album Name</th>        
+        </tr>
+        </thead>  
+        <tbody>
+         <tr><td><h4>AND results</h4></td><td></td></tr>
+        {% for a in andSong %}
+        <tr>
+            <td><a href="/songs/{{ a.Song.song_id }}">{{ a.h_song_name|safe }}</a></td>
+            <td>{{ a.h_album_name|safe }}</td>
+        </tr>
+        {% endfor %}
+        <tr><td><h4>OR results</h4></td><td></td></tr>
+        {% for o in orSong %}
+        <tr>
+            <td><a href="/songs/{{ o.Song.song_id }}">{{ o.h_song_name|safe }}</a></td>
+            <td>{{ o.h_album_name|safe }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% endif %}
 
-    {% for a in andYear %}
-    <div class='row row-eq-height'>
-        <div class='col-md-6'>
-        <a href="/years/{{ a.Year.year }}">{{ a.h_year|safe }}</a>
-        </div>
-        <div class='col-md-6'>
-        {{ a.h_top_album_name|safe }}
-        </div>
-        <!-- <div class='col-md-4'>
-        {{ a.top_genre_name }}
-        </div> -->
-    </div>
-    {% endfor %}
+    {% if andYear|length or orYear|length > 0 %}
+        <table id="years" class="display table" width="100%"> 
+         <h3 align="left"><i>YEARS</i></h3>
+        <thead> 
+        <tr>
+          <th>Year</th>
+          <th>Top Album Name</th>    
+        </tr>
+        </thead>  
+        <tbody>
+        <tr><td><h4>AND results</h4></td><td></td></tr>
+        {% for a in andYear %}
+          <tr>
+          <td><a href="/years/{{ a.Year.year }}">{{ a.h_year|safe }}</a></td>
+          <td>{{ a.h_top_album_name|safe }}</td>
+        </tr>
+        {% endfor %}
+        <tr><td><h4>OR results</h4></td><td></td></tr>
+        {% for o in orYear %}
+          <tr>
+          <td><a href="/years/{{ o.Year.year }}">{{ o.h_year|safe }}</a></td>
+          <td>{{ o.h_top_album_name|safe }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% endif %}
 
-    {% for a in andGenre %}
-    <div class='row row-eq-height'>
-        <div class='col-md-6'>
-        <a href="/genres/{{ a.Genre.name }}">{{ a.h_name|safe }}</a>
-        </div>
-        <div class='col-md-6'>
-        {{ a.h_description|safe }}
-        </div>
-    </div>
-    {% endfor %}
+    {% if andGenre|length or orGenre|length > 0 %}
+        <table id="genres" class="display table" width="100%"> 
+         <h3 align="left"><i>GENRES</i></h3>
+        <thead> 
+        <tr>
+          <th>Name</th>
+          <th>Description</th>     
+        </tr>
+        </thead>  
+        <tbody>
+            <tr><td><h4>AND results</h4></td><td></td></tr>
+        {% for a in andGenre %}
+          <tr>
+          <td><a href="/genres/{{ a.Genre.name }}">{{ a.h_name|safe }}</a></td>
+          <td>{{ a.h_description|safe }}</a></td>
+        </tr>
+        {% endfor %}
+        <tr><td><h4>OR results</h4></td><td></td></tr>
+        {% for o in orGenre %}
+          <tr>
+          <td><a href="/genres/{{ o.Genre.name }}">{{ o.h_name|safe }}</a></td>
+          <td>{{ o.h_description|safe }}</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% endif %}
 
-    <h3>Or results</h3>
 
-    {% for o in orArtist %}
-    <div class='row row-eq-height'>
-        <div class='col-md-12'>
-        <a href="/artists/{{ o.Artist.artist_id }}">{{ o.h_name|safe }}</a>
-        </div>
-    </div>
-    {% endfor %}
-
-    {% for o in orSong %}
-    <div class='row row-eq-height'>
-        <div class='col-md-6'>
-        <a href="/songs/{{ o.Song.song_id }}">{{ o.h_song_name|safe }}</a>
-        </div>
-        <div class='col-md-6'>
-        {{ o.h_album_name|safe }}
-        </div>
-    </div>
-    {% endfor %}
-
-    {% for o in orYear %}
-    <div class='row row-eq-height'>
-        <div class='col-md-6'>
-        <a href="/years/{{ o.Year.year }}">{{ o.h_year|safe }}</a>
-        </div>
-        <div class='col-md-6'>
-        {{ o.h_top_album_name|safe }}
-        </div>  
-<!--         <div class='col-md-4'>
-        {{ o.top_genre_name }}
-        </div> -->
-    </div>
-    {% endfor %}
-
-    {% for o in orGenre %}
-    <div class='row row-eq-height'>
-        <div class='col-md-6'>
-        <a href="/genres/{{ o.Genre.name }}">{{ o.h_name|safe }}</a>
-        </div>
-        <div class='col-md-6'>
-        {{ o.h_description|safe }}
-        </div>
-    </div>
-    {% endfor %}
-
+    </div>  
 
       <!-- FOOTER -->
       <footer>
@@ -199,6 +224,15 @@
     src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" 
     src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <script>
+    $(document).ready(function(){
+        $('#songs').dataTable({bFilter: false, bSort: false});
+        $('#artists').dataTable({bFilter: false, bSort: false});
+        $('#genres').dataTable({bFilter: false, bSort: false});
+        $('#years').dataTable({bFilter: false, bSort: false});
+    });
+    </script>
 
     <script type="text/javascript">
     function search() {

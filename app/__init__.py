@@ -32,12 +32,6 @@ def artists_and_songs(session):
 				session.add(artist)
 				session.commit()
 
-		# Now, make an association between the artist and their genres.
-		# artist_genres = a['genres']
-		# for a_genre in artist_genres:
-		# 	genre_to_add = session.query(Genre).filter_by(name=a_genre).first()
-		# 	artist.genres.append(genre_to_add)
-
 		for s in songs:
 			test_song = session.query(Song).filter_by(song_id=s['song_id']).first()
 			if not test_song:
@@ -205,10 +199,6 @@ def search(term):
 	# Parse it
 	term = term.lower().replace("%20", " ")
 	terms = term.split()
-	# Query
-	# queryAndArtist =
-	# session.query(Artist).filter(and_(Artist.tsvector_col.match(s) for s in
-	# terms))
 
 	queryAndArtist = session.query(Artist, func.ts_headline('english', Artist.name, func.plainto_tsquery(term)).label('h_name')) \
 					.filter(and_(Artist.tsvector_col.match(s) for s in terms)).all()
@@ -216,11 +206,6 @@ def search(term):
 	queryOrArtist = session.query(Artist, func.ts_headline('english', Artist.name, func.plainto_tsquery(term)).label('h_name')) \
 					.filter(or_(Artist.tsvector_col.match(s) for s in terms)).all()
 
-	# queryAndSong =
-	# session.query(Song).filter(and_(Song.tsvector_col.match(s) for s in
-	# terms)).all()
-	# queryOrSong = session.query(Song).filter(or_(Song.tsvector_col.match(s)
-	# for s in terms)).all()
 	queryAndSong = session.query(Song,
 								 func.ts_headline('english', Song.song_name,
 								                  func.plainto_tsquery(term)).label('h_song_name'),
@@ -232,10 +217,6 @@ def search(term):
 								func.ts_headline('english', Song.song_name, func.plainto_tsquery(term)).label('h_song_name'), \
 								func.ts_headline('english', Song.album_name, func.plainto_tsquery(term)).label('h_album_name')) \
 								.filter(or_(Song.tsvector_col.match(s) for s in terms)).all()
-
-	# queryAndYear = session.query(Year).filter(and_(Year.tsvector_col.match(s) for s in terms)).all()
-
-	# queryOrYear = session.query(Year).filter(or_(Year.tsvector_col.match(s) for s in terms)).all()
 
 	queryAndYear = session.query(Year, \
 								 func.ts_headline('english', Year.year, func.plainto_tsquery(term)).label('h_year'), \
@@ -260,7 +241,7 @@ def search(term):
 	return render_template('search.html', andArtist = queryAndArtist, orArtist = queryOrArtist,
 		andSong = queryAndSong, orSong = queryOrSong,
 		andYear = queryAndYear, orYear = queryOrYear,
-		andGenre = queryAndGenre, orGenre = queryOrGenre)
+		andGenre = queryAndGenre, orGenre = queryOrGenre, term=term)
 
 
 
