@@ -2,7 +2,6 @@ from flask import Flask, render_template, jsonify, abort
 from models import *
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import and_, or_
-from sqlalchemy import func
 import ast
 import subprocess
 import requests
@@ -26,30 +25,40 @@ def artists_and_songs(session):
 	try:
 		if not session.query(Artist).first():
 			for a in artists:
-				artist = Artist(name=a['name'], num_followers=a['num_followers'],
-				artist_id=a['artist_id'], image_url=a['image_url'],
+				artist = Artist(name=a['name'], num_followers=a['num_followers'], 
+				artist_id=a['artist_id'], image_url=a['image_url'], 
 				popularity=a['popularity'])
 				session.add(artist)
 				session.commit()
 
+<<<<<<< HEAD
 		for s in songs:
+=======
+		# Now, make an association between the artist and their genres.
+		# artist_genres = a['genres']
+		# for a_genre in artist_genres:
+		# 	genre_to_add = session.query(Genre).filter_by(name=a_genre).first()
+		# 	artist.genres.append(genre_to_add)
+
+		for s in songs:  
+>>>>>>> 32880f1468e9756bf1909b64f388f346140595a7
 			test_song = session.query(Song).filter_by(song_id=s['song_id']).first()
 			if not test_song:
-				song = Song(song_id=s['song_id'], song_name=s['song_name'],
-					artist_id=s['artist_id'], artist_name=s['artist_name'],
-					album_name=s['album_name'], explicit=s['explicit'],
-					popularity=s['popularity'])
+				song = Song(song_id = s['song_id'], song_name = s['song_name'],
+					artist_id = s['artist_id'], artist_name = s['artist_name'], 
+					album_name = s['album_name'], explicit = s['explicit'], 
+					popularity = s['popularity'])
 				session.add(song)
 				session.commit()
 
 		# Make the charted_songs and artist relationship
 		for a in session.query(Artist).all():
 			if not a.charted_songs:
-				for s in session.query(Song).filter_by(artist_id=a.artist_id).all():
+				for s in session.query(Song).filter_by(artist_id = a.artist_id).all():
 					a.charted_songs.append(s)
 
 				# s.artist = a
-
+		
 		if not session.query(Genre).first():
 			for g in genres:
 				genre = Genre(name=g['name'], description=g['summary'])
@@ -59,15 +68,13 @@ def artists_and_songs(session):
 		if not session.query(Year).first():
 			for y in years:
 				if not session.query(Artist).filter_by(artist_id=y['top_album_artist_id']).first():
-					year = Year(
-						year=str(y['year']).strip(), top_album_name=y['top_album_name'],
+					year = Year(year=y['year'], top_album_name=y['top_album_name'], 
 						top_album_id=y['top_album_id'],
 						top_genre_name=y['top_genre_name'])
 				else:
-					year = Year(
-						year=str(y['year']).strip(), top_album_name=y['top_album_name'],
+					year = Year(year=y['year'], top_album_name=y['top_album_name'], 
 						top_album_id=y['top_album_id'],
-						top_genre_name=y['top_genre_name'],
+						top_genre_name=y['top_genre_name'], 
 						top_album_artist_id=y['top_album_artist_id'])
 				session.add(year)
 				session.commit()
@@ -101,22 +108,22 @@ def artists_and_songs(session):
 		# Year song association
 		for ys in year_song:
 			# Get the year
-			year = session.query(Year).filter_by(year=str(ys['year']).strip()).first()
+			year = session.query(Year).filter_by(year = ys['year']).first()
 			if not year.top_songs:
 				# Loop through the list of songs
 				for s in ys['song_list']:
 					if s['song_id']:
-						song = session.query(Song).filter_by(song_id=s['song_id']).first()
+						song = session.query(Song).filter_by(song_id = s['song_id']).first()
 						# Do we have this song in the DB?
 						if song:
-							assoc = YearsSongsAssociation(year_num=year.year,
-								song_id=s['song_id'], rank=s['rank'])
+							assoc = YearsSongsAssociation(year_num = year.year, 
+								song_id = s['song_id'], rank= s['rank'])
 							assoc.song = song
 							assoc.year = year
 							year.top_songs.append(assoc)
 							session.add(assoc)
 							session.commit()
-							# song.years_charted.append(assoc) # Do we need this?
+							#song.years_charted.append(assoc) # Do we need this?
 
 	except:
 		session.rollback()
@@ -186,11 +193,8 @@ def visualization():
 
 @app.route('/search/<term>')
 def search(term):
-	# Year could have top_genre_name
-	# Song could have artist_name
-
 	# Parse it
-	term = term.lower().replace("%20", " ")
+	term = term.lower()
 	terms = term.split()
 
 	queryAndArtist = session.query(Artist, func.ts_headline('english', Artist.name, func.plainto_tsquery(term)).label('h_name')) \
