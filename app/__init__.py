@@ -5,7 +5,7 @@ from sqlalchemy import and_, or_
 from sqlalchemy import func
 import ast
 import subprocess
-
+import requests
 
 def artists_and_songs(session):
 	json = open('JSON/songs.txt', 'r').read()
@@ -129,70 +129,60 @@ session_maker = sessionmaker(bind=engine)
 session = session_maker()
 artists_and_songs(session)
 
-
 @app.route('/')
 def homepage():
 	return render_template('index.html')
-
-
 @app.route('/about')
 def about():
 	return render_template('about.html')
-
-
 @app.route('/years')
 def years():
 	year = session.query(Year).all()
 	return render_template('years.html', years=year)
-
-
 @app.route('/songs')
 def songs():
 	song = session.query(Song).all()
 	return render_template('songs.html', songs=song)
-
-
 @app.route('/songs/<id>')
 def song(id):
-	s = session.query(Song).filter_by(song_id=id).first()
+	s = session.query(Song).filter_by(song_id = id).first()
 	return render_template('song1.html', song=s)
-
-
 @app.route('/artists')
 def artists():
 	artist = session.query(Artist).all()
 	return render_template('artists.html', artists=artist)
-
-
 @app.route('/artists/<id>')
 def artist(id):
-	a = session.query(Artist).filter_by(artist_id=id).first()
+	a = session.query(Artist).filter_by(artist_id = id).first()
 	return render_template('artist1.html', artist=a)
-
-
 @app.route('/genres')
 def genres():
 	genre = session.query(Genre).all()
 	return render_template('genres.html', genres=genre)
-
-
 @app.route('/years/<year>')
 def year(year):
-	y = session.query(Year).filter_by(year=year).first()
-	a = session.query(Artist).filter_by(artist_id=y.top_album_artist_id).first()
-	return render_template('year1.html', year=y, artist=a)
-
-
+	y = session.query(Year).filter_by(year = year).first()
+	a = session.query(Artist).filter_by(artist_id = y.top_album_artist_id).first()
+	return render_template('year1.html', year=y, artist=a)		
 @app.route('/genres/<name>')
 def genre(name):
-	g = session.query(Genre).filter_by(name=name).first()
+	g = session.query(Genre).filter_by(name = name).first()
 	return render_template('genre1.html', genre=g)
-
-
 @app.route('/visualization')
 def visualization():
-	return render_template('visualization.html')
+	response = requests.get('http://sweetify.me/api/artists')
+	authors = response.json()['result']
+	character_counts = dict()
+	for author in authors :
+		c = author.upper()[0]
+		if c in character_counts :
+			character_counts[c] += 1
+		else :
+			character_counts[c] = 1
 
+	character_counts = [{'text':key,'count':str(character_counts[key])} for key in character_counts]
+	
+	return render_template('visualization.html', character_counts=character_counts)
 
 @app.route('/search/<term>')
 def search(term):
