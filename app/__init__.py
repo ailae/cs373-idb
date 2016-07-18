@@ -186,8 +186,6 @@ def visualization():
 
 @app.route('/search/<term>')
 def search(term):
-	# Year could have top_genre_name
-	# Song could have artist_name
 
 	# Parse it
 	term = term.lower().replace("%20", " ")
@@ -201,23 +199,29 @@ def search(term):
 
 	queryAndSong = session.query(Song,
 								 func.ts_headline('english', Song.song_name,
-								                  func.plainto_tsquery(term)).label('h_song_name'),
+								                  func.plainto_tsquery(term)).label('h_song_name'), \
+								 func.ts_headline('english', Song.artist_name, \
+								                  func.plainto_tsquery(term)).label('h_artist_name'), \
 								 func.ts_headline('english', Song.album_name, func.plainto_tsquery(term)).label('h_album_name')) \
 								 .filter(and_(Song.tsvector_col.match(s) for s in terms)).all()
 
 
 	queryOrSong = session.query(Song, \
 								func.ts_headline('english', Song.song_name, func.plainto_tsquery(term)).label('h_song_name'), \
+								func.ts_headline('english', Song.artist_name, \
+								                  func.plainto_tsquery(term)).label('h_artist_name'), \
 								func.ts_headline('english', Song.album_name, func.plainto_tsquery(term)).label('h_album_name')) \
 								.filter(or_(Song.tsvector_col.match(s) for s in terms)).all()
 
 	queryAndYear = session.query(Year, \
 								 func.ts_headline('english', Year.year, func.plainto_tsquery(term)).label('h_year'), \
+								 func.ts_headline('english', Year.top_genre_name, func.plainto_tsquery(term)).label('h_top_genre_name'), \
 								 func.ts_headline('english', Year.top_album_name, func.plainto_tsquery(term)).label('h_top_album_name')) \
 								 .filter(and_(Year.tsvector_col.match(s) for s in terms)).all()
 
 	queryOrYear = session.query(Year, \
 								 func.ts_headline('english', Year.year, func.plainto_tsquery(term)).label('h_year'), \
+								 func.ts_headline('english', Year.top_genre_name, func.plainto_tsquery(term)).label('h_top_genre_name'), \
 								 func.ts_headline('english', Year.top_album_name, func.plainto_tsquery(term)).label('h_top_album_name')) \
 								 .filter(or_(Year.tsvector_col.match(s) for s in terms)).all()
 
