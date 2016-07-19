@@ -72,7 +72,10 @@
     <div class="row featurette">
         <div class="col-md-8">
           <h2 class="featurette-heading">{{ artist.name }}</h2>
-          <h3><span class="text-muted">Genre</span></h3>
+          <h3><span class="text-muted">{% for g in artist.genres %}
+            {{ g.name }}{% if not loop.last %},{% endif %}
+            {% endfor %}
+          </span></h3>
           </h2>
           <p class="lead">Popularity: {{ artist.popularity }}
             <br>Number of followers: {{ artist.num_followers }}
@@ -94,7 +97,6 @@
       <!-- FOOTER -->
       <footer>
        <a href="#">Back to top</a></p>
-        <p>&copy; 2015 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
       </footer>
 
     </div><!-- /.container -->

@@ -108,21 +108,24 @@
         <thead> 
         <tr>
           <th>Song Name</th>
+          <th>Artist Name</th>
           <th>Album Name</th>        
         </tr>
         </thead>  
         <tbody>
-         <tr><td><h4>AND results</h4></td><td></td></tr>
+         <tr><td><h4>AND results</h4></td><td></td><td></td></tr>
         {% for a in andSong %}
         <tr>
             <td><a href="/songs/{{ a.Song.song_id }}">{{ a.h_song_name|safe }}</a></td>
+            <td>{{ a.h_artist_name|safe }}</td>
             <td>{{ a.h_album_name|safe }}</td>
         </tr>
         {% endfor %}
-        <tr><td><h4>OR results</h4></td><td></td></tr>
+        <tr><td><h4>OR results</h4></td><td></td><td></td></tr>
         {% for o in orSong %}
         <tr>
             <td><a href="/songs/{{ o.Song.song_id }}">{{ o.h_song_name|safe }}</a></td>
+            <td>{{ o.h_artist_name|safe }}</td>
             <td>{{ o.h_album_name|safe }}</td>
         </tr>
         {% endfor %}
@@ -136,22 +139,25 @@
         <thead> 
         <tr>
           <th>Year</th>
-          <th>Top Album Name</th>    
+          <th>Top Album Name</th> 
+          <th>Top Genre</th>   
         </tr>
         </thead>  
         <tbody>
-        <tr><td><h4>AND results</h4></td><td></td></tr>
+        <tr><td><h4>AND results</h4></td><td></td><td></td></tr>
         {% for a in andYear %}
           <tr>
           <td><a href="/years/{{ a.Year.year }}">{{ a.h_year|safe }}</a></td>
           <td>{{ a.h_top_album_name|safe }}</td>
+          <td>{{ a.h_top_genre_name|safe }}</td>
         </tr>
         {% endfor %}
-        <tr><td><h4>OR results</h4></td><td></td></tr>
+        <tr><td><h4>OR results</h4></td><td></td><td></td></tr>
         {% for o in orYear %}
           <tr>
           <td><a href="/years/{{ o.Year.year }}">{{ o.h_year|safe }}</a></td>
           <td>{{ o.h_top_album_name|safe }}</td>
+          <td>{{ o.h_top_genre_name|safe }}</td>
         </tr>
         {% endfor %}
         </tbody>
