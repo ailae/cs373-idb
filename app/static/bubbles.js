@@ -1,29 +1,4 @@
-function myFunction(artists) {
-  // var xmlhttp = new XMLHttpRequest();
-  // var url = "http://sweetify.me/api/artists";
-  // var character_counts = []
-  // xmlhttp.onreadystatechange = function() {
-  //    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-  //        window.alert(xmlhttp.responseText);
-  //        var myArr = JSON.parse(xmlhttp.responseText.result);
-  //       character_counts = dict()
-  //       for author in authors :
-  //         c = author.upper()[0]
-  //         if c in character_counts :
-  //           character_counts[c] += 1
-  //         else :
-  //           character_counts[c] = 1        
-  //         character_counts = [{'text':key,'count':character_counts[key]} for key in character_counts]     
-  //         var dict;
-  //        for (var i = 0; i < myArr.length; i++)
-  //        {
-
-  //        }
-  //    }
-  // };
-  // xmlhttp.open("GET", url, true);
-  // xmlhttp.send();
-  // var character_counts = {{ character_counts|tojson }}
+function myFunction(authors) {
 
   var bubbleChart = new d3.svg.BubbleChart({
     supportResponsive: true,
@@ -38,7 +13,7 @@ function myFunction(artists) {
     //intersectInc: use @default
     //circleColor: use @default
     data: {
-         items: artists, 
+         items: authors, 
       // items: [
       //   {text: "Java", count: "236"},
       //   {text: ".Net", count: "382"},
@@ -66,7 +41,7 @@ function myFunction(artists) {
       {
         name: "central-click",
         options: {
-          text: "(See more detail)",
+          text: "(See list of books)",
           style: {
             "font-size": "12px",
             "font-style": "italic",
@@ -77,7 +52,7 @@ function myFunction(artists) {
           },
           attr: {dy: "65px"},
           centralClick: function() {
-            alert("Here is more details!!");
+            alert("assfdffgg!!");
           }
         }
       },

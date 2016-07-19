@@ -170,19 +170,16 @@ def genre(name):
 	return render_template('genre1.html', genre=g)
 @app.route('/visualization')
 def visualization():
-	response = requests.get('http://sweetify.me/api/artists')
-	authors = response.json()['result']
-	character_counts = dict()
-	for author in authors :
-		c = author.upper()[0]
-		if c in character_counts :
-			character_counts[c] += 1
-		else :
-			character_counts[c] = 1
-
-	character_counts = [{'text':key,'count':str(character_counts[key])} for key in character_counts]
+	response = requests.get('http://writerblocks.me/api/publishers')
+	publishers = response.json()
+	book_count = list()
+	for publisher in publishers :
+		publisherID = publisher[0]
+		publishername = publisher[1]
+		response = requests.get('http://writerblocks.me/api/publishers?id=' + str(publisherID)).json()
+		book_count += [{'text': publishername, 'count': len(response['published_books'])}]
 	
-	return render_template('visualization.html', character_counts=character_counts)
+	return render_template('visualization.html', book_count=book_count)
 
 @app.route('/search/<term>')
 def search(term):
