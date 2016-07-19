@@ -1,3 +1,66 @@
+commit 333d2411f29d5d66449a6d0e1e47994aa78195d0
+Author: Brady Miller <bratxdy@utexas.edu>
+Date:   Tue Jul 19 17:45:57 2016 -0500
+
+    Delete __init__.py.orig
+
+commit eb1aa25d1234d77c51fe41e6d31f07e821e81341
+Author: Brady Miller <bratxdy@utexas.edu>
+Date:   Tue Jul 19 17:45:13 2016 -0500
+
+    Updating year to be a string.
+
+commit 60f939cef34453c1d86cbe28977f67a295ea0228
+Author: Brady Miller <bratxdy@utexas.edu>
+Date:   Tue Jul 19 17:44:40 2016 -0500
+
+    Year is stored as a string now in the db.
+
+commit b973d72d286c1223e3d0c67499cf51c83361c29e
+Merge: 3b3f6b5 508e076
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Tue Jul 19 17:07:24 2016 -0500
+
+    resolved merge conflict
+
+commit 3b3f6b58f4d00965a29e40a77a42e5d95c65effd
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Tue Jul 19 17:06:22 2016 -0500
+
+    updated visualization
+
+commit 508e076850435b9a461a04fddcc228df77e3f129
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Tue Jul 19 16:20:50 2016 -0500
+
+    Fixed __init__.py pylint errors
+
+commit 5317879e6baceef381817516b52124a59a608d2b
+Merge: 6127af4 9f45e7f
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Tue Jul 19 16:07:52 2016 -0500
+
+    Merge branch 'dev'
+
+commit 9f45e7fb9120a2d891783842e1156ee63ea78ade
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Tue Jul 19 16:05:38 2016 -0500
+
+    Updated epydoc and git log.
+
+commit 6127af444b2eb663ffb4b040528335df22c580b6
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Tue Jul 19 15:18:54 2016 -0500
+
+    About page is updated
+
+commit 44d4ee4d723431038bfb2739e0fd13ba7cce0d39
+Merge: fb2a9a8 f487f15
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Mon Jul 18 19:54:03 2016 -0500
+
+    Merge branch 'master' of https://github.com/ailae/cs373-idb
+
 commit fb2a9a8f54a795f938e3071f79e931a105ea02f2
 Author: Aila Enos <ailaenos@utexas.edu>
 Date:   Mon Jul 18 19:48:40 2016 -0500
@@ -65,6 +128,12 @@ Author: Aila Enos <ailaenos@utexas.edu>
 Date:   Sun Jul 17 17:51:31 2016 -0500
 
     Rows in search now same height
+
+commit f487f15a667fb9d5382080913b9c75ded25fa2d7
+Author: Brady Miller <bratxdy@utexas.edu>
+Date:   Sun Jul 17 17:47:11 2016 -0500
+
+    Update apiary.apib
 
 commit 040c002c2dc05aea3b378420778e06058b968e6a
 Author: Aila Enos <ailaenos@utexas.edu>
