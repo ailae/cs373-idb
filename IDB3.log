@@ -1,3 +1,146 @@
+commit fb2a9a8f54a795f938e3071f79e931a105ea02f2
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Mon Jul 18 19:48:40 2016 -0500
+
+    Closes #62 and closes #61
+
+commit 23c67f2c9e722a86c0e0c73c6edca1c3e79997b7
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Mon Jul 18 17:44:01 2016 -0500
+
+    Updated triggers in models.py for the changes in the previous commit
+
+commit 318027b7c3733c9739a7f26961b267d80b911b34
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Mon Jul 18 17:43:05 2016 -0500
+
+    Added top genre name to years, added artist name to songs (for searching)
+
+commit d93edcb65f72c24b5f8d4c0aed644fe9ebbc1394
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Mon Jul 18 17:27:37 2016 -0500
+
+    Added comment about fields to add to search
+
+commit f1deca21478e7049dbf26d75c6ad60ccd1dedd71
+Merge: 8d405ec 32880f1
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Mon Jul 18 17:13:02 2016 -0500
+
+    Used mergetool
+
+commit 8d405ec7db9668093073a52a2ea6800a777815f1
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Mon Jul 18 17:09:10 2016 -0500
+
+    Added pagination by using DataTables... now there is a table for each model
+
+commit 32880f1468e9756bf1909b64f388f346140595a7
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sun Jul 17 18:06:44 2016 -0500
+
+    uncommented the db code
+
+commit 3710d2ca35d23e714116aaddb770b1f6bebe4ef0
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sun Jul 17 18:06:12 2016 -0500
+
+    fixed some merge issues
+
+commit c5d523dcbd9d87c316b061263c48202e37edd4ec
+Merge: ce1d51b 26deeaf
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sun Jul 17 17:58:35 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit ce1d51b865543362cdbbf4426c1b342a36d78905
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sun Jul 17 17:56:51 2016 -0500
+
+    Updated the visualization page
+
+commit 26deeaf920134e5f0c3766504b2c1cd0cc788974
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 17 17:51:31 2016 -0500
+
+    Rows in search now same height
+
+commit 040c002c2dc05aea3b378420778e06058b968e6a
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 17 17:42:06 2016 -0500
+
+    Search results are now clickable
+
+commit add84b0ac4f4bf7fb330d0bce1b9a4f8dc707cd2
+Merge: 9468e82 6129382
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sun Jul 17 17:03:55 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 9468e82da679e5b460090c1a5b4dee66dd9d6fec
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sun Jul 17 17:03:53 2016 -0500
+
+    Added ts_headline to all model queries for search.
+
+commit 6129382690b74ec45c392922cbbc4505bc655d7d
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 17 16:57:50 2016 -0500
+
+    Oops forgot an = lol.. still worked tho
+
+commit 905cbb14eaf7af448c21f67b6b4bc20a8cb1231e
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 17 16:50:32 2016 -0500
+
+    Added search bar to every page
+
+commit f36a536523ee7e590466bada2c677ab480e77bfc
+Merge: 9cdaa84 a0ccc3d
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 17 16:40:19 2016 -0500
+
+    Merge branch 'dev' of https://github.com/ailae/cs373-idb into dev
+
+commit 9cdaa846199e2f40d50fa1ca185ea8c8f808d24b
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sun Jul 17 16:40:12 2016 -0500
+
+    Query highlighting is WORKINGgit add .
+
+commit a0ccc3de62cb547bd96575a5ef1044d679c99b8d
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sun Jul 17 14:37:39 2016 -0500
+
+    Updated the tsvectors, removed some redundant search columns
+
+commit e0d20ab8e74219c75795fe63854e1f5b236089d5
+Merge: 95e9f8e ab52d71
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sat Jul 16 17:40:00 2016 -0500
+
+    fixed conflicts
+
+commit 95e9f8e13b76b7004b3f4014a788ad7ef2c8c285
+Author: Kirk Johnson <kirk.johnson@utexas.edu>
+Date:   Sat Jul 16 17:37:44 2016 -0500
+
+    visualization
+
+commit ab52d71cbfeeee4bcc1b9c8aecee79279a53e285
+Author: Aila Enos <ailaenos@utexas.edu>
+Date:   Sat Jul 16 17:17:30 2016 -0500
+
+    Made search prettier, search box works on the main page
+
+commit 7f284db99f50f805f1103fdcc7ce93b13d21eafd
+Author: Samarth Dhruva <samarthdhruva@utexas.edu>
+Date:   Sat Jul 16 15:38:21 2016 -0500
+
+    Changed all years to strings rather than ints so that they can be searched over
+
 commit c66b9749201e8b5236ac8fb1bb6d2075223bb0d5
 Author: Samarth Dhruva <samarthdhruva@utexas.edu>
 Date:   Sat Jul 16 14:38:10 2016 -0500
