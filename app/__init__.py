@@ -299,7 +299,7 @@ def get_years() :
 		year_names += [year.year]
 	return jsonify({'result' : year_names, 'success' : True})
 	
-@app.route('/api/years/<int:year>', methods=['GET'])
+@app.route('/api/years/<string:year>', methods=['GET'])
 def get_year_by_name(year) :
 	year_obj = session.query(Year).filter_by(year=year).first()
 	
